@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class PeriodApiConfig(AppConfig):
+class ApiPeriodConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "api"
+    name = "api_period"

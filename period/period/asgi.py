@@ -1,5 +1,5 @@
 """
-ASGI config for period1 project.
+ASGI config for period project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
