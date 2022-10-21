@@ -18,3 +18,10 @@ class HomePage(models.Model):
 
     def __str__(self):
         return self.diary_text
+
+
+class Setting(models.Model):
+    birth_year = models.IntegerField()
+    period_length = models.IntegerField()
+    cycle_length = models.IntegerField()
+    luteal_length = models.IntegerField()
