@@ -8,6 +8,7 @@ from .forms import NewUserForm
 from django.contrib.auth import login
 from django.contrib import messages
 
+
 # Create your views here.
 
 def main(request):
@@ -34,7 +35,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return redirect("home")
+                return redirect("/api/home")
             else:
                 messages.error(request, "Invalid username or password.")
         else:
