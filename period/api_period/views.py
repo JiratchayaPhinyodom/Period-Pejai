@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from .forms import NewUserForm, MySettingPage
 from django.contrib.auth import login
 from django.contrib import messages
-from .serializers import MySetting
+from .serializers import MyData
 
 
 def main(request):
@@ -16,7 +16,7 @@ def main(request):
 
 class Data(generics.ListAPIView):
     queryset = Setting.objects.all()
-    serializer_class = MySetting
+    serializer_class = MyData
 
 
 def login_request(request):
