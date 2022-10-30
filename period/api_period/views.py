@@ -14,7 +14,7 @@ def main(request):
     return HttpResponse("Hello")
 
 
-class MyForm(generics.CreateAPIView):
+class MyForm(generics.ListAPIView):
     queryset = Setting.objects.all()
     serializer_class = MySetting
 
