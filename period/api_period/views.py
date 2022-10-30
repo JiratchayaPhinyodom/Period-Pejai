@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from rest_framework import generics
 from .models import Setting
-from django.contrib.auth.forms import AuthenticationForm  # add this
-from django.contrib.auth import login, authenticate  # add this
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from .forms import NewUserForm, MySettingPage
 from django.contrib.auth import login
