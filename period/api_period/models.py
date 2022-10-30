@@ -2,9 +2,6 @@ import random
 import string
 
 from django.db import models
-from django.contrib.auth.models import User
-from django.utils import timezone
-import datetime
 
 
 class HomePage(models.Model):
@@ -34,6 +31,7 @@ def generate_unique_code():
 
 
 class Setting(models.Model):
+    """To correct data from user in setting page"""
     birth_year = models.IntegerField()
     period_length = models.IntegerField()
     cycle_length = models.IntegerField()
