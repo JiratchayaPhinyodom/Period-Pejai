@@ -1,28 +1,22 @@
-from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import MySetting
+from rest_framework import generics
+from .models import Setting
 from django.contrib.auth.forms import AuthenticationForm  # add this
 from django.contrib.auth import login, authenticate  # add this
 from django.shortcuts import render, redirect
 from .forms import NewUserForm
 from django.contrib.auth import login
 from django.contrib import messages
+from .serializers import MySetting
 
-
-# Create your views here.
 
 def main(request):
     return HttpResponse("Hello")
 
 
-def my_form(request):
-    if request.method == "POST":
-        form = MySetting(request.POST)
-        if form.is_valid():
-            form.save()
-    else:
-        form = MySetting()
-    return render(request, 'setting/setting_page.html', {'form': form})
+class MyForm(generics.CreateAPIView):
+    queryset = Setting.objects.all()
+    serializer_class = MySetting
 
 
 def login_request(request):

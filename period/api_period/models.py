@@ -1,4 +1,7 @@
 # Create your models here.
+import random
+import string
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -21,13 +24,18 @@ class HomePage(models.Model):
         return self.diary_text
 
 
+def generate_unique_code():
+    length = 6
+
+    while True:
+        code = ''.join(random.choices(string.ascii_uppercase, k=length))
+        if Setting.objects.filter(code=code).count() == 0:
+            break
+    return code
+
+
 class Setting(models.Model):
     birth_year = models.IntegerField()
     period_length = models.IntegerField()
     cycle_length = models.IntegerField()
     luteal_length = models.IntegerField()
-
-
-class PredictCalendar(models.Model):
-    def get_predict(self, day: datetime, setting: Setting) -> list:
-        pass
