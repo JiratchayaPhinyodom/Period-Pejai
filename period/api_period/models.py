@@ -1,4 +1,3 @@
-# Create your models here.
 import random
 import string
 
