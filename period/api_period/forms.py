@@ -1,6 +1,15 @@
 from django import forms
+from .models import Setting
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+
+
+class MySettingPage(forms.ModelForm):
+    class Meta:
+        model = Setting
+        fields = ["birth_year", "period_length", "cycle_length", "luteal_length"]
+        labels = {"birth_year": "Year of Birth", "period_length": "Period length",
+                  "cycle_length": "Cycle length", "luteal length": "Luteal length"}
 
 
 class NewUserForm(UserCreationForm):
@@ -15,4 +24,4 @@ class NewUserForm(UserCreationForm):
         user.email = self.cleaned_data['email']
         if commit:
             user.save()
-        return user
+        return

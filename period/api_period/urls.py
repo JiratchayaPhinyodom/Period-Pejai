@@ -3,7 +3,8 @@ from .views import *
 
 urlpatterns = [
     path('home', main),
-    path('setting', MyForm.as_view()),
+    path('data', Data.as_view()),
     path('login', login_request),
-    path('signup', register_request)
+    path('signup', register_request),
+    path('setting', my_form)
 ]

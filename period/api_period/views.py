@@ -4,7 +4,7 @@ from .models import Setting
 from django.contrib.auth.forms import AuthenticationForm  # add this
 from django.contrib.auth import login, authenticate  # add this
 from django.shortcuts import render, redirect
-from .forms import NewUserForm
+from .forms import NewUserForm, MySettingPage
 from django.contrib.auth import login
 from django.contrib import messages
 from .serializers import MySetting
@@ -14,7 +14,7 @@ def main(request):
     return HttpResponse("Hello")
 
 
-class MyForm(generics.ListAPIView):
+class Data(generics.ListAPIView):
     queryset = Setting.objects.all()
     serializer_class = MySetting
 
@@ -49,3 +49,13 @@ def register_request(request):
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(request=request, template_name="registration/register.html", context={"register_form": form})
+
+
+def my_form(request):
+    if request.method == "POST":
+        form = MySettingPage(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = MySettingPage()
+    return render(request, 'setting/setting_page.html', {'form': form})
