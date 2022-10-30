@@ -1,6 +1,6 @@
 import random
 import string
-
+import datetime
 from django.db import models
 
 
@@ -36,3 +36,8 @@ class Setting(models.Model):
     period_length = models.IntegerField()
     cycle_length = models.IntegerField()
     luteal_length = models.IntegerField()
+
+
+class PredictCalendar(models.Model):
+    def get_predict(self, day: datetime, setting: Setting) -> list:
+        pass
