@@ -1,0 +1,29 @@
+.choose {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0.5cm;
+    margin-left: 1cm;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.profile_img {
+    display: flex;
+    justify-content: flex-start;
+    margin: auto;
+    width: 95%;
+    height: 95%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.bc_img {
+    display: flex;
+    justify-content: flex-start;
+    border-radius: 10em;
+    border-color: #7b7aaf;
+    background-color: #7b7aaf;
+    margin: 0.5cm;
+    width: 15rem;
+    height: 15rem;
+}

@@ -1,0 +1,9 @@
+.input-border {
+    border-style: solid;
+    border-width: 0.25em;
+    border-color: #f8ad9d;
+    border-radius: 2em;
+    width: 5cm;
+    font-weight: bold;
+    
+}

@@ -1,0 +1,176 @@
+.App {
+    font-family: 'Gaegu', cursive;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .left-side {
+    text-align: center;
+    font-family: 'Gaegu', cursive;
+    background-color: #dde0eb;
+    width: 25em;
+    height: 60em;
+    float: left;
+  }
+  
+  .name {
+    font-size: 32px;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .pic {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .btn_profile {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .setting {
+    display: flex;
+    justify-content: flex-start;
+    border-style: solid;
+    border-radius: 3em;
+    border-color: #7b7aaf;
+    background-color: #7b7aaf;
+    margin: 0.5cm;
+    width: 9rem;
+    height: 3.5rem;
+  }
+  
+  .setting_p {
+    font-size: 1.5rem;
+    color: white; 
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    margin-left: 0.5cm;
+    margin-top: 0.25cm;
+  }
+  
+  .icon_setting {
+    margin-right: 0.1cm;
+    margin-top: 0.1cm;
+  }
+  
+  .home {
+    display: flex;
+    justify-content: flex-start;
+    border-style: solid;
+    border-radius: 3em;
+    border-color: #b8bedd;
+    background-color: #b8bedd;
+    margin: 0.5cm;
+    width: 9rem;
+    height: 3.5rem;
+  }
+  
+  .home_p {
+    font-size: 1.5rem;
+    color: white; 
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    margin-left: 0.5cm;
+    margin-top: 0.25cm;
+  }
+  
+  .icon_home {
+    margin-right: 0.1cm;
+    margin-top: 0.1cm;
+    margin-left: -0.25cm;
+  }
+  
+  .reminder {
+    font-size: 1.5rem;
+    color: #7b7aaf;
+    display: flex;
+    justify-content: flex-start;
+    font-weight: bold;
+    margin-left: 1cm;
+    margin-top: 0.5cm;
+  }
+  
+  .switch_period {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .logout, .update {
+    display: flex;
+    justify-content: flex-start;
+    border-style: solid;
+    border-radius: 3em;
+    border-color: #b8bedd;
+    background-color: #b8bedd;
+    margin: 0.5cm;
+    width: 9rem;
+    height: 3.5rem;
+  
+  }
+  
+  .logout_p, .update_p {
+    font-size: 1.5rem;
+    color: white; 
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    margin-left: 0.5cm;
+    margin-top: 0.25cm;
+  }
+  
+  .icon_logout {
+    margin-right: 0.1cm;
+    margin-top: 0.1cm;
+    margin-left: -0.25cm;
+  }
+  
+  .bc-input {
+    background-color: #fffaed;
+    height: 60em;
+  }
+  
+  .input {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    float: left;
+    border-style: solid;
+    border-color: #ffe4dc;
+    background-color: #ffe4dc;
+    border-radius: 3em;
+    box-shadow: 0.5em 0.5em #f8ad9d;
+    width: 50em;
+    height: 40em;
+    margin: 5cm;
+    margin-top: -20cm;
+    margin-left: 15cm;
+  }
+  
+  .year, .period-length, .cycle-length, .phase-length {
+    margin: 1cm;
+    margin-left: 3cm;
+    border-style: solid;
+    border-width: 0.25;
+    border-color: #f8ad9d;
+    border-radius: 1em;
+    background-color: #ffcdb2;
+    box-shadow: 0.25em 0.25em #f8ad9d;
+    display: flex;
+    width: 5cm;
+    height: 1cm;
+    justify-content: center;
+  }
+  
+  .box-year, .box-period, .box-cycle, .box-phase {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .mar {
+    margin: 1cm;
+  }

@@ -1,0 +1,152 @@
+
+.app {
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    height: 821px;
+    width: 1440px;
+    background-color: #fffaed;
+    margin-left: 350px;
+}
+
+input[type="email"],
+input[type="password"] {
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 280px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+    box-shadow: 4px 3px;
+    background: #ffe4dc;
+    border: 1px solid black;
+}
+
+.submit {
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+    background: #f8ad9d;
+    border: 1px solid black;
+    border-radius: 14px;
+    box-shadow: 4px 3px;
+    color: black;
+    padding: 6px 60px;
+}
+
+input[type="submit"]:hover {
+    background: #f8ad9d;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.login-topper-form {
+    height: 45px;
+    width: 750px;
+    background-color: #f8ad9d;
+    border: 2px solid black;
+    border-radius: 5px;
+    
+}
+
+.login-form {
+    margin-top: -22px;
+    background-color: white;
+    border: 2px solid black;
+    padding: 2rem;
+    height: 380px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.list-container {
+    display: flex;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.title {
+    margin: -300px;
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 45px;
+    margin-left: 300px;
+}
+
+.input-container {
+    position: relative;
+    top: 20%;
+    left: 13%;
+    font-size: 25px;
+    align-items: center;
+    display: flex;
+    gap: 40px;
+    margin: 16px;
+    width: 650px;
+}
+
+.result-container {
+    position: relative;
+    top: 10%;
+    left: 13%;
+    font-size: 25px;
+    align-items: center;
+    display: flex;
+    gap: 40px;
+    margin: 16px;
+    width: 650px;
+}
+
+
+.endingleft{
+    font-size: 18px;
+    margin-top: 100px;
+    margin-left: 145px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.endingright{
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+.App-logo {
+    /* height: 40vmin;
+    pointer-events: none; */
+    position: relative;
+    top: -160px;
+    right: -505px;
+}
+
+.dot-component{
+    position: relative;
+    top: -310px;
+    left: -330px;
+}
+
+.curve-component{
+    position: relative;
+    top: -310px;
+    left: -390px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+}
+}
