@@ -45,11 +45,11 @@ export default function Signup() {
             </Form.Group>
             <div id="password">
               <Form.Label>Password</Form.Label>
-              <InputPassword type="password" ref={passwordRef} required />
+              <input type="password" ref={passwordRef} required />
             </div>
             <div id="password-confirm">
               <Form.Label>Password Confirmation</Form.Label>
-              <InputPassword type="password" ref={passwordConfirmRef} required />
+              <input type="password" ref={passwordConfirmRef} required />
             </div>
             <Button disabled={loading} className="w-100" type="submit">
               Sign Up

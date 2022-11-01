@@ -42,7 +42,7 @@ export default function Login() {
               </span>
               <span className = "input-container" id="password">
                 <label>Password :</label>
-                <InputPassword type="password" ref={passwordRef} required />
+                <input type="password" ref={passwordRef} required />
               </span>
               <div className="button-container">
               <button disabled={loading} type="submit" className="submit">
