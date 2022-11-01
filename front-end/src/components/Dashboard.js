@@ -14,7 +14,7 @@ import Input_phase from './component_setting/input/input_phase';
 
 export default function Dashboard() {
   const [error, setError] = useState("")
-  const { currentUser, logout, home } = useAuth()
+  const { currentUser, logout, login} = useAuth()
   const history = useHistory()
 
   async function handleLogout() {
@@ -31,8 +31,17 @@ async function handleHome() {
   setError("")
 
   try {
-    await logout()
     history.push("/home")
+  } catch {
+    setError("Failed to go to Home page")
+  }
+}
+
+async function handleUpdateProfile() {
+  setError("")
+
+  try {
+    history.push("/update-profile")
   } catch {
     setError("Failed to log out")
   }
@@ -50,7 +59,7 @@ async function handleHome() {
     <p className='reminder'>Reminders</p>
     <ToggleSwitch label="Period" />
     <ToggleSwitch label="Ovaluation"/>
-    <Link to="/update-profile" className="update"><p className="update_p"> Update Profile </p></Link>
+    <Button className="update" variant="link" onClick={handleUpdateProfile}><p className="update_p"> Update Profile </p></Button>
     <span><Button className='logout' variant="link" onClick={handleLogout}><p className='logout_p' ><LogoutOutlined className='icon_logout'/>Logout</p></Button></span>
   </div>
   <div className='bc-input'>
