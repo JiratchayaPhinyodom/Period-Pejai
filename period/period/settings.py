@@ -114,4 +114,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "home"
 
 # auth and allauth
-AUTH_USER_MODEL = 'periods.User'
+# AUTH_USER_MODEL = 'periods.User'

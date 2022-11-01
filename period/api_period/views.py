@@ -59,3 +59,9 @@ def my_form(request):
     else:
         form = MySettingPage()
     return render(request, 'setting/setting_page.html', {'form': form})
+
+
+def redirect_line(request):
+    # response = redirect('/redirect-success/')
+    print(request.GET['code'])
+    # return HttpResponse('success')
