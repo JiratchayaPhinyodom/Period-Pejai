@@ -66,13 +66,13 @@ const handleSubmit = (event) => {
 );
 
 return (
-    <div className="app">
+    <div className="home">
         <div className="home-form">
-            <div className="title">PAIN LEVEL</div>
+            <div className="title-home">PAIN LEVEL</div>
                 <div className="pain-level-container"></div>
-            <div className="title">BLOOD LEVEL</div>
+            <div className="title-home">BLOOD LEVEL</div>
                 <div className="blood-level-container"></div>
-            <div className="title">DIARY</div>
+            <div className="title-home">DIARY</div>
                 <input type='text'></input>
             {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
             <br></br>

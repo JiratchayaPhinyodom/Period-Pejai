@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
-
 import 'antd/dist/antd.css';
 import './Dashboard.css';
 import { Button } from 'antd';
@@ -15,7 +14,7 @@ import Input_phase from './component_setting/input/input_phase';
 
 export default function Dashboard() {
   const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
+  const { currentUser, logout, home } = useAuth()
   const history = useHistory()
 
   async function handleLogout() {
@@ -27,7 +26,17 @@ export default function Dashboard() {
     } catch {
       setError("Failed to log out")
     }
+}
+async function handleHome() {
+  setError("")
+
+  try {
+    await logout()
+    history.push("/home")
+  } catch {
+    setError("Failed to log out")
   }
+}
   
 
   return (
@@ -37,7 +46,7 @@ export default function Dashboard() {
     <span className='setting'>
     <p className='setting_p'><SettingOutlined className='icon_setting'/>Setting</p>
     </span>
-    <span><Button className='home'><p className='home_p' ><HomeOutlined className='icon_home'/>Home</p></Button></span>
+    <span><Button className='route_home' variant="link" onClick={handleHome}><p className='home_p' ><HomeOutlined className='icon_home'/>Home</p></Button></span>
     <p className='reminder'>Reminders</p>
     <ToggleSwitch label="Period" />
     <ToggleSwitch label="Ovaluation"/>

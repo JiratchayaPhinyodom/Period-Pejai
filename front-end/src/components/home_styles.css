@@ -3,7 +3,7 @@
     opacity: 1;
 }
 
-.app {
+.home {
     font-family: 'Gaegu', cursive;
     font-weight: bold;
     display: flex;
@@ -29,7 +29,7 @@
     display: flex;
 }
 
-.title {
+.title-home {
     margin-top: 8px;
     margin-left: 20px;
     text-align: left;
