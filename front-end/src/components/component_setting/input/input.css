@@ -7,3 +7,14 @@
     font-weight: bold;
     
 }
+
+.diary-container {
+    width: 490px;
+    background-color: #ffb5a7;
+    margin-top: -45px;
+    margin-left: 32px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #926432;
+}

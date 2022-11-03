@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import LogoPic from "./pics/app_logo.png";
 import Dots from "./pics/dots.png";
 import Curve from "./pics/curve.png";
+import InputDiary from './component_setting/input/input_diary';
 import "./home_styles.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Input, Space } from 'antd';
@@ -65,15 +66,16 @@ const handleSubmit = (event) => {
     </form>
 );
 
+
 return (
     <div className="home">
         <div className="home-form">
-            <div className="title-home">PAIN LEVEL</div>
+            <div className="home-title">PAIN LEVEL</div>
                 <div className="pain-level-container"></div>
-            <div className="title-home">BLOOD LEVEL</div>
+            <div className="home-title">BLOOD LEVEL</div>
                 <div className="blood-level-container"></div>
-            <div className="title-home">DIARY</div>
-                <input type='text'></input>
+            <div className="home-title">DIARY</div>
+                <InputDiary className="diary-container"></InputDiary>
             {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
             <br></br>
         </div>
