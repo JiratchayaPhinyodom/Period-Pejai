@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import MySetting
 from django.contrib.auth.forms import AuthenticationForm  # add this
@@ -7,6 +6,9 @@ from django.shortcuts import render, redirect
 from .forms import NewUserForm
 from django.contrib.auth import login
 from django.contrib import messages
+from rest_framework.viewsets import ViewSet
+from rest_framework.response import Response
+from .serializers import UploadFile
 
 
 # Create your views here.
@@ -55,3 +57,16 @@ def register_request(request):
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(request=request, template_name="registration/register.html", context={"register_form": form})
+
+
+class UploadPicture(ViewSet):
+    serializer_class = UploadFile
+
+    def get_API(self, request):
+        return Response("GET API")
+
+    def create(self, request):
+        file_uploaded = request.FILES.get('file_uploaded')
+        content_type = file_uploaded.content_type
+        response = "POST API and you have uploaded a {} file".format(content_type)
+        return Response(response)
