@@ -1,5 +1,4 @@
-
-.app {
+.login {
     font-family: 'Gaegu', cursive;
     font-weight: bold;
     display: flex;
@@ -12,6 +11,10 @@
     background-color: #fffaed;
 }
 
+a{
+    color: black;
+}
+
 input[type="email"],
 input[type="password"] {
     font-family: 'Gaegu', cursive;
@@ -19,41 +22,41 @@ input[type="password"] {
     font-size: 20px;
     align-items: center;
     justify-content: center;
-    height: 30px;
+    height: 40px;
     width: 280px;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 14px;
+    border-radius: 16px;
     box-shadow: 4px 3px;
     background: #ffe4dc;
     border: 1px solid black;
 }
 
-.submit {
+.login-submit {
     margin-top: 10px;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 20px;
     font-family: 'Gaegu', cursive;
     font-weight: bold;
     background: #f8ad9d;
     border: 1px solid black;
-    border-radius: 14px;
+    border-radius: 16px;
     box-shadow: 4px 3px;
     color: black;
-    padding: 6px 60px;
+    padding: 6px 70px;
 }
 
 input[type="submit"]:hover {
     background: #f8ad9d;
 }
 
-.button-container {
+.login-button-container {
     display: flex;
     justify-content: center;
 }
 
 .login-topper-form {
-    height: 45px;
-    width: 750px;
+    height: 55px;
+    width: 1070px;
     background-color: #f8ad9d;
     border: 2px solid black;
     border-radius: 5px;
@@ -64,21 +67,21 @@ input[type="submit"]:hover {
     margin-top: -22px;
     background-color: white;
     border: 2px solid black;
-    padding: 2rem;
-    height: 380px;
+    padding: 12rem;
+    height: 600px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.list-container {
+.login-list-container {
     display: flex;
 }
 
-.error {
+.login-error {
     color: red;
     font-size: 12px;
 }
 
-.title {
+.login-title {
     margin: -300px;
     text-align: center;
     font-size: 50px;
@@ -86,7 +89,7 @@ input[type="submit"]:hover {
     margin-left: 300px;
 }
 
-.input-container {
+.login-input-container {
     position: relative;
     top: 20%;
     left: 13%;
@@ -98,7 +101,7 @@ input[type="submit"]:hover {
     width: 650px;
 }
 
-.result-container {
+.login-result-container {
     position: relative;
     top: 10%;
     left: 13%;
@@ -111,7 +114,7 @@ input[type="submit"]:hover {
 }
 
 
-.endingleft{
+.ending{
     font-size: 18px;
     margin-top: 50px;
     margin-left: 130px;
@@ -119,26 +122,19 @@ input[type="submit"]:hover {
     white-space: nowrap;
 }
 
-.endingright{
-    font-size: 12px;
-    margin-right: 10px;
-}
-
 .App-logo {
-    /* height: 40vmin;
-    pointer-events: none; */
     position: relative;
-    top: -160px;
-    right: -505px;
+    top: -330px;
+    left: 640px;
 }
 
-.dot-component{
+.login-dot-component{
     position: relative;
     top: -310px;
     left: -330px;
 }
 
-.curve-component{
+.login-curve-component{
     position: relative;
     top: -310px;
     left: -390px;

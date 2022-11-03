@@ -9,7 +9,7 @@
 }
 
 .diary-container {
-    width: 490px;
+    width: 640px;
     background-color: #ffb5a7;
     margin-top: -45px;
     margin-left: 32px;
@@ -17,4 +17,31 @@
     font-weight: bold;
     font-size: 20px;
     color: #926432;
+}
+
+.icon-wrapper {
+    position: relative;
+    padding: 0px 30px;
+}
+
+.icon-wrapper .anticon {
+    position: absolute;
+    top: -2px;
+    width: 16px;
+    height: 16px;
+    color: rgba(0, 0, 0, 0.25);
+    font-size: 16px;
+    line-height: 1;
+}
+
+.icon-wrapper .icon-wrapper-active {
+    color: rgb(230, 141, 117);
+}
+
+.icon-wrapper .anticon:first-child {
+    left: 0;
+}
+
+.icon-wrapper .anticon:last-child {
+    right: 0;
 }
