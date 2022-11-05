@@ -8,6 +8,7 @@ from .forms import NewUserForm, MySettingPage
 from django.contrib.auth import login
 from django.contrib import messages
 from .serializers import MyData
+import requests
 
 
 def main(request):
@@ -63,5 +64,9 @@ def my_form(request):
 
 def redirect_line(request):
     # response = redirect('/redirect-success/')
-    print(request.GET['code'])
+    collect_code = request.GET['code']
+    # collect_state = request.GET['state']
+    url = 'https://notify-bot.line.me/oauth/token'
+    x = requests.post(url=url, json=collect_code)
+    print(x)
     # return HttpResponse('success')
