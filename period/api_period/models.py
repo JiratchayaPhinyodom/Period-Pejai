@@ -46,7 +46,7 @@ class Setting(models.Model):
 
 class PredictCalendar(models.Model):
     start_time = models.DateTimeField(default=today())
-    setting = models.ForeignKey(Setting, on_delete=models.DO_NOTHING())
+    setting = models.ForeignKey(Setting, on_delete=models.DO_NOTHING)
 
     def get_predict(self, day: datetime, setting: Setting) -> list:
         pass

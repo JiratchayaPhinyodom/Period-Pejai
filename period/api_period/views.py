@@ -10,9 +10,7 @@ from django.contrib import messages
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from .serializers import UploadFile
-=======
 from .serializers import MyData
-import requests
 
 
 def main(request):
