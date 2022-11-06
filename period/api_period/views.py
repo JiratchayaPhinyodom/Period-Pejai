@@ -1,28 +1,23 @@
-from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import MySetting
-from django.contrib.auth.forms import AuthenticationForm  # add this
-from django.contrib.auth import login, authenticate  # add this
+from rest_framework import generics
+from .models import Setting
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
-from .forms import NewUserForm
+from .forms import NewUserForm, MySettingPage
 from django.contrib.auth import login
 from django.contrib import messages
+from .serializers import MyData
+import requests
 
-
-# Create your views here.
 
 def main(request):
     return HttpResponse("Hello")
 
 
-def my_form(request):
-    if request.method == "POST":
-        form = MySetting(request.POST)
-        if form.is_valid():
-            form.save()
-    else:
-        form = MySetting()
-    return render(request, 'setting/setting_page.html', {'form': form})
+class Data(generics.ListAPIView):
+    queryset = Setting.objects.all()
+    serializer_class = MyData
 
 
 def login_request(request):
@@ -51,7 +46,27 @@ def register_request(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful.")
-            return redirect("login")
+            return redirect("/api/login")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(request=request, template_name="registration/register.html", context={"register_form": form})
+
+
+def my_form(request):
+    if request.method == "POST":
+        form = MySettingPage(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = MySettingPage()
+    return render(request, 'setting/setting_page.html', {'form': form})
+
+
+def redirect_line(request):
+    # response = redirect('/redirect-success/')
+    collect_code = request.GET['code']
+    # collect_state = request.GET['state']
+    url = 'https://notify-bot.line.me/oauth/token'
+    x = requests.post(url=url, json=collect_code)
+    print(x)
+    # return HttpResponse('success')
