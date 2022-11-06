@@ -1,9 +1,4 @@
-::placeholder {
-    color: #dfcef6;
-    opacity: 1;
-}
-
-.app {
+.home {
     font-family: 'Gaegu', cursive;
     font-weight: bold;
     display: flex;
@@ -12,6 +7,7 @@
     flex-direction: column;
     gap: 20px;
     height: 821px;
+    width: 1440px;
     background-color: #fffaed;
 }
 
@@ -25,12 +21,8 @@
     border-radius: 20px;
 }
 
-.list-container {
-    display: flex;
-}
 
-.title {
-    margin-top: 8px;
+.home-title {
     margin-left: 20px;
     text-align: left;
     font-size: 35px;
@@ -56,16 +48,7 @@
     border-radius: 20px;
 }
 
-.diary-container {
-    height: 75px;
-    width: 490px;
-    background-color: #ffcdb2;
-    margin-top: -45px;
-    margin-left: 32px;
-    border-radius: 20px;
-}
-
-.input-container {
+.home-input-container {
     position: relative;
     left: 13%;
     font-size: 25px;
@@ -75,31 +58,6 @@
     margin: 16px;
     width: 650px;
 }
-
-input[type="text"]{
-    font-family: 'Gaegu', cursive;
-    font-weight: bold;
-    font-size: 20px;
-    align-items: center;
-    justify-content: center;
-    height: 280px;
-    width: 280px;
-    border-radius: 20px;
-    background: #ffb5a7;
-}
-
-.result-container {
-    position: relative;
-    top: 10%;
-    left: 13%;
-    font-size: 25px;
-    align-items: center;
-    display: flex;
-    gap: 40px;
-    margin: 16px;
-    width: 650px;
-}
-
 
 .endingleft{
     font-size: 18px;

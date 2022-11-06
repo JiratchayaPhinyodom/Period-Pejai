@@ -7,6 +7,10 @@ from django.shortcuts import render, redirect
 from .forms import NewUserForm, MySettingPage
 from django.contrib.auth import login
 from django.contrib import messages
+from rest_framework.viewsets import ViewSet
+from rest_framework.response import Response
+from .serializers import UploadFile
+=======
 from .serializers import MyData
 import requests
 
@@ -52,6 +56,18 @@ def register_request(request):
     return render(request=request, template_name="registration/register.html", context={"register_form": form})
 
 
+class UploadPicture(ViewSet):
+    serializer_class = UploadFile
+
+    def get_API(self, request):
+        return Response("GET API")
+
+    def create(self, request):
+        file_uploaded = request.FILES.get('file_uploaded')
+        content_type = file_uploaded.content_type
+        response = "POST API and you have uploaded a {} file".format(content_type)
+        return Response(response)
+
 def my_form(request):
     if request.method == "POST":
         form = MySettingPage(request.POST)
@@ -70,3 +86,4 @@ def redirect_line(request):
     x = requests.post(url=url, json=collect_code)
     print(x)
     # return HttpResponse('success')
+
