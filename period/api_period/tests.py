@@ -1,13 +1,10 @@
 from django.test import TestCase
+from .models import Setting
 
 
 # Create your tests here.
 class SettingModelTests(TestCase):
-    def test_birth_year_is_integer(self):
-        pass
 
-    def test_period_length_is_integer(self):
-        pass
-
-    def test_no_negative_number(self):
-        pass
+    def test_uses_setting_template(self):
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, 'setting/setting_page.html')
