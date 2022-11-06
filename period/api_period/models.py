@@ -44,12 +44,12 @@ class Setting(models.Model):
     luteal_length = models.IntegerField()
 
 
-class PredictCalendar(models.Model):
-    start_time = models.DateTimeField(default=today())
-    setting = models.ForeignKey(Setting, on_delete=models.DO_NOTHING())
-
-    def get_predict(self, day: datetime, setting: Setting) -> list:
-        pass
+# class PredictCalendar(models.Model):
+#     start_time = models.DateTimeField(default=today())
+#     setting = models.ForeignKey(Setting, on_delete=models.DO_NOTHING())
+#
+#     def get_predict(self, day: datetime, setting: Setting) -> list:
+#         pass
 #
 #     def get_previous_period(self, previous):
 #         previous_periods = self.first_days().filter(timestamp__lte=previous)

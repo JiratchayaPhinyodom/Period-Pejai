@@ -1,3 +1,4 @@
+from django.contrib.sites import requests
 from django.http import HttpResponse
 from rest_framework import generics
 from .models import Setting
@@ -10,9 +11,8 @@ from django.contrib import messages
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from .serializers import UploadFile
-=======
+
 from .serializers import MyData
-import requests
 
 
 def main(request):
@@ -68,6 +68,7 @@ class UploadPicture(ViewSet):
         response = "POST API and you have uploaded a {} file".format(content_type)
         return Response(response)
 
+
 def my_form(request):
     if request.method == "POST":
         form = MySettingPage(request.POST)
@@ -86,4 +87,3 @@ def redirect_line(request):
     x = requests.post(url=url, json=collect_code)
     print(x)
     # return HttpResponse('success')
-
