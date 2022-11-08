@@ -4,9 +4,12 @@ import LogoPic from "./pics/app_logo.png";
 import Dots from "./pics/dots.png";
 import Curve from "./pics/curve.png";
 import InputDiary from './component_setting/input/input_diary';
+import IconSlider from './component_setting/input/input_painlevel';
 import "./home_styles.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Input, Space } from 'antd';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDroplet } from "@fortawesome/free-solid-svg-icons";
 
 
 function Home() {
@@ -71,9 +74,22 @@ return (
     <div className="home">
         <div className="home-form">
             <div className="home-title">PAIN LEVEL</div>
-                <div className="pain-level-container"></div>
+                <div className="pain-level-container"><IconSlider></IconSlider></div>
             <div className="home-title">BLOOD LEVEL</div>
-                <div className="blood-level-container"></div>
+                <div className="blood-level-container">
+                    <button className="small-blood-level-block">
+                        <FontAwesomeIcon icon={faDroplet} size="3x" />
+                    </button>
+                    <button className="small-blood-level-block">
+                        <FontAwesomeIcon icon={faDroplet} size="3x"/>
+                        <FontAwesomeIcon icon={faDroplet} size="3x" />
+                    </button>
+                    <button type="level" className="small-blood-level-block">
+                        <FontAwesomeIcon icon={faDroplet} size="3x" />
+                        <FontAwesomeIcon icon={faDroplet} size="3x" />
+                        <FontAwesomeIcon icon={faDroplet} size="3x" />
+                    </button>
+                </div>
             <div className="home-title">DIARY</div>
                 <InputDiary className="diary-container"></InputDiary>
             {isSubmitted ? <div>User is successfully logged in</div> : renderForm}

@@ -9,12 +9,43 @@
 }
 
 .diary-container {
-    width: 490px;
+    width: 640px;
     background-color: #ffb5a7;
     margin-top: -45px;
     margin-left: 32px;
     border-radius: 20px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 23px;
     color: #926432;
+}
+
+.icon-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    padding: 0px 30px;
+}
+
+.icon-wrapper .anticon {
+    position: absolute;
+    top: -2px;
+    width: 16px;
+    height: 16px;
+    color: rgba(0, 0, 0, 0.25);
+    font-size: 16px;
+    line-height: 2.8;
+}
+
+.icon-wrapper .icon-wrapper-active {
+    color: #926432;
+}
+
+.icon-wrapper .anticon:first-child {
+    left: 0;
+}
+
+.icon-wrapper .anticon:last-child {
+    right: 0;
 }
