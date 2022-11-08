@@ -19,7 +19,7 @@
     background-color: #fff0ca;
     height: 770px;
     width: 700px;
-    border-radius: 20px;
+    border-radius: 25px;
 }
 
 
@@ -37,16 +37,21 @@
     background-color: #ffb5a7;
     margin-top: -45px;
     margin-left: 32px;
-    border-radius: 20px;
+    border-radius: 25px;
+    position: relative;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
 }
 
-.blood-level-container {
-    height: 100px;
-    width: 640px;
-    background-color: #ffcdb2;
-    margin-top: -45px;
-    margin-left: 32px;
-    border-radius: 20px;
+.small-blood-level-block{
+    height: 80px;
+    width: 200px;
+    background-color: #ffe4dc;
+    border-radius: 25px;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
 }
 
 .home-input-container {
@@ -66,6 +71,36 @@
     margin-left: 145px;
     display: inline-block;
     white-space: nowrap;
+}
+
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+}
+
+
+.blood-level-container {
+    height: 100px;
+    width: 640px;
+    background-color: #ffcdb2;
+    border-radius: 25px;
+    padding: 10px;
+    justify-content: space-between;
+    align-content: space-between;
+    margin-top: -45px;
+    margin-left: 32px;
+    display: flex;
+}
+
+.fa-droplet {
+    color: #da2f47;
+    padding: 0.15em;
 }
 
 @media (prefers-reduced-motion: no-preference) {
