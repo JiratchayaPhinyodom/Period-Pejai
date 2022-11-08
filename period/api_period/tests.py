@@ -1,11 +1,8 @@
 from django.test import TestCase
 from .models import Setting
+from django.test import Client
 
 
-# birth_year = models.IntegerField()
-# period_length = models.IntegerField()
-# cycle_length = models.IntegerField()
-# luteal_length = models.IntegerField()
 class ModelSettingTestCase(TestCase):
     def setUp(self):
         self.birth_year = 2002
@@ -23,7 +20,26 @@ class ModelSettingTestCase(TestCase):
 
 
 class ViewsTestCase(TestCase):
-    def test_index_loads_properly(self):
-        """The index page loads properly"""
-        response = self.client.get('server_ip:8000')
-        self.assertEqual(response.status_code, 404)
+    """Test that the pages has status code = 200 which mean it is ok"""
+    def setUp(self):
+        # Every test needs a client.
+        self.client = Client()
+
+    def test_home_page(self):
+        response = self.client.get('/api/home')
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
+    def test_setting_page(self):
+        response = self.client.get('/api/setting')
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_page(self):
+        response = self.client.get('/api/login')
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
