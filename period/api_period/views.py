@@ -66,6 +66,7 @@ class UploadPicture(ViewSet):
         response = "POST API and you have uploaded a {} file".format(content_type)
         return Response(response)
 
+
 def my_form(request):
     if request.method == "POST":
         form = MySettingPage(request.POST)
@@ -84,4 +85,3 @@ def redirect_line(request):
     x = requests.post(url=url, json=collect_code)
     print(x)
     # return HttpResponse('success')
-
