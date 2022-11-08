@@ -2,14 +2,24 @@ from django.test import TestCase
 from .models import Setting
 
 
-# class ModelSettingTestCase(TestCase):
-#     def SetUp(self):
-#         self.birth_year = Setting.birth_year()
-#
-#     def test_user_input_is_integer(self):
-#         Birth_year = 2002
-#         self.birth_year = Setting.birth_year()
-#         self.assertEqual(self.birth_year, Birth_year)
+# birth_year = models.IntegerField()
+# period_length = models.IntegerField()
+# cycle_length = models.IntegerField()
+# luteal_length = models.IntegerField()
+class ModelSettingTestCase(TestCase):
+    def setUp(self):
+        self.birth_year = 2002
+        self.period_length = 7
+        self.cycle_length = 28
+        self.luteal_length = 14
+
+    def test_user_input_is_integer(self):
+        self.assertEqual(self.birth_year, 2002)
+        self.assertEqual(self.period_length, 7)
+        self.assertEqual(self.cycle_length, 28)
+        self.assertEqual(self.luteal_length, 14)
+        # with self.assertRaises(TypeError):
+        #     self.assertEqual(self.luteal_length, "14") #failures
 
 
 class ViewsTestCase(TestCase):
