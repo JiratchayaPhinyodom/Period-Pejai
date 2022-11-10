@@ -21,9 +21,14 @@
     display: flex;
     justify-content: flex-start;
     border-radius: 10em;
-    border-color: #7b7aaf;
-    background-color: #7b7aaf;
+    border-color: #FAF3DD;
+    background-color: #FAF3DD;
     margin: 0.5cm;
     width: 15rem;
     height: 15rem;
+}
+
+.swal2-title, .swal2-button, .swal2-text{
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
 }
