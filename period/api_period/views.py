@@ -67,12 +67,27 @@ def my_form(request):
 
 def redirect_line(request):
     # response = redirect('/redirect-success/')
-    print(request.GET['code'])
+    # print(request.GET['code'])
     # collect_state = request.GET['state']
-    # url = 'https://notify-bot.line.me/oauth/token'
+    url = "https://notify-bot.line.me/oauth/token"
     # x = requests.post(url=url, json=collect_code)
     # print(x)
     # return HttpResponse('success')
+    pass
+
+
+def request(request):
+    code = "DvC3pxIQuMtJOww9XOlCyN&state"
+    client_id = "3i37SxxITCH1t4ngUNAPuz"
+    redirect_uri = "http://127.0.0.1:8000/api/setting"
+    state = "abcdef123456"
+    print(request.GET['code'])
+
+
+def response(code):
+    code = ""
+    state = ""
+    pass
 
 
 class UploadPredict(ViewSet):
