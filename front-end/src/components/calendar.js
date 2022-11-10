@@ -3,14 +3,14 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
 import 'antd/dist/antd.css';
+import React, { useState } from "react";
 
 import { DatePicker } from 'antd';
-import React, { useState } from 'react';
 
 import 'moment/locale/zh-cn';
 
 
-function calendars() {
+function Calendars() {
 
 
   const DateToString = (date) => {
@@ -128,4 +128,4 @@ function calendars() {
   );
 }
 
-export default calendars;
+export default Calendars;

@@ -10,7 +10,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Input, Space } from 'antd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDroplet } from "@fortawesome/free-solid-svg-icons";
-
+import Calendars from "./Calendar"
 
 function Home() {
   // React States
@@ -74,6 +74,7 @@ const handleSubmit = (event) => {
 
 return (
     <div className="home">
+        <Calendars className="component-calendar"/>
         <div className="home-form">
             <div className="home-title">PAIN LEVEL</div>
                 <div className="pain-level-container"><IconSlider></IconSlider></div>

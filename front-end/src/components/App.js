@@ -9,6 +9,7 @@ import ForgotPassword from "./ForgotPassword"
 import UpdateProfile from "./UpdateProfile"
 import Home from "./Home"
 import "./App.css";
+import Calendars from "./Calendar"
 
 function App() {
   return (
