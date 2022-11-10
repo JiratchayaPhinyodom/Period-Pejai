@@ -1,5 +1,17 @@
 import React, { useState, useEffect} from 'react';
 import "./profile.css"
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+function savePic(){
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Your work has been saved',
+    showConfirmButton: false,
+    timer: 1500
+  })
+};  
 
 export default function App() {
   const [images, setImages] = useState([]);
@@ -13,6 +25,7 @@ export default function App() {
   }, [images]);
 
   function onImageChange(e) {
+    savePic();
     setImages([...e.target.files]);
   }
 
