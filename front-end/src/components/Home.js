@@ -10,7 +10,6 @@ import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Input, Space } from 'antd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDroplet } from "@fortawesome/free-solid-svg-icons";
-import Calendar from 'react-calendar';
 
 
 function Home() {
@@ -70,14 +69,11 @@ const handleSubmit = (event) => {
     </form>
 );
 
-const [value, onChange] = useState(new Date());
+// calen
 
 
 return (
     <div className="home">
-        <div>
-      <Calendar onChange={onChange} value={value} />
-    </div>
         <div className="home-form">
             <div className="home-title">PAIN LEVEL</div>
                 <div className="pain-level-container"><IconSlider></IconSlider></div>
