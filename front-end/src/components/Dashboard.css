@@ -38,8 +38,8 @@
     border-color: #7b7aaf;
     background-color: #7b7aaf;
     margin: 0.5cm;
-    width: 9rem;
-    height: 3.5rem;
+    width: 14rem;
+    height: 3rem;
   }
   
   .setting_p {
@@ -65,8 +65,8 @@
     border-color: #b8bedd;
     background-color: #b8bedd;
     margin: 0.5cm;
-    width: 9rem;
-    height: 3.5rem;
+    width: 14rem;
+    height: 3rem;
   }
   
   .home_p {
@@ -108,8 +108,8 @@
     border-color: #b8bedd;
     background-color: #b8bedd;
     margin: 0.5cm;
-    width: 9rem;
-    height: 3.5rem;
+    width: 14rem;
+    height: 3rem;
   
   }
   
@@ -145,11 +145,25 @@
     border-radius: 3em;
     box-shadow: 0.5em 0.5em #f8ad9d;
     width: 50em;
-    height: 40em;
+    height: 35em;
     margin: 5cm;
     margin-top: -20cm;
     margin-left: 15cm;
   }
+
+  .setting-submit {
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+    background: #7B7AAF;
+    border-radius: 30px;
+    color: white;
+    height: 2em;
+    width: 5em;
+}
+
   
   .year, .period-length, .cycle-length, .phase-length {
     margin: 1cm;
