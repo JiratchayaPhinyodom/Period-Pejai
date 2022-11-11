@@ -23,17 +23,17 @@ class Data(generics.ListAPIView):
     queryset = Setting.objects.all()
     serializer_class = MyData
 
-    def post(self, request):
-        """Create a hello message with our name"""
-
-        serializer = MyData(data=request.data)
-
-        if serializer.is_valid():
-            # name = serializer.data.get('name')
-            message = request.data
-            return Response(message)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # def post(self, request):
+    #     """Create a hello message with our name"""
+    #
+    #     serializer = MyData(data=request.data)
+    #
+    #     if serializer.is_valid():
+    #         # name = serializer.data.get('name')
+    #         message = request.data
+    #         return Response(message)
+    #     else:
+    #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def login_request(request):
