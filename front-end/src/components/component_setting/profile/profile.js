@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import "./profile.css"
 import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 
 function savePic(){
   Swal.fire({

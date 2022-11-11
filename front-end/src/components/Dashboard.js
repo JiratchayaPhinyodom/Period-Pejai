@@ -5,12 +5,31 @@ import 'antd/dist/antd.css';
 import './Dashboard.css';
 import { Button } from 'antd';
 import Profile from './component_setting/profile/profile'
-import { SettingOutlined, HomeOutlined, LogoutOutlined} from '@ant-design/icons';
+import { SettingOutlined, HomeOutlined, LogoutOutlined, UserOutlined} from '@ant-design/icons';
 import ToggleSwitch from './component_setting/toggle/toggle_period'
 import Input_birth from './component_setting/input/input_birth';
 import Input_period from './component_setting/input/input_period'
 import Input_cycle from './component_setting/input/input_cycle';
 import Input_phase from './component_setting/input/input_phase';
+import Swal from 'sweetalert2'
+import LineLink from "./pics/line_button.png";
+
+function saveConfirm(){
+  Swal.fire({
+    title: 'Do you want to save the changes?',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: 'Save',
+    denyButtonText: `Don't save`,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      Swal.fire('Saved!', '', 'success')
+    } else if (result.isDenied) {
+      Swal.fire('Changes are not saved', '', 'info')
+    }
+  })
+}
 
 export default function Dashboard() {
   const [error, setError] = useState("")
@@ -60,7 +79,10 @@ async function handleUpdateProfile() {
     <p className='reminder'>Reminders</p>
     <ToggleSwitch label="Period" />
     <ToggleSwitch label="Ovaluation"/>
-    <Button className="update" type="primary" variant="link" onClick={handleUpdateProfile} style={{ background: "#b8bedd"}}><p className="update_p"> Update Profile </p></Button>
+    <a href="https://notify-bot.line.me/en/">
+            <img src={LineLink} className="line-logo" height = "50px"/>
+    </a>
+    <Button className="update" type="primary" variant="link" onClick={handleUpdateProfile} style={{ background: "#b8bedd"}}><p className="update_p"><UserOutlined className='icon_user'/>Update Profile </p></Button>
     <span><Button className='logout' type="primary" variant="link" onClick={handleLogout} style={{ background: "#b8bedd"}}><p className='logout_p' ><LogoutOutlined className='icon_logout'/>Logout</p></Button></span>
   </div>
   <div className='bc-input'>
@@ -69,8 +91,8 @@ async function handleUpdateProfile() {
       <span className='box-period'><p className='period-length'>PERIOD LENGTH</p><span className='mar'><Input_period /> DAYS</span></span>
       <span className='box-cycle'><p className='cycle-length'>CYCLE LENGTH</p><span className='mar'><Input_cycle /> DAYS</span></span>
       <span className='box-phase'><p className='phase-length'>LUTEAL PHASE LENGTH </p><span className='mar'><Input_phase /> DAYS</span></span>
-      <button disabled={loading} type="submit" className="setting-submit">
-          SAVE
+      <button disabled={loading} type="submit" className="setting-submit" onClick={saveConfirm}>
+          Save
       </button>
       </div>
   </div>
