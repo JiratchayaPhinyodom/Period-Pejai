@@ -1,5 +1,7 @@
 from django.http import HttpResponse
-from rest_framework import generics
+from rest_framework import generics, permissions, status
+from rest_framework.decorators import api_view
+
 from .models import Setting
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
@@ -20,6 +22,18 @@ def main(request):
 class Data(generics.ListAPIView):
     queryset = Setting.objects.all()
     serializer_class = MyData
+
+    def post(self, request):
+        """Create a hello message with our name"""
+
+        serializer = MyData(data=request.data)
+
+        if serializer.is_valid():
+            # name = serializer.data.get('name')
+            message = request.data
+            return Response(message)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def login_request(request):
