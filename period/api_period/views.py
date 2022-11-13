@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from rest_framework import generics, permissions, status
 from rest_framework.decorators import api_view
 
-from .models import Setting
+from .models import Setting, PeriodData
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
@@ -12,28 +12,21 @@ from django.contrib import messages
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from .serializers import UploadFile
-from .serializers import MyData
+from .serializers import MyData, MyDiaryPage
 
 
 def main(request):
     return HttpResponse("Hello")
 
 
-class Data(generics.ListAPIView):
+class Data(generics.ListCreateAPIView):
     queryset = Setting.objects.all()
     serializer_class = MyData
 
-    # def post(self, request):
-    #     """Create a hello message with our name"""
-    #
-    #     serializer = MyData(data=request.data)
-    #
-    #     if serializer.is_valid():
-    #         # name = serializer.data.get('name')
-    #         message = request.data
-    #         return Response(message)
-    #     else:
-    #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class Diary(generics.ListCreateAPIView):
+    queryset = PeriodData.objects.all()
+    serializer_class = MyDiaryPage
 
 
 def login_request(request):
