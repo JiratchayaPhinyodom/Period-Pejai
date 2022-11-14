@@ -63,7 +63,6 @@ function Calendars() {
     onChange={setDate}
     value={date}
     locale="US"
-
   />)
 
     

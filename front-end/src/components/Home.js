@@ -107,7 +107,7 @@ return (
         <div className="home-form">
             <div className="home-title">PAIN LEVEL</div>
                 <div className="pain-level-container">
-                    <Slider onChange={setPainLevel} value={painLevel} min={0} max={10}></Slider>
+                    <Slider onChange={setPainLevel} value={painLevel}></Slider>
                 </div>
             <div className="home-title">BLOOD LEVEL</div>
                 <div className="blood-level-container">
