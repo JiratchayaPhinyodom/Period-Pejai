@@ -63,8 +63,6 @@ function Calendars() {
     onChange={setDate}
     value={date}
     locale="US"
-    multipleSelect={true}
-
   />)
 
     
@@ -83,7 +81,6 @@ function Calendars() {
       onChange={setDate}
       value={date}
       locale="US"
-      multipleSelect={true}
       tileClassName={({date}) => 
       {
         let day = date.getDate()
