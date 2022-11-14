@@ -2,8 +2,8 @@
     font-family: 'Gaegu', cursive;
     font-weight: bold;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     flex-direction: column;
     gap: 20px;
     height: 1000px;
@@ -103,9 +103,8 @@
     padding: 0.15em;
 }
 
-.component-calendar {
-    justify-content: start;   
-
+.component-calendar { 
+    margin-left:10em;
 }
 
 @media (prefers-reduced-motion: no-preference) {
