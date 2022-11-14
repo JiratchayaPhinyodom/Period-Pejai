@@ -13,25 +13,25 @@ import { signInWithGoogle } from "../firebase"
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  const { login } = useAuth()
+  // const { login } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
 
-  async function handleSubmit(e) {
-    e.preventDefault()
+  // async function handleSubmit(e) {
+  //   e.preventDefault()
 
-    try {
-      setError("")
-      setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
-    } catch {
-      setError("Failed to log in")
-    }
+  //   try {
+  //     setError("")
+  //     setLoading(true)
+  //     await login(emailRef.current.value, passwordRef.current.value)
+  //     history.push("/")
+  //   } catch {
+  //     setError("Failed to log in")
+  //   }
 
-    setLoading(false)
-  }
+  //   setLoading(false)
+  // }
 
   return (
     <div className="login">
@@ -42,7 +42,7 @@ export default function Login() {
         </a> */}
           <span className="login-title">LOGIN</span>
           {error && <Alert variant="danger">{error}</Alert>}
-          <div className="form">
+          {/* <div className="form">
             <form onSubmit={handleSubmit}>
               <span className = "login-input-container" id="email">
                 <label>E-MAIL:</label>
@@ -64,8 +64,8 @@ export default function Login() {
           </div>
       <div className="ending">
         <Link to="/signup">SIGN UP</Link>
-      </div>
-      <button onClick={signInWithGoogle}></button>
+      </div> */}
+      <button onClick={signInWithGoogle}>Sign in with google</button>
     </div>
   </div>
   )

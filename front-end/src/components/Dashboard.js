@@ -14,6 +14,9 @@ import Input_phase from './component_setting/input/input_phase';
 import Swal from 'sweetalert2'
 import LineLink from "./pics/line_button.png";
 
+
+import { auth } from '../firebase'
+
 function saveConfirm(){
   Swal.fire({
     title: 'Do you want to save the changes?',
@@ -31,22 +34,22 @@ function saveConfirm(){
   })
 }
 
-export default function Dashboard() {
+const Dashboard= ({ user }) =>{
   const [error, setError] = useState("")
-  const { currentUser, logout, login} = useAuth()
+//   const { currentUser, logout, login} = useAuth()
   const history = useHistory()
   const [loading, setLoading] = useState(false)
 
-  async function handleLogout() {
-    setError("")
+//   async function handleLogout() {
+//     setError("")
 
-    try {
-      await logout()
-      history.push("/login")
-    } catch {
-      setError("Failed to log out")
-    }
-}
+//     try {
+//       await logout()
+//       history.push("/login")
+//     } catch {
+//       setError("Failed to log out")
+//     }
+// }
 async function handleHome() {
   setError("")
 
@@ -57,21 +60,23 @@ async function handleHome() {
   }
 }
 
-async function handleUpdateProfile() {
-  setError("")
+// async function handleUpdateProfile() {
+//   setError("")
 
-  try {
-    history.push("/update-profile")
-  } catch {
-    setError("Failed to log out")
-  }
-}
+//   try {
+//     history.push("/update-profile")
+//   } catch {
+//     setError("Failed to log out")
+//   }
+// }
   
 
   return (
     <div className='App'>
     <div className='left-side'>
-    <Profile />
+    {/* <Profile /> */}
+    <h1>Hello, <span></span>{user.displayName}</h1>
+    <img src={user.photoURL} alt="" />
     <span className='setting'>
     <p className='setting_p'><SettingOutlined className='icon_setting'/>Setting</p>
     </span>
@@ -82,8 +87,8 @@ async function handleUpdateProfile() {
     <a href="https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=3i37SxxITCH1t4ngUNAPuz&redirect_uri=http://127.0.0.1:8000/api/setting&scope=notify&state=abcdef123456">
             <img src={LineLink} className="line-logo" height = "50px"/>
     </a>
-    <Button className="update" type="primary" variant="link" onClick={handleUpdateProfile} style={{ background: "#b8bedd"}}><p className="update_p"><UserOutlined className='icon_user'/>Update Profile </p></Button>
-    <span><Button className='logout' type="primary" variant="link" onClick={handleLogout} style={{ background: "#b8bedd"}}><p className='logout_p' ><LogoutOutlined className='icon_logout'/>Logout</p></Button></span>
+    {/* <Button className="update" type="primary" variant="link" onClick={handleUpdateProfile} style={{ background: "#b8bedd"}}><p className="update_p"><UserOutlined className='icon_user'/>Update Profile </p></Button> */}
+    <span><Button className='logout' type="primary" variant="link" onClick={() => auth.signOut()} style={{ background: "#b8bedd"}}><p className='logout_p' ><LogoutOutlined className='icon_logout'/>Logout</p></Button></span>
   </div>
   <div className='bc-input'>
     <div className='input'>
@@ -99,3 +104,5 @@ async function handleUpdateProfile() {
 </div>
   )
 }
+
+export default Dashboard;
