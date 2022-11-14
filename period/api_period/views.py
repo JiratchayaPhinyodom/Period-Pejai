@@ -1,4 +1,3 @@
-from django.contrib.sites import requests
 from django.http import HttpResponse
 from rest_framework import generics
 from django.contrib.auth.forms import AuthenticationForm
@@ -7,14 +6,11 @@ from django.shortcuts import render, redirect
 from .forms import NewUserForm, MySettingPage
 from django.contrib.auth import login
 from django.contrib import messages
-from .serializers import *
-from rest_framework.viewsets import ViewSet
 from .models import *
-from rest_framework.response import Response
-import requests
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from .serializers import UploadFile
+from .serializers import MyData, MyDiaryPage
 from .serializers import MyData
 
 
@@ -22,11 +18,16 @@ def main(request):
     return HttpResponse("Hello")
 
 
-class Data(generics.ListAPIView):
+class Data(generics.ListCreateAPIView):
     queryset = Setting.objects.all()
     serializer_class = MyData
     queryset_predict = PredictCalendar.objects.all()
     serializer_predict = PredictCalendar
+
+
+class Diary(generics.ListCreateAPIView):
+    queryset = PeriodData.objects.all()
+    serializer_class = MyDiaryPage
 
 
 def login_request(request):
@@ -106,7 +107,6 @@ def redirect_line(request):
 #     r = requests.post(url, headers=headers, data={'message': msg})
 #     print(r.text)
 #
-
 
 def response(code):
     code = ""
