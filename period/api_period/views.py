@@ -16,6 +16,8 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from .serializers import UploadFile
 from .serializers import MyData
+from rest_framework import status
+from rest_framework.decorators import api_view
 
 
 def main(request):
@@ -74,14 +76,18 @@ class UploadPicture(ViewSet):
         return Response(response)
 
 
+@api_view(['POST'])
 def my_form(request):
+    # print(request.data)
     if request.method == "POST":
-        form = MySettingPage(request.POST)
+        form = MySettingPage(request.data)
         if form.is_valid():
             form.save()
+            return Response(status=status.HTTP_201_CREATED)
     else:
         form = MySettingPage()
-    return render(request, 'setting/setting_page.html', {'form': form})
+        Response(status=status.HTTP_400_BAD_REQUEST)
+    
 
 
 def redirect_line(request):
