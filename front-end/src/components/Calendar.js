@@ -106,7 +106,7 @@ function Calendars() {
 
   return (
     <div className='calendar'>
-      <h1 className='text-center'>React Calendar with Range</h1>
+      <h1 className='text-center'>PERIOD-PEJAI CALENDAR</h1>
       <div className='calendar-container'>
         {calen}
       </div>

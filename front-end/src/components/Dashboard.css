@@ -38,8 +38,8 @@
     border-color: #7b7aaf;
     background-color: #7b7aaf;
     margin: 0.5cm;
-    width: 9rem;
-    height: 3.5rem;
+    width: 14rem;
+    height: 3rem;
   }
   
   .setting_p {
@@ -65,8 +65,8 @@
     border-color: #b8bedd;
     background-color: #b8bedd;
     margin: 0.5cm;
-    width: 9rem;
-    height: 3.5rem;
+    width: 14rem;
+    height: 3rem;
   }
   
   .home_p {
@@ -79,7 +79,7 @@
     margin-top: 0.25cm;
   }
   
-  .icon_home {
+  .icon_home, .icon_logout, .icon_user {
     margin-right: 0.1cm;
     margin-top: 0.1cm;
     margin-left: -0.25cm;
@@ -88,10 +88,7 @@
   .reminder {
     font-size: 1.5rem;
     color: #7b7aaf;
-    display: flex;
-    justify-content: flex-start;
     font-weight: bold;
-    margin-left: 1cm;
     margin-top: 0.5cm;
   }
   
@@ -108,8 +105,8 @@
     border-color: #b8bedd;
     background-color: #b8bedd;
     margin: 0.5cm;
-    width: 9rem;
-    height: 3.5rem;
+    width: 14rem;
+    height: 3rem;
   
   }
   
@@ -123,11 +120,6 @@
     margin-top: 0.25cm;
   }
   
-  .icon_logout {
-    margin-right: 0.1cm;
-    margin-top: 0.1cm;
-    margin-left: -0.25cm;
-  }
   
   .bc-input {
     background-color: #fffaed;
@@ -145,11 +137,26 @@
     border-radius: 3em;
     box-shadow: 0.5em 0.5em #f8ad9d;
     width: 50em;
-    height: 40em;
+    height: 35em;
     margin: 5cm;
     margin-top: -20cm;
     margin-left: 15cm;
   }
+
+  .setting-submit {
+    margin-top: 15px;
+    margin-left: 15em;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+    background: #7B7AAF;
+    border-radius: 30px;
+    color: white;
+    height: 2em;
+    width: 5em;
+}
+
   
   .year, .period-length, .cycle-length, .phase-length {
     margin: 1cm;
@@ -161,15 +168,21 @@
     background-color: #ffcdb2;
     box-shadow: 0.25em 0.25em #f8ad9d;
     display: flex;
-    width: 5cm;
+    width: 5cm; 
     height: 1cm;
     justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
   }
   
   .box-year, .box-period, .box-cycle, .box-phase {
     display: flex;
     flex-direction: row;
   }
+
+  .line-logo {
+    margin-top: 20px;
+}
   
   .mar {
     margin: 1cm;
