@@ -7,6 +7,9 @@ import Dots from "./pics/dots.png";
 import LogoPic from "./pics/app_logo.png";
 import InputPassword from "./component_setting/input/input_password"
 
+//sign in with google
+import { signInWithGoogle } from "../firebase"
+
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -62,6 +65,7 @@ export default function Login() {
       <div className="ending">
         <Link to="/signup">SIGN UP</Link>
       </div>
+      <button onClick={signInWithGoogle}></button>
     </div>
   </div>
   )
