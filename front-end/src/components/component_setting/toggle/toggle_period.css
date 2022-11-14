@@ -24,7 +24,7 @@
     display: block;
     overflow: hidden;
     cursor: pointer;
-    border: 0 solid #bbb;
+    border: 0 solid #A5978E;
     border-radius: 20px;
   }
   .inner {
@@ -45,15 +45,15 @@
     box-sizing: border-box;
   }
   .inner:before {
-    content: "YES";
+    content: "";
     padding-left: 10px;
-    background-color: #060;
+    background-color: #F8AD9D;
     color: #fff;
   }
   .inner:after {
-    content: "NO";
+    content: "";
     padding-right: 10px;
-    background-color: #bbb;
+    background-color: #A5978E;
     color: #fff;
     text-align: right;
   }
@@ -67,7 +67,7 @@
     top: 0;
     bottom: 0;
     right: 40px;
-    border: 0 solid #bbb;
+    border: 0 solid #A5978E;
     border-radius: 20px;
     transition: all 0.3s ease-in 0s;
   }
