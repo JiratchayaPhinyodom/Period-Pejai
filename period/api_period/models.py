@@ -50,3 +50,4 @@ class PredictCalendar(models.Model):
 
     def get_predict(self, day: datetime, setting: Setting) -> list:
         pass
+

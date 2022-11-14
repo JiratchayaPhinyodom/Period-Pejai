@@ -1,3 +1,4 @@
+from django.contrib.sites import requests
 from django.http import HttpResponse
 from rest_framework import generics
 from django.contrib.auth.forms import AuthenticationForm
@@ -11,6 +12,10 @@ from rest_framework.viewsets import ViewSet
 from .models import *
 from rest_framework.response import Response
 import requests
+from rest_framework.viewsets import ViewSet
+from rest_framework.response import Response
+from .serializers import UploadFile
+from .serializers import MyData
 
 
 def main(request):
@@ -54,6 +59,19 @@ def register_request(request):
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(request=request, template_name="registration/register.html", context={"register_form": form})
+
+
+class UploadPicture(ViewSet):
+    serializer_class = UploadFile
+
+    def get_API(self, request):
+        return Response("GET API")
+
+    def create(self, request):
+        file_uploaded = request.FILES.get('file_uploaded')
+        content_type = file_uploaded.content_type
+        response = "POST API and you have uploaded a {} file".format(content_type)
+        return Response(response)
 
 
 def my_form(request):

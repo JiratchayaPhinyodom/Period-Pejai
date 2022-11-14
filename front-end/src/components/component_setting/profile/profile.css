@@ -1,0 +1,34 @@
+.choose {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0.5cm;
+    margin-left: 1cm;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.profile_img {
+    display: flex;
+    justify-content: flex-start;
+    margin: auto;
+    width: 95%;
+    height: 95%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.bc_img {
+    display: flex;
+    justify-content: flex-start;
+    border-radius: 10em;
+    border-color: #FAF3DD;
+    background-color: #FAF3DD;
+    margin: 0.5cm;
+    width: 15rem;
+    height: 15rem;
+}
+
+.swal2-title, .swal2-button, .swal2-text{
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+}

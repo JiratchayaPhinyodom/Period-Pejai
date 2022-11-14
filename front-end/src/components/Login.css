@@ -1,0 +1,147 @@
+.login {
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    height: 821px;
+    width: 1440px;
+    background-color: #fffaed;
+}
+
+a{
+    color: black;
+}
+
+input[type="email"],
+input[type="password"] {
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 280px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    box-shadow: 4px 3px;
+    background: #ffe4dc;
+    border: 1px solid black;
+}
+
+.login-submit {
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+    background: #f8ad9d;
+    border: 1px solid black;
+    border-radius: 16px;
+    box-shadow: 4px 3px;
+    color: black;
+    padding: 6px 70px;
+}
+
+input[type="submit"]:hover {
+    background: #f8ad9d;
+}
+
+.login-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.login-topper-form {
+    height: 55px;
+    width: 1070px;
+    background-color: #f8ad9d;
+    border: 2px solid black;
+    border-radius: 5px;
+    
+}
+
+.login-form {
+    margin-top: -22px;
+    background-color: white;
+    border: 2px solid black;
+    padding: 12rem;
+    height: 600px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.login-list-container {
+    display: flex;
+}
+
+.login-error {
+    color: red;
+    font-size: 12px;
+}
+
+.login-title {
+    margin: -300px;
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 45px;
+    margin-left: 300px;
+}
+
+.login-input-container {
+    position: relative;
+    top: 20%;
+    left: 13%;
+    font-size: 25px;
+    align-items: center;
+    display: flex;
+    gap: 40px;
+    margin: 16px;
+    width: 650px;
+}
+
+.login-result-container {
+    position: relative;
+    top: 10%;
+    left: 13%;
+    font-size: 25px;
+    align-items: center;
+    display: flex;
+    gap: 40px;
+    margin: 16px;
+    width: 650px;
+}
+
+
+.ending{
+    font-size: 18px;
+    margin-top: 50px;
+    margin-left: 130px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.App-logo {
+    position: relative;
+    top: -330px;
+    left: 640px;
+}
+
+.login-dot-component{
+    position: relative;
+    top: -310px;
+    left: -330px;
+}
+
+.login-curve-component{
+    position: relative;
+    top: -310px;
+    left: -390px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+}
+}
