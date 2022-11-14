@@ -1,17 +1,20 @@
 from django.contrib.sites import requests
 from django.http import HttpResponse
 from rest_framework import generics
-from .models import Setting
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from .forms import NewUserForm, MySettingPage
 from django.contrib.auth import login
 from django.contrib import messages
+from .serializers import *
+from rest_framework.viewsets import ViewSet
+from .models import *
+from rest_framework.response import Response
+import requests
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from .serializers import UploadFile
-
 from .serializers import MyData
 
 
@@ -22,6 +25,8 @@ def main(request):
 class Data(generics.ListAPIView):
     queryset = Setting.objects.all()
     serializer_class = MyData
+    queryset_predict = PredictCalendar.objects.all()
+    serializer_predict = PredictCalendar
 
 
 def login_request(request):
@@ -81,9 +86,36 @@ def my_form(request):
 
 def redirect_line(request):
     # response = redirect('/redirect-success/')
-    collect_code = request.GET['code']
+    # print(request.GET['code'])
     # collect_state = request.GET['state']
-    url = 'https://notify-bot.line.me/oauth/token'
-    x = requests.post(url=url, json=collect_code)
-    print(x)
+    url = "https://notify-bot.line.me/oauth/token"
+    # x = requests.post(url=url, json=collect_code)
+    # print(x)
     # return HttpResponse('success')
+    pass
+
+
+# def request():
+#     code = "fPg7tfstCUlDW5s5TiAha5"
+#     client_id = "3i37SxxITCH1t4ngUNAPuz"
+#     url = "http://127.0.0.1:8000/api/setting"
+#     state = "abcdef123456"
+#     token = "IYsi0yC9Et4EqFHBzv9evCyN1azoebOgKkyU4UygHwj"
+#     headers = {'content-type': 'application/x-www-form-urlencoded', 'Authorization': 'Bearer ' + token}
+#     msg = 'Hello LINE Notify'
+#     r = requests.post(url, headers=headers, data={'message': msg})
+#     print(r.text)
+#
+
+
+def response(code):
+    code = ""
+    state = ""
+    pass
+
+
+class UploadPredict(ViewSet):
+    serializer_class = PredictCalendar
+
+    def get_API(self):
+        return Response("GET API")

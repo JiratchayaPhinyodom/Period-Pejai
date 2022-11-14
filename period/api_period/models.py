@@ -44,30 +44,10 @@ class Setting(models.Model):
     luteal_length = models.IntegerField()
 
 
-# class PredictCalendar(models.Model):
-#     start_time = models.DateTimeField(default=today())
-#     setting = models.ForeignKey(Setting, on_delete=models.DO_NOTHING())
-#
-#     def get_predict(self, day: datetime, setting: Setting) -> list:
-#         pass
-#
-#     def get_previous_period(self, previous):
-#         previous_periods = self.first_days().filter(timestamp__lte=previous)
-#         previous_periods = previous_periods.order_by('-timestamp')
-#         return previous_periods.first()
-#
-#     def get_next_period(self, after=None):
-#         next_periods = self.first_days()
-#         if after:
-#             next_periods = next_periods.filter(timestamp__gte=after)
-#         next_periods = next_periods.order_by('timestamp')
-#         return next_periods.first()
-#
-#     def first_days(self):
-#         return self.flow_events.filter(first_day=True).order_by('timestamp')
-#
-#
-# class FlowEvent(models.Model):
-#     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='flow_events', null=True)
-#     timestamp = models.DateTimeField()
-#     first_day = models.BooleanField(default=False)
+class PredictCalendar(models.Model):
+    start_time = models.DateTimeField(default=today())
+    setting = models.ForeignKey(Setting, on_delete=models.DO_NOTHING)
+
+    def get_predict(self, day: datetime, setting: Setting) -> list:
+        pass
+
