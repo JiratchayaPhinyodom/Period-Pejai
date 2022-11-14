@@ -79,7 +79,7 @@ async function handleUpdateProfile() {
     <p className='reminder'>Reminders</p>
     <ToggleSwitch label="Period" />
     <ToggleSwitch label="Ovaluation"/>
-    <a href="https://notify-bot.line.me/en/">
+    <a href="https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=3i37SxxITCH1t4ngUNAPuz&redirect_uri=http://127.0.0.1:8000/api/setting&scope=notify&state=abcdef123456">
             <img src={LineLink} className="line-logo" height = "50px"/>
     </a>
     <Button className="update" type="primary" variant="link" onClick={handleUpdateProfile} style={{ background: "#b8bedd"}}><p className="update_p"><UserOutlined className='icon_user'/>Update Profile </p></Button>
