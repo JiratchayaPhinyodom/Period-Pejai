@@ -22,3 +22,4 @@ class MyDiaryPage(serializers.ModelSerializer):
     class Meta:
         model = PeriodData
         fields = ["pain_level", "blood_level", "diary_text", "date"]
+

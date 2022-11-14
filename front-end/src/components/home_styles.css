@@ -2,23 +2,24 @@
     font-family: 'Gaegu', cursive;
     font-weight: bold;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     flex-direction: column;
     gap: 20px;
-    height: 821px;
+    height: 1000px;
     width: 1440px;
     background-color: #fffaed;
 }
 
 .home-form {
-    position: absolute;
-    right: 0px;
+    position:absolute;
+    top:10px;
+    right: 10px;
     width: 50%;
     background-color: #fff0ca;
-    height: 650px;
-    width: 550px;
-    border-radius: 20px;
+    height: 770px;
+    width: 700px;
+    border-radius: 25px;
 }
 
 
@@ -31,21 +32,26 @@
 }
 
 .pain-level-container {
-    height: 75px;
-    width: 490px;
+    height: 100px;
+    width:640px;
     background-color: #ffb5a7;
     margin-top: -45px;
     margin-left: 32px;
-    border-radius: 20px;
+    border-radius: 25px;
+    position: relative;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
 }
 
-.blood-level-container {
-    height: 75px;
-    width: 490px;
-    background-color: #ffcdb2;
-    margin-top: -45px;
-    margin-left: 32px;
-    border-radius: 20px;
+.small-blood-level-block{
+    height: 80px;
+    width: 200px;
+    background-color: #ffe4dc;
+    border-radius: 25px;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
 }
 
 .home-input-container {
@@ -65,6 +71,40 @@
     margin-left: 145px;
     display: inline-block;
     white-space: nowrap;
+}
+
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+}
+
+
+.blood-level-container {
+    height: 100px;
+    width: 640px;
+    background-color: #ffcdb2;
+    border-radius: 25px;
+    padding: 10px;
+    justify-content: space-between;
+    align-content: space-between;
+    margin-top: -45px;
+    margin-left: 32px;
+    display: flex;
+}
+
+.fa-droplet {
+    color: #da2f47;
+    padding: 0.15em;
+}
+
+.component-calendar { 
+    margin-left:10em;
 }
 
 @media (prefers-reduced-motion: no-preference) {
