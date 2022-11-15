@@ -21,24 +21,15 @@ const MainApp  = ()=> {
   }
   else{
     console.log("Main Router");
+    console.log(currentUser.uid)
     return <MainRouter/>
   };
 }
 
 function App() {
-  // const [user, setUser] = useState(null);
-
-  // useEffect(() => {
-  //   firebase.auth().onAuthStateChanged(user => {
-  //     setUser(user);
-  //   })
-  // }, [])
-
-  // console.log(user);
 
   return (
     <div className="app">
-      {/* {user ? <Dashboard user={user} /> : <Login />} */}
       <AuthProvider>
         <MainApp/>
       </AuthProvider>
