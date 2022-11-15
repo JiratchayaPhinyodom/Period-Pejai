@@ -34,7 +34,7 @@ function Calendars({date,setDate}) {
   }
 
   const setEvents2 = (eventsX) => {
-    console.log(eventsX)
+    // console.log(eventsX)
     let events2 = []
     eventsX.forEach((events) => {
       const start = new Date(Date.parse(events[0]))
@@ -43,7 +43,7 @@ function Calendars({date,setDate}) {
       while(1){
         const nextday = new Date(Date.parse(events[0]));
         nextday.setDate(start.getDate() + i);
-        console.log(i,nextday,endd)
+        // console.log(i,nextday,endd)
         const str_nextday = DateToString(nextday)  
         events2 = [...events2, str_nextday]
         i += 1
@@ -53,7 +53,7 @@ function Calendars({date,setDate}) {
       }
     }) 
     
-    console.log(events2)
+    // console.log(events2)
     return events2
   }
 
@@ -66,35 +66,34 @@ function Calendars({date,setDate}) {
     value={date}
     locale="US"
   />)
-  const [reTemp, setReTemp] = useState([])
-  const [testS, setTestS] = useState()
-
-  const [temp, setTemp] = useState([])
+  const [rangeDate, setRangeDate] = useState([])
+  const [collectRangeDate, setCollectRangeDate] = useState([])
   const [showBtn, setShowBtn] = useState(false)
     
 
   const onChange = (dates, dateStrings) => {
-    let tt = []
+    let listRangeDate = []
     if (dates) {
       console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
       // console.log("result = ", temp_reTemp)
-      tt.push(dateStrings[0]) //[[st,en], [], []]
-      tt.push(dateStrings[1])
-      setTemp(tt)
+      listRangeDate.push(dateStrings[0]) //[[st,en], [], []]
+      listRangeDate.push(dateStrings[1])
+      setCollectRangeDate(listRangeDate)
       setShowBtn(true)
     } else {
       console.log('Clear');
-      setTemp(tt)
+      setCollectRangeDate(listRangeDate)
     }
     
   };
 
-  const submitDate = (ev, reTemp) => {
-    let t = reTemp
-    t.push(temp)
-    setReTemp(t)
-    console.log("submitDate", t)
-    const events2 = setEvents2(t)
+  const submitDate = (ev, rangeDate) => {
+    let range_date = rangeDate
+    range_date.push(collectRangeDate)
+    setRangeDate(range_date)
+    console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
+    const events2 = setEvents2(range_date)
+    console.log("submitDate", events2) //ถ้าจะส่งค่าไปทุกวันที่ไฮไลท์ใช้อันนี้
     setShowBtn(false)
     setCalen(<Calendar
       onChange={setDate}
@@ -140,7 +139,7 @@ function Calendars({date,setDate}) {
       )}
       
       <RangePicker onChange={onChange} />
-      { showBtn ? <button type="button" onClick={(ev) => {submitDate(ev,reTemp) }} >Save</button> : null }
+      { showBtn ? <button type="button" onClick={(ev) => {submitDate(ev,rangeDate) }} >Save</button> : null }
       
     </div>
     

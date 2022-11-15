@@ -31,7 +31,7 @@ const submitDiary = ()=> {
     console.log(`Pain Level: ${painLevel}`);
     console.log(`Blood Level: ${bloodLevel}`);
     console.log(`Diary: ${diaryRef.current.value}`);
-    console.log(`Date: ${date}`)
+    console.log(`Date: ${date.toDateString()}`)
 }
 
 const [date, setDate] = useState(new Date());
