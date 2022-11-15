@@ -11,7 +11,6 @@ from .serializers import *
 from rest_framework.viewsets import ViewSet
 from .models import *
 from rest_framework.response import Response
-import requests
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from .serializers import UploadFile
@@ -29,6 +28,11 @@ class Data(generics.ListAPIView):
     serializer_class = MyData
     queryset_predict = PredictCalendar.objects.all()
     serializer_predict = PredictCalendar
+
+
+class Diary(generics.ListCreateAPIView):
+    queryset = PeriodData.objects.all()
+    serializer_class = MyDiaryPage
 
 
 def login_request(request):
@@ -87,7 +91,6 @@ def my_form(request):
     else:
         form = MySettingPage()
         Response(status=status.HTTP_400_BAD_REQUEST)
-    
 
 
 def redirect_line(request):

@@ -11,19 +11,20 @@ def today():
 
 class PeriodData(models.Model):
     """Home Page model"""
-    diary_text = models.CharField(max_length=400)
-    blood_level = models.DateTimeField('store blood level')
-    pain_level = models.DateTimeField('store pain level')
-    current_period = True
-    period_day = models.CharField(max_length=10)
+    diary_text = models.CharField(max_length=1000)
+    blood_level = models.IntegerField()
+    pain_level = models.IntegerField()
+    # date = models.DateTimeField(default=today())
+    # current_period = True
+    # period_day = models.CharField(max_length=10)
+    #
+    # def can_choose(self) -> bool:
+    #     """For checking the date that user has period"""
+    #     if not self.current_period:
+    #         return False
 
-    def can_choose(self) -> bool:
-        """For checking the date that user has period"""
-        if not self.current_period:
-            return False
-
-    def __str__(self):
-        return self.diary_text
+    # def __str__(self):
+    #     return self.diary_text
 
 
 def generate_unique_code():

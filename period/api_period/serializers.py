@@ -6,6 +6,8 @@ class UploadFile(Serializer):
 
     class Meta:
         fields = ['file_uploaded']
+
+
 from rest_framework import serializers
 from .models import *
 
@@ -18,7 +20,13 @@ class MyData(serializers.ModelSerializer):
         fields = ["birth_year", "period_length", "cycle_length", "luteal_length"]
 
 
-class PeriodData(serializers.ModelSerializer):
+class PredictCalendar(serializers.ModelSerializer):
     class Meta:
         model = PredictCalendar
         fields = ["start_time"]
+
+
+class MyDiaryPage(serializers.ModelSerializer):
+    class Meta:
+        model = PeriodData
+        fields = ["pain_level", "blood_level", "diary_text"]
