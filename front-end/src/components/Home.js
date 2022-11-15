@@ -24,86 +24,22 @@ function Home() {
     const [bloodLevel, setBloodLevel] = useState(1);
     const diaryRef = useRef();
 
-  // User Login info
-//     const database = [
-//     {
-//         username: "user1",
-//         password: "pass1"
-//     },
-//     {
-//         username: "user2",
-//         password: "pass2"
-//     }
-// ];
-
-// const errors = {
-//     uname: "invalid username",
-//     pass: "invalid password"
-// };
-
-// const handleSubmit = (event) => {
-//     //Prevent page reload
-//     event.preventDefault();
-
-//     var { uname, pass } = document.forms[0];
-
-//     // Find user login info
-//     const userData = database.find((user) => user.username === uname.value);
-
-//     // Compare user info
-//     if (userData) {
-//         if (userData.password !== pass.value) {
-//         // Invalid password
-//         setErrorMessages({ name: "pass", message: errors.pass });
-//     } else {
-//         setIsSubmitted(true);
-//     }
-//     } else {
-//       // Username not found
-//         setErrorMessages({ name: "uname", message: errors.uname });
-//     }
-// };
-
-//   // Generate JSX code for error message
-//     const renderErrorMessage = (name) =>
-//     name === errorMessages.name && (
-//     <div className="error">{errorMessages.message}</div>
-//     );
-
-//   // JSX code for login form
-//     const renderForm = (
-//     <form onSubmit={handleSubmit}>
-//     </form>
-// );
-
 // calen
 const { TextArea } = Input;
-// const onChangeDiary = (e)  => {
-//     setDiary(e.target.value);
-//     console.log('Change:', e.target.value);
-//   };
-// const [inputIcon, setInputIcon] = useState(1);
-// const onChangeIcon = (newValue) => {
-//     setInputIcon(newValue);
-//     console.log(inputIcon)
-// }
-
 
 const submitDiary = ()=> {
     console.log(`Pain Level: ${painLevel}`);
     console.log(`Blood Level: ${bloodLevel}`);
     console.log(`Diary: ${diaryRef.current.value}`);
+    console.log(`Date: ${date}`)
 }
 
-// const onChangeIcon = (e) => {
-//     console.log('Change:', e.target.value);
-// }
-
+const [date, setDate] = useState(new Date());
 
 
 return (
     <div className="home">
-        <Calendars className="component-calendar"/>
+        <Calendars className="component-calendar" date={date} setDate={setDate} />
         <div className="home-form">
             <div className="home-title">PAIN LEVEL</div>
                 <div className="pain-level-container">
