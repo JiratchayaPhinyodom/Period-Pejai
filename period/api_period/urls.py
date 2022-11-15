@@ -9,7 +9,7 @@ load.register('upload', UploadPredict, basename='upload')
 urlpatterns = [
     path('home', main),
     path('data', Data.as_view()),
-    path('diary', Diary.as_view()),
+    path('diary', my_diary),
     path('login', login_request),
     path('signup', register_request),
     path('', include(load.urls)),  # api/upload/

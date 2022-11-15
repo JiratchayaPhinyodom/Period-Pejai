@@ -93,7 +93,6 @@ function handleSubmit(e) {
     body: JSON.stringify(setting),
   })
   .then((response) => {
-    // fetchPeriod();
     userSetting({birth_year: "",
     period_length: "", 
     cycle_length: "", 

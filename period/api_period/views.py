@@ -1,10 +1,10 @@
 from django.contrib.sites import requests
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from rest_framework import generics
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
-from .forms import NewUserForm, MySettingPage
+from .forms import NewUserForm, MySettingPage, MyHomePage
 from django.contrib.auth import login
 from django.contrib import messages
 from .serializers import *
@@ -28,11 +28,13 @@ class Data(generics.ListAPIView):
     serializer_class = MyData
     queryset_predict = PredictCalendar.objects.all()
     serializer_predict = PredictCalendar
+    queryset_period = PeriodData.objects.all()
+    serializer_period = MyHomePage
 
 
 class Diary(generics.ListCreateAPIView):
     queryset = PeriodData.objects.all()
-    serializer_class = MyDiaryPage
+    serializer_class = MyHomePage
 
 
 def login_request(request):
@@ -82,15 +84,37 @@ class UploadPicture(ViewSet):
 
 @api_view(['POST'])
 def my_form(request):
-    # print(request.data)
+    print(request.data)
+    print(type(request.data))
     if request.method == "POST":
         form = MySettingPage(request.data)
         if form.is_valid():
             form.save()
             return Response(status=status.HTTP_201_CREATED)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
     else:
-        form = MySettingPage()
-        Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+        
+@api_view(['POST', 'GET'])
+def my_diary(request):
+    print(request.data)
+    print(type(request.data))
+    if request.method == "POST":
+        form = MyHomePage(request.data)
+        if form.is_valid():
+            form.save()
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "GET":
+        diary = PeriodData.objects.all()
+        serializer = MyDiaryPage(diary, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+        
 
 
 def redirect_line(request):

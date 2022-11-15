@@ -23,6 +23,11 @@ function Home() {
     const [painLevel, setPainLevel] = useState(0);
     const [bloodLevel, setBloodLevel] = useState(1);
     const diaryRef = useRef();
+    const [home, userHome] = useState({
+        diary_text: "",
+        blood_level: "",
+        pain_level: "",
+        });
 
   // User Login info
 //     const database = [
@@ -99,6 +104,22 @@ const submitDiary = ()=> {
 //     console.log('Change:', e.target.value);
 // }
 
+function handleSubmit(e) {
+    // userHome({ diary_text: diaryRef.current.value,
+    // blood_level: bloodLevel,
+    // pain_level: painLevel,})
+    e.preventDefault();
+    let url = "http://127.0.0.1:8000/api/diary";
+    fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ diary_text: diaryRef.current.value,
+        blood_level: bloodLevel,
+        pain_level: painLevel,}),
+    })
+    .catch((err) => console.log(err));
+}
+
 
 
 return (
@@ -135,9 +156,8 @@ return (
                 </div>
             <div className="home-title">DIARY</div>
                 <input rows={10} placeholder="What do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} />
-                 
             <br></br>
-            <Button type="primary" onClick={submitDiary} >Save</Button>
+            <Button type="primary" onClick={handleSubmit} >Save</Button>
         </div>
     </div>
 );
