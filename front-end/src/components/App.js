@@ -1,80 +1,49 @@
 import { useState, useEffect } from 'react';
-
-import Login from './Login';
 import firebase from "../firebase"
 import React from "react"
-import Setting from "./Setting"
-
-import Signup from "./Signup"
-import { AuthProvider } from "../contexts/AuthContext"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import Dashboard from "./Dashboard"
-import PrivateRoute from "./PrivateRoute"
-import ForgotPassword from "./ForgotPassword"
-import UpdateProfile from "./UpdateProfile"
-import Home from "./Home"
 import "./App.css";
+// import PrivateRoute from './PrivateRoute';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import Dashboard from "./Dashboard";
+import Login from "./Login";
+import Home from "./Home";
+import { AuthProvider } from '../contexts/AuthContext';
+import PrivateRouter from "./PrivateRouter";
+import { useAuth } from '../contexts/AuthContext';
+import MainRouter from './Router';
+
+
+const MainApp  = ()=> {
+  const {currentUser} = useAuth();
+  if (currentUser === null){
+    console.log("Execute null")
+    return <Login/>
+  }
+  else{
+    console.log("Main Router");
+    return <MainRouter/>
+  };
+}
+
 function App() {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
-      setUser(user);
-    })
-  }, [])
+  // useEffect(() => {
+  //   firebase.auth().onAuthStateChanged(user => {
+  //     setUser(user);
+  //   })
+  // }, [])
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <div className="app">
-      {user ? <Dashboard user={user} /> : <Login />}
-      <Router>
-           <AuthProvider>
-             <Switch>
-               <PrivateRoute exact path="/" component={Dashboard} />
-               <PrivateRoute path="/update-profile" component={UpdateProfile} />
-               <Route path="/signup" component={Signup} />
-               <Route path="/login" component={Login} />
-               <Route path="/forgot-password" component={ForgotPassword} />
-               <Route path="/home" component={Home} />
-             </Switch>
-           </AuthProvider>
-      </Router>
+      {/* {user ? <Dashboard user={user} /> : <Login />} */}
+      <AuthProvider>
+        <MainApp/>
+      </AuthProvider>
     </div>
   );
 }
 
 export default App;
-
-// import React from "react"
-// import Signup from "./Signup"
-// import { AuthProvider } from "../contexts/AuthContext"
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-// import Dashboard from "./Dashboard"
-// import Login from "./Login"
-// import PrivateRoute from "./PrivateRoute"
-// import ForgotPassword from "./ForgotPassword"
-// import UpdateProfile from "./UpdateProfile"
-// import Home from "./Home"
-// import "./App.css";
-
-// function App() {
-//   return (
-//       <div className="app" >
-//         <Router>
-//           <AuthProvider>
-//             <Switch>
-//               <PrivateRoute exact path="/" component={Dashboard} />
-//               <PrivateRoute path="/update-profile" component={UpdateProfile} />
-//               <Route path="/signup" component={Signup} />
-//               <Route path="/login" component={Login} />
-//               <Route path="/forgot-password" component={ForgotPassword} />
-//               <Route path="/home" component={Home} />
-//             </Switch>
-//           </AuthProvider>
-//         </Router>
-//       </div>
-//   )
-// }
-
-// export default App

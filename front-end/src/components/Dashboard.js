@@ -34,12 +34,13 @@ function saveConfirm(){
   })
 }
 
-const Dashboard= ({ user }) =>{
-  const [error, setError] = useState("")
-//   const { currentUser, logout, login} = useAuth()
-  const history = useHistory()
-  const [loading, setLoading] = useState(false)
 
+const Dashboard= () =>{
+  const [error, setError] = useState("")
+  const { currentUser} = useAuth()
+  // const history = useHistory()
+  const [loading, setLoading] = useState(false)
+  const history = useHistory();
 //   async function handleLogout() {
 //     setError("")
 
@@ -50,15 +51,6 @@ const Dashboard= ({ user }) =>{
 //       setError("Failed to log out")
 //     }
 // }
-async function handleHome() {
-  setError("")
-
-  try {
-    history.push("/home")
-  } catch {
-    setError("Failed to go to Home page")
-  }
-}
 
 // async function handleUpdateProfile() {
 //   setError("")
@@ -75,12 +67,12 @@ async function handleHome() {
     <div className='App'>
     <div className='left-side'>
     {/* <Profile /> */}
-    <h1>Hello, <span></span>{user.displayName}</h1>
-    <img src={user.photoURL} alt="" />
+    <h1>Hello, <span></span>{currentUser.displayName}</h1>
+    <img src={currentUser.photoURL} alt="" />
     <span className='setting'>
     <p className='setting_p'><SettingOutlined className='icon_setting'/>Setting</p>
     </span>
-    <span><Button className='route_home' type="primary" variant="link" onClick={handleHome} style={{ background: "#b8bedd"}}><p className='home_p' ><HomeOutlined className='icon_home'/>Home</p></Button></span>
+    <span><Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/home"}} style={{ background: "#b8bedd"}}><p className='home_p' ><HomeOutlined className='icon_home'/>Home</p></Button></span>
     <p className='reminder'>Reminders</p>
     <ToggleSwitch label="Period" />
     <ToggleSwitch label="Ovaluation"/>
@@ -88,7 +80,7 @@ async function handleHome() {
             <img src={LineLink} className="line-logo" height = "50px"/>
     </a>
     {/* <Button className="update" type="primary" variant="link" onClick={handleUpdateProfile} style={{ background: "#b8bedd"}}><p className="update_p"><UserOutlined className='icon_user'/>Update Profile </p></Button> */}
-    <span><Button className='logout' type="primary" variant="link" onClick={() => auth.signOut()} style={{ background: "#b8bedd"}}><p className='logout_p' ><LogoutOutlined className='icon_logout'/>Logout</p></Button></span>
+    <span><Button className='logout' type="primary" variant="link" onClick={() => {auth.signOut(); window.location.href = "./login"}} style={{ background: "#b8bedd"}}><p className='logout_p' ><LogoutOutlined className='icon_logout'/>Logout</p></Button></span>
   </div>
   <div className='bc-input'>
     <div className='input'>

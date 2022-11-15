@@ -37,9 +37,9 @@ export default function Login() {
     <div className="login">
       <div className="login-topper-form"></div>
         <div className="login-form">
-        {/* <a href="http://localhost:3000/login">
+        <a href="http://localhost:3000/login">
             <img src={LogoPic} className="App-logo" height = "350px"/>
-        </a> */}
+        </a>
           <span className="login-title">LOGIN</span>
           {error && <Alert variant="danger">{error}</Alert>}
           {/* <div className="form">
@@ -65,7 +65,7 @@ export default function Login() {
       <div className="ending">
         <Link to="/signup">SIGN UP</Link>
       </div> */}
-      <button onClick={signInWithGoogle}>Sign in with google</button>
+      <button onClick={async ()=>{await signInWithGoogle(); window.location.href = "/"}}>Sign in with google</button>
     </div>
   </div>
   )
