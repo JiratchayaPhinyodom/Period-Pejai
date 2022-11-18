@@ -15,7 +15,7 @@ class PeriodData(models.Model):
     blood_level = models.IntegerField(default=0)
     pain_level = models.IntegerField(default=0)
     start_date = models.DateTimeField(default=today())
-    end_date =  models.DateTimeField(default=today())
+    end_date = models.DateTimeField(default=today())
     uid = models.CharField(max_length=1000, default="")
     date = models.DateTimeField(default=today())
     current_period = True
@@ -28,14 +28,6 @@ class PeriodData(models.Model):
 
     def __str__(self):
         return self.diary_text
-
-
-# class PredictCalendar(models.Model):
-#     received_date = models.CharField(max_length=20, default=today())
-#
-#     @property
-#     def predict_date(self):
-#         return self.received_date
 
 
 def generate_unique_code():

@@ -1,4 +1,3 @@
-
 from django.contrib.sites import requests
 from django.http import HttpResponse, JsonResponse
 from rest_framework import generics
@@ -9,15 +8,10 @@ from .forms import NewUserForm, MySettingPage, MyHomePage
 from django.contrib.auth import login
 from django.contrib import messages
 from .models import *
-
 from rest_framework.response import Response
-from rest_framework.viewsets import ViewSet
-from rest_framework.response import Response
-from .serializers import UploadFile
-from .serializers import MyData
+from .serializers import MyData, MyDiaryPage
 from rest_framework import status
 from rest_framework.decorators import api_view
-
 
 
 def main(request):
@@ -27,17 +21,25 @@ def main(request):
 class Data(generics.ListCreateAPIView):
     queryset = Setting.objects.all()
     serializer_class = MyData
-    queryset_predict = PredictCalendar.objects.all()
-    serializer_predict = PredictCalendar
     queryset_period = PeriodData.objects.all()
     serializer_period = MyHomePage
-
 
 
 class Diary(generics.ListCreateAPIView):
     queryset = PeriodData.objects.all()
     serializer_class = MyHomePage
 
+
+def predict_date(request):
+    if request.method == "GET":
+        list_data = []
+        for i in request.data["date"]:
+            first_day = i[0]
+            setting_data = Setting.objects.filter(uid=request.data["uid"])
+            first_day += setting_data.period_length
+            list_data.append(first_day)
+        data = list_data
+        return JsonResponse({"result": data})
 
 
 def login_request(request):
@@ -85,8 +87,8 @@ def my_form(request):
             return Response(status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
-        
-        
+
+
 @api_view(['POST', 'GET', 'PUT'])
 def my_diary(request):
     print(request.data)
@@ -109,14 +111,13 @@ def my_diary(request):
         period_data.start_date = request.data["start_date"]
         period_data.end_date = request.data["end_date"]
         period_data.save()
-        return Response(status=status.HTTP_201_CREATED) # or 204 -> recheck
+        return Response(status=status.HTTP_201_CREATED)  # or 204 -> recheck
     elif request.method == "GET":
         diary = PeriodData.objects.all()
         serializer = MyDiaryPage(diary, many=True)
         return JsonResponse(serializer.data, safe=False)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
-        
 
 
 def redirect_line(request):
@@ -127,3 +128,22 @@ def redirect_line(request):
     # x = requests.post(url=url, json=collect_code)
     # print(x)
     # return HttpResponse('success')
+    pass
+
+
+# def request():
+#     code = "fPg7tfstCUlDW5s5TiAha5"
+#     client_id = "3i37SxxITCH1t4ngUNAPuz"
+#     url = "http://127.0.0.1:8000/api/setting"
+#     state = "abcdef123456"
+#     token = "IYsi0yC9Et4EqFHBzv9evCyN1azoebOgKkyU4UygHwj"
+#     headers = {'content-type': 'application/x-www-form-urlencoded', 'Authorization': 'Bearer ' + token}
+#     msg = 'Hello LINE Notify'
+#     r = requests.post(url, headers=headers, data={'message': msg})
+#     print(r.text)
+#
+
+def response(code):
+    code = ""
+    state = ""
+    pass
