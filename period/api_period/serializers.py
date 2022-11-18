@@ -10,6 +10,10 @@ class UploadFile(Serializer):
         fields = ['file_uploaded']
 
 
+from rest_framework import serializers
+from .models import *
+
+
 class MyData(serializers.ModelSerializer):
     """To see the data in database file"""
 
@@ -18,13 +22,15 @@ class MyData(serializers.ModelSerializer):
         fields = ["birth_year", "period_length", "cycle_length", "luteal_length"]
 
 
+
+class PredictCalendar(serializers.ModelSerializer):
+    class Meta:
+        model = PredictCalendar
+        fields = ["start_time"]
+
+
 class MyDiaryPage(serializers.ModelSerializer):
     class Meta:
         model = PeriodData
-        fields = ["pain_level", "blood_level", "diary_text", "date"]
+        fields = ["pain_level", "blood_level", "diary_text", "start_date", "end_date", "uid", "date"]
 
-
-# class MyPredictCalendar(serializers.ModelSerializer):
-#     class Meta:
-#         model = PredictCalendar
-#         fields = ["date"]
