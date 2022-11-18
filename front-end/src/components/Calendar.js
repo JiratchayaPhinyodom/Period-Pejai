@@ -6,9 +6,7 @@ import React, { useState } from "react";
 import { Button } from 'antd';
 import { DatePicker } from 'antd';
 
-
-function Calendars({date,setDate}) {
-
+function Calendars({date, setDate, rangeDate, setRangeDate}) {
 
   const DateToString = (date) => {
     let day = date.getDate()
@@ -56,7 +54,6 @@ function Calendars({date,setDate}) {
     return events2
   }
 
-  // const [date, setDate] = useState(new Date());
   //ใช้ในนี้ต้องเป็นแค่ปีเดือนวัน
   const { RangePicker } = DatePicker;
   // let result = []
@@ -65,9 +62,10 @@ function Calendars({date,setDate}) {
     value={date}
     locale="US"
   />)
-  const [rangeDate, setRangeDate] = useState([])
+
   const [collectRangeDate, setCollectRangeDate] = useState([])
   const [showBtn, setShowBtn] = useState(false)
+  // const [rangeDate, setRangeDate] = useState([])
     
 
   const onChange = (dates, dateStrings) => {
@@ -86,13 +84,14 @@ function Calendars({date,setDate}) {
     
   };
 
-  const submitDate = (ev, rangeDate) => {
+  const submitDate = () => {
+    console.log("in",rangeDate,collectRangeDate)
     let range_date = rangeDate
     range_date.push(collectRangeDate)
     setRangeDate(range_date)
-    console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
+    // console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
     const events2 = setEvents2(range_date)
-    console.log("submitDate", events2) //ถ้าจะส่งค่าไปทุกวันที่ไฮไลท์ใช้อันนี้
+    // console.log("submitDate", events2) //ถ้าจะส่งค่าไปทุกวันที่ไฮไลท์ใช้อันนี้
     setShowBtn(false)
     setCalen(<Calendar
       onChange={setDate}
@@ -117,35 +116,6 @@ function Calendars({date,setDate}) {
     />)
   }
 
-  // const [collectBackOutRange, setCollectBackOutRangeDate] = useState([])
-  // const [backOutRangeDate, setBackOutRangeDate] = useState([])
-  // const [showBtnBackOut, setShowBtnBackOut] = useState(false)
-
-  // const onChangeBackOut = (dates, dateStrings) => {
-  //   let listRangeDate = []
-  //   if (dates) {
-  //     console.log('Back out','From: ', dateStrings[0], ', to: ', dateStrings[1]);
-  //     listRangeDate.push(dateStrings[0]) //[[st,en], [], []]
-  //     listRangeDate.push(dateStrings[1])
-  //     setCollectBackOutRangeDate(listRangeDate)
-  //     setShowBtnBackOut(true)
-  //   } else {
-  //     console.log('Clear');
-  //     setCollectBackOutRangeDate(listRangeDate)
-  //   }
-  // }
-
-  // const submitBackOutDate = (ev, backOutRangeDate) => {
-  //   let backOut_rangeDate = backOutRangeDate
-  //   backOut_rangeDate.push(collectBackOutRange)
-  //   setBackOutRangeDate(backOut_rangeDate)
-  //   console.log("submitBackOutRangeDate", backOut_rangeDate)
-  //   const events_back_out = setEvents2(backOut_rangeDate)
-  //   console.log("submitBackOutDate", events_back_out)
-  //   setShowBtnBackOut(false)
-  // }
-
-
   return (
     <div className='calendar'>
       <h1 className='text-center'>PERIOD-PEJAI CALENDAR</h1>
@@ -169,15 +139,11 @@ function Calendars({date,setDate}) {
       {/* Use range date */}
       <p>What the range of your period</p>
       <RangePicker onChange={onChange} /> 
-      { showBtn ? <button type="button" onClick={(ev) => {submitDate(ev,rangeDate) }} >Save</button> : null }
+      {showBtn ? <button type="button" onClick={() => { submitDate()}} >Save</button> : null }
         <br></br>
-      {/* Delete range date */}
-      {/* <p>Change the range of period</p>
-      <RangePicker onChange={onChangeBackOut}/>
-      { showBtnBackOut ? <button type="button" onClick={(ev) => {submitBackOutDate(ev,backOutRangeDate) }} >Save</button> : null } 
-       */}
     </div>
     
+   
   );
 }
 
