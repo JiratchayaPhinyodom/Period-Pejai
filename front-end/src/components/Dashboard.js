@@ -1,19 +1,17 @@
 import React, { useState } from "react"
 import { useAuth } from "../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import 'antd/dist/antd.css';
 import './Dashboard.css';
 import { Button } from 'antd';
-import Profile from './component_setting/profile/profile'
 import { SettingOutlined, HomeOutlined, LogoutOutlined, UserOutlined} from '@ant-design/icons';
 import ToggleSwitch from './component_setting/toggle/toggle_period'
 import Input_birth from './component_setting/input/input_birth';
 import Input_period from './component_setting/input/input_period'
 import Input_cycle from './component_setting/input/input_cycle';
 import Input_phase from './component_setting/input/input_phase';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import LineLink from "./pics/line_button.png";
-
 
 import { auth } from '../firebase'
 
@@ -45,19 +43,30 @@ const Dashboard= () =>{
   return (
     <div className='App'>
     <div className='left-side'>
-    <h1>Hello, <span></span>{currentUser.displayName}</h1>
-    <img src={currentUser.photoURL} alt="" />
+    <h1 className="h1-setting">WELCOME TO PERIOD-PEJAI</h1>
+    <img src={currentUser.photoURL} alt="" className="profile-user"/>
+    <h2 className="name-user">{currentUser.displayName.toUpperCase()}</h2>
     <span className='setting'>
-    <p className='setting_p'><SettingOutlined className='icon_setting'/>Setting</p>
+      <SettingOutlined className='icon_setting'/><p className='setting_p'>Setting</p>
     </span>
-    <span><Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/home"}} style={{ background: "#b8bedd"}}><p className='home_p' ><HomeOutlined className='icon_home'/>Home</p></Button></span>
-    <p className='reminder'>Reminders</p>
-    <ToggleSwitch label="Period" />
-    <ToggleSwitch label="Ovaluation"/>
+    <span>
+      <Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/home"}} style={{ background: "#b8bedd"}}>
+        <HomeOutlined className='icon_home'/>
+        <p className='home_p' >Home</p>
+      </Button>
+    </span>
+    <p className='reminder'>REMINDER</p>
+      <ToggleSwitch label="Period"/>
+      <ToggleSwitch label="Ovaluation"/>
     <a href="https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=3i37SxxITCH1t4ngUNAPuz&redirect_uri=http://127.0.0.1:8000/api/setting&scope=notify&state=abcdef123456">
             <img src={LineLink} className="line-logo" height = "50px"/>
     </a>
-    <span><Button className='logout' type="primary" variant="link" onClick={() => {auth.signOut(); window.location.href = "./login"}} style={{ background: "#b8bedd"}}><p className='logout_p' ><LogoutOutlined className='icon_logout'/>Logout</p></Button></span>
+    <span>
+      <Button className='logout' type="primary" variant="link" onClick={() => {auth.signOut(); window.location.href = "./login"}} style={{ background: "#b8bedd"}}>
+        <LogoutOutlined className='icon_logout'/>
+          <p className='logout_p' >Logout</p>
+        </Button>
+    </span>
   </div>
   <div className='bc-input'>
     <div className='input'>
