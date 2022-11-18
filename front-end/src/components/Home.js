@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
 import LogoPic from "./pics/app_logo.png";
 import Dots from "./pics/dots.png";
@@ -13,7 +13,6 @@ import { faDroplet } from "@fortawesome/free-solid-svg-icons";
 import Calendars from "./Calendar"
 import { Button, Slider } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
-
 
 
 function Home() {
@@ -35,11 +34,26 @@ const submitDiary = ()=> {
 }
 
 const [date, setDate] = useState(new Date());
+const [rangeDate, setRangeDate] = useState([])
 
+    useEffect(() => {
+    // call api ---> get data
+        // setRangeDate(data)
+},[])
+    
+const setR = useCallback((data) => {
+    console.log("rangeDate will set with data = ",data)
+    setRangeDate(data)
+
+    // use data ---> call api
+
+},[rangeDate])
 
 return (
     <div className="home">
-        <Calendars className="component-calendar" date={date} setDate={setDate} />
+        <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate } setRangeDate={setR } />
+        {/* <button type="button" onClick={(ev) => {console.log("button",rangeDate)}} >rangeDate</button> */}
+        {/* <button type="button" onClick={() => setClick(click+1)} >setClick</button> */}
         <div className="home-form">
             <div className="home-title">PAIN LEVEL</div>
                 <div className="pain-level-container">

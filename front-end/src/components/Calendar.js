@@ -8,8 +8,7 @@ import { Button } from 'antd';
 import { DatePicker } from 'antd';
 
 
-function Calendars({date,setDate}) {
-
+function Calendars({date, setDate, rangeDate, setRangeDate}) {
 
   const DateToString = (date) => {
     let day = date.getDate()
@@ -57,7 +56,6 @@ function Calendars({date,setDate}) {
     return events2
   }
 
-  // const [date, setDate] = useState(new Date());
   //ใช้ในนี้ต้องเป็นแค่ปีเดือนวัน
   const { RangePicker } = DatePicker;
   // let result = []
@@ -66,9 +64,9 @@ function Calendars({date,setDate}) {
     value={date}
     locale="US"
   />)
-  const [rangeDate, setRangeDate] = useState([])
   const [collectRangeDate, setCollectRangeDate] = useState([])
   const [showBtn, setShowBtn] = useState(false)
+  // const [rangeDate, setRangeDate] = useState([])
     
 
   const onChange = (dates, dateStrings) => {
@@ -87,13 +85,14 @@ function Calendars({date,setDate}) {
     
   };
 
-  const submitDate = (ev, rangeDate) => {
+  const submitDate = () => {
+    console.log("in",rangeDate,collectRangeDate)
     let range_date = rangeDate
     range_date.push(collectRangeDate)
     setRangeDate(range_date)
-    console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
+    // console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
     const events2 = setEvents2(range_date)
-    console.log("submitDate", events2) //ถ้าจะส่งค่าไปทุกวันที่ไฮไลท์ใช้อันนี้
+    // console.log("submitDate", events2) //ถ้าจะส่งค่าไปทุกวันที่ไฮไลท์ใช้อันนี้
     setShowBtn(false)
     setCalen(<Calendar
       onChange={setDate}
@@ -170,13 +169,8 @@ function Calendars({date,setDate}) {
       {/* Use range date */}
       <p>What the range of your period</p>
       <RangePicker onChange={onChange} /> 
-      { showBtn ? <button type="button" onClick={(ev) => {submitDate(ev,rangeDate) }} >Save</button> : null }
+      {showBtn ? <button type="button" onClick={() => { submitDate()}} >Save</button> : null }
         <br></br>
-      {/* Delete range date */}
-      {/* <p>Change the range of period</p>
-      <RangePicker onChange={onChangeBackOut}/>
-      { showBtnBackOut ? <button type="button" onClick={(ev) => {submitBackOutDate(ev,backOutRangeDate) }} >Save</button> : null } 
-       */}
     </div>
     
    
