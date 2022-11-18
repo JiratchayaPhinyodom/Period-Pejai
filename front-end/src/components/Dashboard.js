@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect} from "react"
 import { useAuth } from "../contexts/AuthContext"
 import { useHistory } from "react-router-dom"
 import 'antd/dist/antd.css';
@@ -12,23 +12,21 @@ import Input_cycle from './component_setting/input/input_cycle';
 import Input_phase from './component_setting/input/input_phase';
 import Swal from 'sweetalert2';
 import LineLink from "./pics/line_button.png";
+import { InputNumber, Space } from 'antd';
+import Input from "antd/lib/input/Input";
 
 import { auth } from '../firebase'
 
 function saveConfirm(){
   Swal.fire({
-    title: 'Do you want to save the changes?',
-    showDenyButton: true,
-    showCancelButton: true,
-    confirmButtonText: 'Save',
-    denyButtonText: `Don't save`,
-  }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-      Swal.fire('Saved!', '', 'success')
-    } else if (result.isDenied) {
-      Swal.fire('Changes are not saved', '', 'info')
-    }
+    title: 'Your information has been saved!',
+    width: 600,
+    padding: '3em',
+    color: '#716add',
+    background: '#fff',
+    backdrop: `
+      rgba(0,0,123,0.4)
+    `
   })
 }
 
@@ -38,7 +36,30 @@ const Dashboard= () =>{
   const { currentUser} = useAuth()
   const [loading, setLoading] = useState(false)
   const history = useHistory();
-  
+  const [setting, userSetting] = useState({
+    birth_year: "",
+    period_length: "", 
+    cycle_length: "", 
+    luteal_length: "", 
+  });
+  console.log(setting);
+
+function handleSubmit(e) {
+  e.preventDefault();
+    let url = "http://127.0.0.1:8000/api/setting";
+    fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(setting),
+  })
+  .then((response) => {
+    userSetting({birth_year: "",
+    period_length: "", 
+    cycle_length: "", 
+    luteal_length: "", })
+  })
+  .catch((err) => console.log(err));
+}
 
   return (
     <div className='App'>
@@ -68,29 +89,37 @@ const Dashboard= () =>{
         </Button>
     </span>
   </div>
+  <form onSubmit={handleSubmit}>
   <div className='bc-input'>
     <div className='input'>
+
+      {/* <span className='box-year'><p className='year'>YEAR OF BIRTH </p><span className='mar'><Input_birth/></span></span>
+      <span className='box-period'><p className='period-length'>PERIOD LENGTH</p><span className='mar'><Input_period /> DAYS</span></span>
+      <span className='box-cycle'><p className='cycle-length'>CYCLE LENGTH</p><span className='mar'><Input_cycle /> DAYS</span></span>
+      <span className='box-phase'><p className='phase-length'>LUTEAL PHASE LENGTH </p><span className='mar'><Input_phase /> DAYS</span></span> */}
       <span className='box-year'>
         <p className='year'>YEAR OF BIRTH </p>
-        <span className='mar'><Input_birth /></span>
       </span>
+          <input type="number" value={setting.birth_year} className="input-border" placeholder="2002" onChange={(e) => userSetting({ ...setting, birth_year: e.target.value })}/>
       <span className='box-period'>
-        <p className='period-length'>PERIOD LENGTH</p>
-        <span className='mar'><Input_period /> DAYS</span>
+        <p className='year'>PERIOD LENGTH </p>
       </span>
+          <input type="number" value={setting.period_length} className="input-border" placeholder="7" onChange={(e) => userSetting({ ...setting, period_length: e.target.value })}/>
       <span className='box-cycle'>
-        <p className='cycle-length'>CYCLE LENGTH</p>
-        <span className='mar'><Input_cycle /> DAYS</span>
+        <p className='year'>CYCLE LENGTH </p>
       </span>
+          <input type="number" value={setting.cycle_length} className="input-border" placeholder="28" onChange={(e) => userSetting({ ...setting, cycle_length: e.target.value })}/>
       <span className='box-phase'>
-        <p className='phase-length'>LUTEAL PHASE LENGTH </p>
-        <span className='mar'><Input_phase /> DAYS</span>
+        <p className='year'>LUTHEAL PHASE <br></br>LENGTH </p>
       </span>
-      <button disabled={loading} type="submit" className="setting-submit" onClick={saveConfirm}>
+          <input type="number" value={setting.luteal_length} className="input-border" placeholder="14" onChange={(e) => userSetting({ ...setting, luteal_length: e.target.value })}/>
+      {/* <button disabled={loading} type="submit" className="setting-submit" onClick={saveConfirm}>
           Save
-      </button>
-      </div>
+      </button> */}
+      <button id="submit" className="setting-submit" type="submit" onClick={saveConfirm}> Save </button>
+    </div>
   </div>
+  </form>
 </div>
   )
 }

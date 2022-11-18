@@ -17,12 +17,25 @@ import { SettingOutlined, HomeOutlined, LogoutOutlined, UserOutlined} from '@ant
 import { auth } from '../firebase'
 
 function Home() {
-  // React States
-    // const [errorMessages, setErrorMessages] = useState({});
-    // const [isSubmitted, setIsSubmitted] = useState(false);
-    const [painLevel, setPainLevel] = useState(0);
-    const [bloodLevel, setBloodLevel] = useState(1);
-    const diaryRef = useRef();
+ // React States
+ const [errorMessages, setErrorMessages] = useState({});
+ const [isSubmitted, setIsSubmitted] = useState(false);
+ const [painLevel, setPainLevel] = useState(0);
+ const [bloodLevel, setBloodLevel] = useState(1);
+ const diaryRef = useRef();
+ const uidRef = useRef();
+ const [startDate, setStartDate] = useState();
+ const [endDate, setEndDate] = useState();
+ const [dataDate, setDataDate] = useState();
+ const [home, userHome] = useState({
+     diary_text: "",
+     blood_level: "",
+     pain_level: "",
+     start_date: "",
+     end_date: "",
+     uid: "",
+     date: "",
+     });
 
 // calen
 const { TextArea } = Input;
@@ -62,6 +75,26 @@ const setR = useCallback((data) => {
 
 },[rangeDate])
 
+function handleSubmit(e) {
+    // userHome({ diary_text: diaryRef.current.value,
+    // blood_level: bloodLevel,
+    // pain_level: painLevel,})
+    e.preventDefault();
+    let url = "http://127.0.0.1:8000/api/diary";
+    fetch(url, {
+    method: "PUT",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ diary_text: diaryRef.current.value,
+        blood_level: bloodLevel,
+        pain_level: painLevel,
+        start_date: "",
+        end_date: "",
+        uid: "",
+        date: "",}),
+    })
+    .catch((err) => console.log(err));
+}
+
 return (
     <div className="home">
         <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate } setRangeDate={setR } />
@@ -92,9 +125,8 @@ return (
                 </div>
             <div className="home-title">DIARY</div>
                 <input rows={10} placeholder="What do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} />
-                 
             <br></br>
-            <Button type="primary" onClick={submitDiary} >Save</Button>
+            <Button type="primary" onClick={handleSubmit} >Save</Button>
         </div>
         <span><Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/"}} style={{ background: "#b8bedd"}}><p className='home_p' ><HomeOutlined className='icon_home'/>Setting</p></Button></span>
 

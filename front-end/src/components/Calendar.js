@@ -1,4 +1,3 @@
-
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
@@ -6,7 +5,6 @@ import 'antd/dist/antd.css';
 import React, { useState } from "react";
 import { Button } from 'antd';
 import { DatePicker } from 'antd';
-
 
 function Calendars({date, setDate, rangeDate, setRangeDate}) {
 
@@ -64,6 +62,7 @@ function Calendars({date, setDate, rangeDate, setRangeDate}) {
     value={date}
     locale="US"
   />)
+
   const [collectRangeDate, setCollectRangeDate] = useState([])
   const [showBtn, setShowBtn] = useState(false)
   // const [rangeDate, setRangeDate] = useState([])
