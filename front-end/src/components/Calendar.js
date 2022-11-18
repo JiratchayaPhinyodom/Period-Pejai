@@ -117,35 +117,6 @@ function Calendars({date, setDate, rangeDate, setRangeDate}) {
     />)
   }
 
-  // const [collectBackOutRange, setCollectBackOutRangeDate] = useState([])
-  // const [backOutRangeDate, setBackOutRangeDate] = useState([])
-  // const [showBtnBackOut, setShowBtnBackOut] = useState(false)
-
-  // const onChangeBackOut = (dates, dateStrings) => {
-  //   let listRangeDate = []
-  //   if (dates) {
-  //     console.log('Back out','From: ', dateStrings[0], ', to: ', dateStrings[1]);
-  //     listRangeDate.push(dateStrings[0]) //[[st,en], [], []]
-  //     listRangeDate.push(dateStrings[1])
-  //     setCollectBackOutRangeDate(listRangeDate)
-  //     setShowBtnBackOut(true)
-  //   } else {
-  //     console.log('Clear');
-  //     setCollectBackOutRangeDate(listRangeDate)
-  //   }
-  // }
-
-  // const submitBackOutDate = (ev, backOutRangeDate) => {
-  //   let backOut_rangeDate = backOutRangeDate
-  //   backOut_rangeDate.push(collectBackOutRange)
-  //   setBackOutRangeDate(backOut_rangeDate)
-  //   console.log("submitBackOutRangeDate", backOut_rangeDate)
-  //   const events_back_out = setEvents2(backOut_rangeDate)
-  //   console.log("submitBackOutDate", events_back_out)
-  //   setShowBtnBackOut(false)
-  // }
-
-
   return (
     <div className='calendar'>
       <h1 className='text-center'>PERIOD-PEJAI CALENDAR</h1>
