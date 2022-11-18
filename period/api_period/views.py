@@ -1,3 +1,4 @@
+
 from django.contrib.sites import requests
 from django.http import HttpResponse, JsonResponse
 from rest_framework import generics
@@ -7,9 +8,8 @@ from django.shortcuts import render, redirect
 from .forms import NewUserForm, MySettingPage, MyHomePage
 from django.contrib.auth import login
 from django.contrib import messages
-from .serializers import *
-from rest_framework.viewsets import ViewSet
 from .models import *
+
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
@@ -19,11 +19,12 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 
 
+
 def main(request):
     return HttpResponse("Hello")
 
 
-class Data(generics.ListAPIView):
+class Data(generics.ListCreateAPIView):
     queryset = Setting.objects.all()
     serializer_class = MyData
     queryset_predict = PredictCalendar.objects.all()
@@ -32,9 +33,11 @@ class Data(generics.ListAPIView):
     serializer_period = MyHomePage
 
 
+
 class Diary(generics.ListCreateAPIView):
     queryset = PeriodData.objects.all()
     serializer_class = MyHomePage
+
 
 
 def login_request(request):
@@ -124,4 +127,3 @@ def redirect_line(request):
     # x = requests.post(url=url, json=collect_code)
     # print(x)
     # return HttpResponse('success')
-

@@ -12,23 +12,37 @@
     height: 60em;
     float: left;
   }
+
+  .h1-setting {
+    font-weight: bold;
+  }
+
+  .name-user {
+    font-weight: bolder;
+  }
+
+  .profile-user {
+    border-radius: 50%;
+    max-width: 100%;
+    height: auto;
+  }
   
-  .name {
+  /* .name {
     font-size: 32px;
     font-weight: bold;
     display: flex;
     justify-content: flex-start;
-  }
+  } */
   
-  .pic {
+  /* .pic {
     display: flex;
     justify-content: flex-start;
-  }
+  } */
   
-  .btn_profile {
+  /* .btn_profile {
     display: flex;
     justify-content: flex-start;
-  }
+  } */
   
   .setting {
     display: flex;
@@ -40,24 +54,29 @@
     margin: 0.5cm;
     width: 14rem;
     height: 3rem;
+    margin-left: 1.5cm;
   }
   
-  .setting_p {
+  .icon_home, .home_p, .setting_p, .icon_setting, .icon_logout {
     font-size: 1.5rem;
     color: white; 
     font-weight: bold;
     display: flex;
     justify-content: center;
-    margin-left: 0.5cm;
     margin-top: 0.25cm;
   }
-  
-  .icon_setting {
-    margin-right: 0.1cm;
-    margin-top: 0.1cm;
+
+  .icon_home, .icon_setting, .icon_logout {
+    margin-left: 1.25cm;
+  }
+
+  .setting_p, .home_p, .logout_p {
+    margin-top: 0.25rem;
+    margin-left: 0.25cm;
   }
   
-  .route_home {
+  
+  .route_home, .logout {
     display: flex;
     justify-content: flex-start;
     border-style: solid;
@@ -67,59 +86,24 @@
     margin: 0.5cm;
     width: 14rem;
     height: 3rem;
-  }
-  
-  .home_p {
-    font-size: 1.5rem;
-    color: white; 
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    margin-left: 0.5cm;
-    margin-top: 0.25cm;
-  }
-  
-  .icon_home, .icon_logout, .icon_user {
-    margin-right: 0.1cm;
-    margin-top: 0.1cm;
-    margin-left: -0.25cm;
+    margin-left: 1.5cm;
   }
   
   .reminder {
     font-size: 1.5rem;
     color: #7b7aaf;
-    font-weight: bold;
+    font-weight: bolder;
     margin-top: 0.5cm;
   }
-  
-  .switch_period {
-    display: flex;
-    justify-content: flex-start;
-  }
-  
-  .logout, .update {
-    display: flex;
-    justify-content: flex-start;
-    border-style: solid;
-    border-radius: 3em;
-    border-color: #b8bedd;
-    background-color: #b8bedd;
-    margin: 0.5cm;
-    width: 14rem;
-    height: 3rem;
-  
-  }
-  
-  .logout_p, .update_p {
+
+  .logout_p {
     font-size: 1.5rem;
     color: white; 
     font-weight: bold;
     display: flex;
     justify-content: center;
-    margin-left: 0.5cm;
-    margin-top: 0.25cm;
-  }
-  
+    margin-top: 0.1cm;
+  } 
   
   .bc-input {
     background-color: #fffaed;

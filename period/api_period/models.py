@@ -30,6 +30,14 @@ class PeriodData(models.Model):
         return self.diary_text
 
 
+# class PredictCalendar(models.Model):
+#     received_date = models.CharField(max_length=20, default=today())
+#
+#     @property
+#     def predict_date(self):
+#         return self.received_date
+
+
 def generate_unique_code():
     length = 6
 
@@ -46,12 +54,3 @@ class Setting(models.Model):
     period_length = models.IntegerField()
     cycle_length = models.IntegerField()
     luteal_length = models.IntegerField()
-
-
-class PredictCalendar(models.Model):
-    start_time = models.DateTimeField(default=today())
-    setting = models.ForeignKey(Setting, on_delete=models.DO_NOTHING)
-
-    def get_predict(self, day: datetime, setting: Setting) -> list:
-        pass
-

@@ -13,29 +13,29 @@ import { faDroplet } from "@fortawesome/free-solid-svg-icons";
 import Calendars from "./Calendar"
 import { Button, Slider } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
-// import { rangeDate } from Calendars
-
+import { SettingOutlined, HomeOutlined, LogoutOutlined, UserOutlined} from '@ant-design/icons';
+import { auth } from '../firebase'
 
 function Home() {
-  // React States
-    // const [errorMessages, setErrorMessages] = useState({});
-    // const [isSubmitted, setIsSubmitted] = useState(false);
-    const [painLevel, setPainLevel] = useState(0);
-    const [bloodLevel, setBloodLevel] = useState(1);
-    const diaryRef = useRef();
-    const uidRef = useRef();
-    const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
-    const [date, setDate] = useState();
-    const [home, userHome] = useState({
-        diary_text: "",
-        blood_level: "",
-        pain_level: "",
-        start_date: "",
-        end_date: "",
-        uid: "",
-        date: "",
-        });
+ // React States
+ const [errorMessages, setErrorMessages] = useState({});
+ const [isSubmitted, setIsSubmitted] = useState(false);
+ const [painLevel, setPainLevel] = useState(0);
+ const [bloodLevel, setBloodLevel] = useState(1);
+ const diaryRef = useRef();
+ const uidRef = useRef();
+ const [startDate, setStartDate] = useState();
+ const [endDate, setEndDate] = useState();
+ const [dataDate, setDataDate] = useState();
+ const [home, userHome] = useState({
+     diary_text: "",
+     blood_level: "",
+     pain_level: "",
+     start_date: "",
+     end_date: "",
+     uid: "",
+     date: "",
+     });
 
 // calen
 const { TextArea } = Input;
@@ -73,6 +73,8 @@ const setR = useCallback((data) => {
 
     // use data ---> call api
 
+},[rangeDate])
+
 function handleSubmit(e) {
     // userHome({ diary_text: diaryRef.current.value,
     // blood_level: bloodLevel,
@@ -93,9 +95,6 @@ function handleSubmit(e) {
     .catch((err) => console.log(err));
 }
 
-
-},[rangeDate])
-
 return (
     <div className="home">
         <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate } setRangeDate={setR } />
@@ -112,22 +111,16 @@ return (
                         console.log(e.target.value);
                         setBloodLevel(e.target.value);
                     }}>
-                        {/* <FontAwesomeIcon icon={faDroplet} size="3x" /> */}
                     </button>
                     <button id="2" className="small-blood-level-block" value={2} onClick={(e)=> {
                         console.log(e.target.value);
                         setBloodLevel(e.target.value);
                     }}>
-                        {/* <FontAwesomeIcon icon={faDroplet} size="3x"/>
-                        <FontAwesomeIcon icon={faDroplet} size="3x" /> */}
                     </button>
                     <button id="3" className="small-blood-level-block" value={3} onClick={(e)=> {
                         console.log(e.target.value);
                         setBloodLevel(e.target.value);
                     }}>
-                        {/* <FontAwesomeIcon icon={faDroplet} size="3x" />
-                        <FontAwesomeIcon icon={faDroplet} size="3x" />
-                        <FontAwesomeIcon icon={faDroplet} size="3x" /> */}
                     </button>
                 </div>
             <div className="home-title">DIARY</div>
@@ -135,6 +128,10 @@ return (
             <br></br>
             <Button type="primary" onClick={handleSubmit} >Save</Button>
         </div>
+        <span><Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/"}} style={{ background: "#b8bedd"}}><p className='home_p' ><HomeOutlined className='icon_home'/>Setting</p></Button></span>
+
+        <span><Button className='logout' type="primary" variant="link" onClick={() => {auth.signOut(); window.location.href = "./login"}} style={{ background: "#b8bedd"}}><p className='logout_p' ><LogoutOutlined className='icon_logout'/>Logout</p></Button></span>
+
     </div>
 );
 }
