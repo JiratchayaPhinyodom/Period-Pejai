@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
 import LogoPic from "./pics/app_logo.png";
 import Dots from "./pics/dots.png";
@@ -15,95 +15,57 @@ import { Button, Slider } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 
 
-
 function Home() {
   // React States
-    const [errorMessages, setErrorMessages] = useState({});
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    // const [errorMessages, setErrorMessages] = useState({});
+    // const [isSubmitted, setIsSubmitted] = useState(false);
     const [painLevel, setPainLevel] = useState(0);
     const [bloodLevel, setBloodLevel] = useState(1);
     const diaryRef = useRef();
 
-  // User Login info
-//     const database = [
-//     {
-//         username: "user1",
-//         password: "pass1"
-//     },
-//     {
-//         username: "user2",
-//         password: "pass2"
-//     }
-// ];
-
-// const errors = {
-//     uname: "invalid username",
-//     pass: "invalid password"
-// };
-
-// const handleSubmit = (event) => {
-//     //Prevent page reload
-//     event.preventDefault();
-
-//     var { uname, pass } = document.forms[0];
-
-//     // Find user login info
-//     const userData = database.find((user) => user.username === uname.value);
-
-//     // Compare user info
-//     if (userData) {
-//         if (userData.password !== pass.value) {
-//         // Invalid password
-//         setErrorMessages({ name: "pass", message: errors.pass });
-//     } else {
-//         setIsSubmitted(true);
-//     }
-//     } else {
-//       // Username not found
-//         setErrorMessages({ name: "uname", message: errors.uname });
-//     }
-// };
-
-//   // Generate JSX code for error message
-//     const renderErrorMessage = (name) =>
-//     name === errorMessages.name && (
-//     <div className="error">{errorMessages.message}</div>
-//     );
-
-//   // JSX code for login form
-//     const renderForm = (
-//     <form onSubmit={handleSubmit}>
-//     </form>
-// );
-
 // calen
 const { TextArea } = Input;
-// const onChangeDiary = (e)  => {
-//     setDiary(e.target.value);
-//     console.log('Change:', e.target.value);
-//   };
-// const [inputIcon, setInputIcon] = useState(1);
-// const onChangeIcon = (newValue) => {
-//     setInputIcon(newValue);
-//     console.log(inputIcon)
-// }
 
+const DateToString = (date) => {
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    if(date.getMonth() < 10) {
+      month = '0' + month
+    }
+    if(date.getDate() < 10) {
+      day = '0' + day
+    }
+    return date.getFullYear() + '-' + month + '-' + day
+  }
 
 const submitDiary = ()=> {
     console.log(`Pain Level: ${painLevel}`);
     console.log(`Blood Level: ${bloodLevel}`);
     console.log(`Diary: ${diaryRef.current.value}`);
+    console.log(`Date: ${DateToString(date)}`)
 }
 
-// const onChangeIcon = (e) => {
-//     console.log('Change:', e.target.value);
-// }
+const [date, setDate] = useState(new Date());
+const [rangeDate, setRangeDate] = useState([])
 
+useEffect(() => {
+    // call api ---> get data
+        // setRangeDate(data)
+},[])
+    
+const setR = useCallback((data) => {
+    console.log("date: ",data)
+    setRangeDate(data)
 
+    // use data ---> call api
+
+},[rangeDate])
 
 return (
     <div className="home">
-        <Calendars className="component-calendar"/>
+        <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate } setRangeDate={setR } />
+        {/* <button type="button" onClick={(ev) => {console.log("button",rangeDate)}} >rangeDate</button> */}
+        {/* <button type="button" onClick={() => setClick(click+1)} >setClick</button> */}
         <div className="home-form">
             <div className="home-title">PAIN LEVEL</div>
                 <div className="pain-level-container">
