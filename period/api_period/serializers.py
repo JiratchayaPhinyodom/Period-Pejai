@@ -22,13 +22,6 @@ class MyData(serializers.ModelSerializer):
         fields = ["birth_year", "period_length", "cycle_length", "luteal_length"]
 
 
-
-class PredictCalendar(serializers.ModelSerializer):
-    class Meta:
-        model = PredictCalendar
-        fields = ["start_time"]
-
-
 class MyDiaryPage(serializers.ModelSerializer):
     class Meta:
         model = PeriodData
