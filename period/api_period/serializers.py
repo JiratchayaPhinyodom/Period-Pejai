@@ -29,4 +29,4 @@ class PredictCalendar(serializers.ModelSerializer):
 class MyDiaryPage(serializers.ModelSerializer):
     class Meta:
         model = PeriodData
-        fields = ["pain_level", "blood_level", "diary_text"]
+        fields = ["pain_level", "blood_level", "diary_text", "start_date", "end_date", "uid", "date"]

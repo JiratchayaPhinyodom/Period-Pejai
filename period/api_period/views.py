@@ -97,7 +97,7 @@ def my_form(request):
         return Response(status=status.HTTP_400_BAD_REQUEST)
         
         
-@api_view(['POST', 'GET'])
+@api_view(['POST', 'GET', 'PUT'])
 def my_diary(request):
     print(request.data)
     print(type(request.data))
@@ -108,6 +108,18 @@ def my_diary(request):
             return Response(status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+    # try/except
+    elif request.method == "PUT":
+        period_data = PeriodData.objects.get(uid=request.data["uid"], date=request.data["date"])
+        print(period_data)
+        form = MyHomePage(request.data)
+        period_data.pain_level = request.data["pain_level"]
+        period_data.blood_level = request.data["blood_level"]
+        period_data.diary_text = request.data["diary_text"]
+        period_data.start_date = request.data["start_date"]
+        period_data.end_date = request.data["end_date"]
+        period_data.save()
+        return Response(status=status.HTTP_201_CREATED) # or 204 -> recheck
     elif request.method == "GET":
         diary = PeriodData.objects.all()
         serializer = MyDiaryPage(diary, many=True)

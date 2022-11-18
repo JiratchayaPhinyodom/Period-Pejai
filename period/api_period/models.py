@@ -11,10 +11,13 @@ def today():
 
 class PeriodData(models.Model):
     """Home Page model"""
-    diary_text = models.CharField(max_length=1000)
-    blood_level = models.IntegerField()
-    pain_level = models.IntegerField()
-    # date = models.DateTimeField(default=today())
+    diary_text = models.CharField(max_length=1000, default="")
+    blood_level = models.IntegerField(default=0)
+    pain_level = models.IntegerField(default=0)
+    start_date = models.DateTimeField(default=today())
+    end_date =  models.DateTimeField(default=today())
+    uid = models.CharField(max_length=1000, default="")
+    date = models.DateTimeField(default=today())
     # current_period = True
     # period_day = models.CharField(max_length=10)
     #
