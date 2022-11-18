@@ -17,8 +17,8 @@ import { DownloadOutlined } from '@ant-design/icons';
 
 function Home() {
   // React States
-    const [errorMessages, setErrorMessages] = useState({});
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    // const [errorMessages, setErrorMessages] = useState({});
+    // const [isSubmitted, setIsSubmitted] = useState(false);
     const [painLevel, setPainLevel] = useState(0);
     const [bloodLevel, setBloodLevel] = useState(1);
     const diaryRef = useRef();
@@ -26,23 +26,35 @@ function Home() {
 // calen
 const { TextArea } = Input;
 
+const DateToString = (date) => {
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    if(date.getMonth() < 10) {
+      month = '0' + month
+    }
+    if(date.getDate() < 10) {
+      day = '0' + day
+    }
+    return date.getFullYear() + '-' + month + '-' + day
+  }
+
 const submitDiary = ()=> {
     console.log(`Pain Level: ${painLevel}`);
     console.log(`Blood Level: ${bloodLevel}`);
     console.log(`Diary: ${diaryRef.current.value}`);
-    console.log(`Date: ${date.toDateString()}`)
+    console.log(`Date: ${DateToString(date)}`)
 }
 
 const [date, setDate] = useState(new Date());
 const [rangeDate, setRangeDate] = useState([])
 
-    useEffect(() => {
+useEffect(() => {
     // call api ---> get data
         // setRangeDate(data)
 },[])
     
 const setR = useCallback((data) => {
-    console.log("rangeDate will set with data = ",data)
+    console.log("date: ",data)
     setRangeDate(data)
 
     // use data ---> call api
