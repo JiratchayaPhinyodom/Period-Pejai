@@ -21,14 +21,6 @@ class PeriodData(models.Model):
         return self.diary_text
 
 
-# class PredictCalendar(models.Model):
-#     received_date = models.CharField(max_length=20, default=today())
-#
-#     @property
-#     def predict_date(self):
-#         return self.received_date
-
-
 def generate_unique_code():
     length = 6
 
