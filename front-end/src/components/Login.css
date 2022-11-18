@@ -15,7 +15,7 @@ a{
     color: black;
 }
 
-input[type="email"],
+/* input[type="email"],
 input[type="password"] {
     font-family: 'Gaegu', cursive;
     font-weight: bold;
@@ -29,10 +29,10 @@ input[type="password"] {
     box-shadow: 4px 3px;
     background: #ffe4dc;
     border: 1px solid black;
-}
+} */
 
-.login-submit {
-    margin-top: 10px;
+.login-google {
+    margin-top: 60px;
     cursor: pointer;
     font-size: 20px;
     font-family: 'Gaegu', cursive;
@@ -43,16 +43,17 @@ input[type="password"] {
     box-shadow: 4px 3px;
     color: black;
     padding: 6px 70px;
+    margin-left: 200px;
 }
 
-input[type="submit"]:hover {
+/* input[type="submit"]:hover {
     background: #f8ad9d;
 }
 
 .login-button-container {
     display: flex;
     justify-content: center;
-}
+} */
 
 .login-topper-form {
     height: 55px;
@@ -69,39 +70,45 @@ input[type="submit"]:hover {
     border: 2px solid black;
     padding: 12rem;
     height: 600px;
+    width: 1070px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.login-list-container {
+/* .login-list-container {
     display: flex;
 }
 
 .login-error {
     color: red;
     font-size: 12px;
-}
+} */
 
-.login-title {
+/* .login-title {
     margin: -300px;
     text-align: center;
     font-size: 50px;
     margin-bottom: 45px;
     margin-left: 300px;
-}
+} */
 
-.login-input-container {
-    position: relative;
-    top: 20%;
-    left: 13%;
-    font-size: 25px;
-    align-items: center;
+.head-login {
     display: flex;
-    gap: 40px;
-    margin: 16px;
-    width: 650px;
+    text-align: center;
+    font-size: 50px;
+    margin-top: -500px;
+    margin-left: 70px;
 }
 
-.login-result-container {
+.paragraph-login {
+    font-family: 'Gaegu', cursive;
+    display: flex;
+    text-align: justify;
+    font-size: 30px;
+    margin-top: 60px;
+}
+
+
+/* .login-result-container {
     position: relative;
     top: 10%;
     left: 13%;
@@ -111,16 +118,16 @@ input[type="submit"]:hover {
     gap: 40px;
     margin: 16px;
     width: 650px;
-}
+} */
 
 
-.ending{
+/* .ending{
     font-size: 18px;
     margin-top: 50px;
     margin-left: 130px;
     display: inline-block;
     white-space: nowrap;
-}
+} */
 
 .App-logo {
     position: relative;

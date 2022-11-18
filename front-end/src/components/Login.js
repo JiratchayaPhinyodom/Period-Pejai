@@ -7,6 +7,7 @@ import LogoPic from "./pics/app_logo.png";
 
 //sign in with google
 import { signInWithGoogle } from "../firebase"
+import { Prev } from "react-bootstrap/esm/PageItem";
 
 export default function Login() {
   const emailRef = useRef()
@@ -22,9 +23,16 @@ export default function Login() {
         <a href="http://localhost:3000/login">
             <img src={LogoPic} className="App-logo" height = "350px"/>
         </a>
-          <span className="login-title">LOGIN</span>
-          {error && <Alert variant="danger">{error}</Alert>}
-      <button onClick={async ()=>{await signInWithGoogle(); window.location.href = "/"}}>Sign in with google</button>
+        {/* <span className="login-title"> */}
+            <h1 className="head-login">Welcome to period-pejai</h1>
+              <p1 className="paragraph-login">
+              We'll assist you in overcoming
+              the difficulty of forgetting your menstrual cycle.
+              And foretell your period for the next month,
+              As well as assist ladies who wish to plan for the birth of children.</p1>
+            {/* </span> */}
+          {/* {error && <Alert variant="danger">{error}</Alert>} */}
+      <button onClick={async ()=>{await signInWithGoogle(); window.location.href = "/"}} className="login-google">Login in with google</button>
     </div>
   </div>
   )

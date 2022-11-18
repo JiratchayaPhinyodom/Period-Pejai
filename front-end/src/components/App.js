@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import firebase from "../firebase"
 import React from "react"
 import "./App.css";
-// import PrivateRoute from './PrivateRoute';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Dashboard from "./Dashboard";
 import Login from "./Login";
