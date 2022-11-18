@@ -18,16 +18,16 @@ class PeriodData(models.Model):
     end_date =  models.DateTimeField(default=today())
     uid = models.CharField(max_length=1000, default="")
     date = models.DateTimeField(default=today())
-    # current_period = True
-    # period_day = models.CharField(max_length=10)
-    #
-    # def can_choose(self) -> bool:
-    #     """For checking the date that user has period"""
-    #     if not self.current_period:
-    #         return False
+    current_period = True
+    period_day = models.CharField(max_length=10)
+    
+    def can_choose(self) -> bool:
+        """For checking the date that user has period"""
+        if not self.current_period:
+            return False
 
-    # def __str__(self):
-    #     return self.diary_text
+    def __str__(self):
+        return self.diary_text
 
 
 def generate_unique_code():

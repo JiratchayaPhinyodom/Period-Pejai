@@ -69,19 +69,6 @@ def register_request(request):
     return render(request=request, template_name="registration/register.html", context={"register_form": form})
 
 
-class UploadPicture(ViewSet):
-    serializer_class = UploadFile
-
-    def get_API(self, request):
-        return Response("GET API")
-
-    def create(self, request):
-        file_uploaded = request.FILES.get('file_uploaded')
-        content_type = file_uploaded.content_type
-        response = "POST API and you have uploaded a {} file".format(content_type)
-        return Response(response)
-
-
 @api_view(['POST'])
 def my_form(request):
     print(request.data)
@@ -131,36 +118,10 @@ def my_diary(request):
 
 def redirect_line(request):
     # response = redirect('/redirect-success/')
-    # print(request.GET['code'])
+    print(request.GET['code'])
     # collect_state = request.GET['state']
-    url = "https://notify-bot.line.me/oauth/token"
+    # url = 'https://notify-bot.line.me/oauth/token'
     # x = requests.post(url=url, json=collect_code)
     # print(x)
     # return HttpResponse('success')
-    pass
 
-
-# def request():
-#     code = "fPg7tfstCUlDW5s5TiAha5"
-#     client_id = "3i37SxxITCH1t4ngUNAPuz"
-#     url = "http://127.0.0.1:8000/api/setting"
-#     state = "abcdef123456"
-#     token = "IYsi0yC9Et4EqFHBzv9evCyN1azoebOgKkyU4UygHwj"
-#     headers = {'content-type': 'application/x-www-form-urlencoded', 'Authorization': 'Bearer ' + token}
-#     msg = 'Hello LINE Notify'
-#     r = requests.post(url, headers=headers, data={'message': msg})
-#     print(r.text)
-#
-
-
-def response(code):
-    code = ""
-    state = ""
-    pass
-
-
-class UploadPredict(ViewSet):
-    serializer_class = PredictCalendar
-
-    def get_API(self):
-        return Response("GET API")
