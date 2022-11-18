@@ -12,7 +12,6 @@ import PrivateRouter from "./PrivateRouter";
 import { useAuth } from '../contexts/AuthContext';
 import MainRouter from './Router';
 
-
 const MainApp  = ()=> {
   const {currentUser} = useAuth();
   if (currentUser === null){
