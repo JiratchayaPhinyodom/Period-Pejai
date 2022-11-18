@@ -125,10 +125,3 @@ def response(code):
     code = ""
     state = ""
     pass
-
-
-# class UploadPredict(ViewSet):
-#     serializer_class = PredictCalendar
-#
-#     def get_API(self):
-#         return Response("GET API")
