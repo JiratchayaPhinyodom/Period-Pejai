@@ -21,6 +21,7 @@
     "react-multi-date-picker": "^3.3.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-slider-page": "^1.0.0",
     "react-swal": "^4.0.0"
   },
   "scripts": {
