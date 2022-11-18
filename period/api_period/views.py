@@ -11,7 +11,8 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from .serializers import UploadFile
 from .serializers import MyData, MyDiaryPage
-from .serializers import MyData
+from django.views import View
+from django.http import JsonResponse
 
 
 def main(request):
@@ -21,8 +22,20 @@ def main(request):
 class Data(generics.ListCreateAPIView):
     queryset = Setting.objects.all()
     serializer_class = MyData
-    queryset_predict = PredictCalendar.objects.all()
-    serializer_predict = PredictCalendar
+    # queryset_predict = PredictCalendar.objects.all()
+    # serializer_predict = PredictCalendar
+
+
+def predict_date(request):
+    if request.method == "GET":
+        list_data = []
+        for i in request.data["date"]:
+            first_day = i[0]
+            setting_data = Setting.objects.filter(uid=request.data["uid"])
+            first_day += setting_data.period_length
+            list_data.append(first_day)
+        data = list_data
+        return JsonResponse({"result": data})
 
 
 class Diary(generics.ListCreateAPIView):
@@ -114,8 +127,8 @@ def response(code):
     pass
 
 
-class UploadPredict(ViewSet):
-    serializer_class = PredictCalendar
-
-    def get_API(self):
-        return Response("GET API")
+# class UploadPredict(ViewSet):
+#     serializer_class = PredictCalendar
+#
+#     def get_API(self):
+#         return Response("GET API")
