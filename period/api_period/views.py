@@ -147,3 +147,21 @@ def response(code):
     code = ""
     state = ""
     pass
+
+
+## LineView จะต้องเอาไปเขียน class เพื่อใช้ส่งข้อความว่าจะส่งไปวันไหน
+# class LineView(generics.DetailCreateAPIView): 
+
+#     def get(self, request, *args, **kwargs):
+#         url = "https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=FoxpwP1XQ9OX0RXJXT8Ju5" \
+#                       "&redirect_uri=http://localhost:3000/&scope=notify&state=period "
+#         return HttpResponseRedirect(url)
+
+
+## Get code กลับมา
+# class NotificationCallback(generics.Detail.View):
+#     """A class that handles the callback after user authorize notification."""
+
+#     def get(self, request, *args, **kwargs):
+#         code = request.GET['code'] # get the code ได้โค้ดไปใส่ใน get access token
+        

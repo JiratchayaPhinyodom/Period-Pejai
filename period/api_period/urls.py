@@ -10,6 +10,6 @@ urlpatterns = [
     path('signup', register_request),
     path('login', login_request),
     path('setting', my_form),
-    path('notification', redirect_line),
+    # path('notification', redirect_line),
     path('predict', views.predict_date),
 ]
