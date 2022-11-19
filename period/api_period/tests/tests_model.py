@@ -29,8 +29,17 @@ class SettingModelTest(TestCase):
         self.assertEqual(field_label, 'luteal length')
 
 
-# class PeriodDataModelTests(TestCase):
-#     def test_diary_text_max_length(self):
-#         period_data = PeriodData.objects.get(id=1)
-#         max_length = period_data._meta.get_field('diary_text').max_length
-#         self.assertEqual(max_length, 1000)
+class PeriodDataModelTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        # Set up non-modified objects used by all test methods
+        PeriodData.objects.create(pain_level=1, blood_level=1, diary_text="Hello",
+                                  start_date="2022-11-15T17:14:00+07:00"
+                                  , end_date="2022-11-27T17:14:00+07:00", uid="abc1234",
+                                  date="2022-11-19T17:14:00+07:00")
+
+    def test_diary_text_max_length(self):
+        period_data = PeriodData.objects.get(id=1)
+        max_length = period_data._meta.get_field('diary_text').max_length
+        self.assertEqual(max_length, 1000)
+
