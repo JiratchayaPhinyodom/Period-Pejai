@@ -111,7 +111,7 @@ function handleSubmit(e) {
     <p className='reminder'>REMINDER</p>
       <ToggleSwitch label="Period"/>
       <ToggleSwitch label="Ovaluation"/>
-    <a href="https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=FoxpwP1XQ9OX0RXJXT8Ju5&redirect_uri=http://127.0.0.1:8000/api/setting&scope=notify&state=abcdef123456">
+    <a href="https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=FoxpwP1XQ9OX0RXJXT8Ju5&redirect_uri=http://localhost:3000/&scope=notify&state=abcdef123456">
             <img src={LineLink} className="line-logo" height = "50px"/>
     </a>
     <span>
