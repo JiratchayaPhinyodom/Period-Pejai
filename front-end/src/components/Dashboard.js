@@ -43,6 +43,15 @@ const Dashboard= () =>{
     cycle_length: "", 
     luteal_length: "", 
   });
+  // const [latest, periodLatest] = useState({
+  //   diary_text: "",
+  //   blood_level: "",
+  //   pain_level: "",
+  //   start_date: "",
+  //   end_date: "",
+  //   uid: "",
+  //   date: "",
+  //   });
   console.log(setting);
 
   const [collectRangeDateSetting, setCollectRangeDateSetting] = useState([])
@@ -76,7 +85,7 @@ const Dashboard= () =>{
     // console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
     setShowBtnSetting(false) }
 
-function handleSubmit(e) {
+function handleInfoSubmit(e) {
   e.preventDefault();
     let url = "http://127.0.0.1:8000/api/setting";
     fetch(url, {
@@ -92,6 +101,26 @@ function handleSubmit(e) {
   })
   .catch((err) => console.log(err));
 }
+
+// function handleLatestSubmit(e) {
+//   // userHome({ diary_text: diaryRef.current.value,
+//   // blood_level: bloodLevel,
+//   // pain_level: painLevel,})
+//   e.preventDefault();
+//   let url = "http://127.0.0.1:8000/api/diary";
+//   fetch(url, {
+//   method: "PUT",
+//   headers: { "Content-type": "application/json" },
+//   body: JSON.stringify({ diary_text: diaryRef.current.value,
+//       blood_level: bloodLevel,
+//       pain_level: painLevel,
+//       start_date: rangeDate[0],
+//       end_date: rangeDate[1],
+//       uid: "",
+//       date: DateToString(date),}),
+//   })
+//   .catch((err) => console.log(err));
+// }
 
   return (
     <div className='App'>
@@ -121,7 +150,7 @@ function handleSubmit(e) {
         </Button>
     </span>
   </div>
-  <form onSubmit={handleSubmit}>
+  <form onSubmit={handleInfoSubmit}>
   <div className='bc-input'>
     <div className='input'>
       <span className='box-year'>
@@ -154,3 +183,5 @@ function handleSubmit(e) {
 }
 
 export default Dashboard;
+
+// แป้งโกะทำ submit date แล้วเราจะสร้าง handle submit ไว้ไหนนะ

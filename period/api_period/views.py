@@ -4,12 +4,12 @@ from rest_framework import generics
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
-from .forms import NewUserForm, MySettingPage, MyHomePage
+from .forms import *
 from django.contrib.auth import login
 from django.contrib import messages
 from .models import *
 from rest_framework.response import Response
-from .serializers import MyData, MyDiaryPage
+from .serializers import MyData, MyDiaryPage, MyPeriod
 from rest_framework import status
 from rest_framework.decorators import api_view
 
@@ -27,18 +27,38 @@ class Data(generics.ListCreateAPIView):
 
 class Diary(generics.ListCreateAPIView):
     queryset = PeriodData.objects.all()
-    serializer_class = MyHomePage
+    serializer_class = MyDiaryPage
+    
+
+class Period(generics.ListCreateAPIView):
+    queryset = DateRange.objects.all()
+    serializer_class = MyPeriod
 
 
+# def predict_date(request):
+#     if request.method == "GET":
+#         list_data = []
+#         for i in request.data["period_phase"]:
+#             first_day = i[0]
+#             setting_data = Setting.objects.filter(uid=request.data["uid"])
+#             first_day += setting_data.cycle_length
+#             list_data.append(first_day)
+#         data = list_data
+#         return JsonResponse({"result": data})
+
+@api_view(['GET'])
 def predict_date(request):
     if request.method == "GET":
+        print(request.data)
         list_data = []
-        for i in request.data["date"]:
-            first_day = i[0]
-            setting_data = Setting.objects.filter(uid=request.data["uid"])
-            first_day += setting_data.period_length
-            list_data.append(first_day)
+        period_start_day = request.data["period_phase"][-1][0]
+        setting_data = Setting.objects.filter(uid=request.data["uid"])
+        next_first_day = period_start_day + setting_data.cycle_length
+        list_data.append(next_first_day)
+        next_stop_day = next_first_day + setting_data.period_length
+        list_data.append(next_stop_day)
         data = list_data
+        print(list_data)
         return JsonResponse({"result": data})
 
 
@@ -77,7 +97,6 @@ def register_request(request):
 @api_view(['POST'])
 def my_form(request):
     print(request.data)
-    print(type(request.data))
     if request.method == "POST":
         form = MySettingPage(request.data)
         if form.is_valid():
@@ -87,8 +106,25 @@ def my_form(request):
             return Response(status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
-
-
+    
+    
+@api_view(['POST', 'GET'])
+def my_period(request):
+    print(request.data)
+    if request.method == "POST":
+        form = MyPeriodData(request.data)
+        if form.is_valid():
+            form.save()
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "GET":
+        range = DateRange.objects.all()
+        serializer = MyPeriod(range, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+    
 @api_view(['POST', 'GET', 'PUT'])
 def my_diary(request):
     print(request.data)
@@ -100,7 +136,6 @@ def my_diary(request):
             return Response(status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-    # try/except
     elif request.method == "PUT":
         period_data = PeriodData.objects.get(uid=request.data["uid"], date=request.data["date"])
         print(period_data)
@@ -108,16 +143,13 @@ def my_diary(request):
         period_data.pain_level = request.data["pain_level"]
         period_data.blood_level = request.data["blood_level"]
         period_data.diary_text = request.data["diary_text"]
-        period_data.start_date = request.data["start_date"]
-        period_data.end_date = request.data["end_date"]
         period_data.save()
         return Response(status=status.HTTP_201_CREATED)  # or 204 -> recheck
     elif request.method == "GET":
         diary = PeriodData.objects.all()
         serializer = MyDiaryPage(diary, many=True)
         return JsonResponse(serializer.data, safe=False)
-    else:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 def redirect_line(request):

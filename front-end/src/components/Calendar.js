@@ -143,7 +143,6 @@ function Calendars({date, setDate, rangeDate, setRangeDate}) {
         <br></br>
     </div>
     
-   
   );
 }
 

@@ -15,27 +15,28 @@ import { Button, Slider } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 import { SettingOutlined, HomeOutlined, LogoutOutlined, UserOutlined} from '@ant-design/icons';
 import { auth } from '../firebase'
+import { useAuth } from '../contexts/AuthContext';
 
 function Home() {
  // React States
- const [errorMessages, setErrorMessages] = useState({});
- const [isSubmitted, setIsSubmitted] = useState(false);
- const [painLevel, setPainLevel] = useState(0);
- const [bloodLevel, setBloodLevel] = useState(1);
- const diaryRef = useRef();
- const uidRef = useRef();
- const [startDate, setStartDate] = useState();
- const [endDate, setEndDate] = useState();
- const [dataDate, setDataDate] = useState();
- const [home, userHome] = useState({
-     diary_text: "",
-     blood_level: "",
-     pain_level: "",
-     start_date: "",
-     end_date: "",
-     uid: "",
-     date: "",
-     });
+const [errorMessages, setErrorMessages] = useState({});
+const [isSubmitted, setIsSubmitted] = useState(false);
+const [painLevel, setPainLevel] = useState(0);
+const [bloodLevel, setBloodLevel] = useState(1);
+const diaryRef = useRef();
+const uidRef = useRef();
+const [periodPhase, setPeriodPhase] = useState(0);
+const [dataDate, setDataDate] = useState(0);
+const {currentUser} = useAuth();
+console.log(currentUser.uid)
+const [home, userHome] = useState({
+    diary_text: "",
+    blood_level: "",
+    pain_level: "",
+    period_phase: "",
+    uid: "",
+    date: "",
+    });
 
 // calen
 const { TextArea } = Input;
@@ -44,13 +45,13 @@ const DateToString = (date) => {
     let day = date.getDate()
     let month = date.getMonth() + 1
     if(date.getMonth() < 10) {
-      month = '0' + month
+    month = '0' + month
     }
     if(date.getDate() < 10) {
-      day = '0' + day
+    day = '0' + day
     }
     return date.getFullYear() + '-' + month + '-' + day
-  }
+}
 
 const submitDiary = ()=> {
     console.log(`Pain Level: ${painLevel}`);
@@ -72,28 +73,49 @@ const setR = useCallback((data) => {
     setRangeDate(data)
 
     // use data ---> call api
+    let url = "http://127.0.0.1:8000/api/period";
+    fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ 
+        period_phase: data,
+        uid: currentUser.uid})
+    })
+    .catch((err) => console.log(err));
+    console.log(
+        JSON.stringify({ 
+        period_phase: data,
+        uid: currentUser.uid})
+    );
 
 },[rangeDate])
 
+
 function handleSubmit(e) {
-    // userHome({ diary_text: diaryRef.current.value,
-    // blood_level: bloodLevel,
-    // pain_level: painLevel,})
     e.preventDefault();
     let url = "http://127.0.0.1:8000/api/diary";
     fetch(url, {
-    method: "PUT",
+    method: "POST",
     headers: { "Content-type": "application/json" },
-    body: JSON.stringify({ diary_text: diaryRef.current.value,
+    body: JSON.stringify({ 
+        diary_text: diaryRef.current.value,
         blood_level: bloodLevel,
         pain_level: painLevel,
-        start_date: "",
-        end_date: "",
-        uid: "",
-        date: "",}),
+        uid: currentUser.uid,
+        date: DateToString(date)}),
     })
     .catch((err) => console.log(err));
 }
+
+// useEffect(async () => {
+//     try {
+//         const res = await fetch('http://127.0.0.1:8000/api/predict')
+//         const predict_data = await res.json()
+//         userHome(predict_data)
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }, [])
 
 return (
     <div className="home">
