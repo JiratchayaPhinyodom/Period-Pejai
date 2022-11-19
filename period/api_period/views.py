@@ -34,6 +34,18 @@ class Diary(generics.ListCreateAPIView):
     serializer_class = MyHomePage
 
 
+def predict_date(request):
+    if request.method == "GET":
+        list_data = []
+        for i in request.data["date"]:
+            first_day = i[0]
+            setting_data = Setting.objects.filter(uid=request.data["uid"])
+            first_day += setting_data.period_length
+            list_data.append(first_day)
+        data = list_data
+        return JsonResponse({"result": data})
+
+
 def login_request(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)

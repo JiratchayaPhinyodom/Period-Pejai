@@ -15,7 +15,7 @@ class PeriodData(models.Model):
     blood_level = models.IntegerField(default=0)
     pain_level = models.IntegerField(default=0)
     start_date = models.DateTimeField(default=today())
-    end_date =  models.DateTimeField(default=today())
+    end_date = models.DateTimeField(default=today())
     uid = models.CharField(max_length=1000, default="")
     date = models.DateTimeField(default=today())
     current_period = True
