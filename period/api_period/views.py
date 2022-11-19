@@ -1,4 +1,3 @@
-
 from django.contrib.sites import requests
 from django.http import HttpResponse, JsonResponse
 from rest_framework import generics
@@ -19,7 +18,6 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 
 
-
 def main(request):
     return HttpResponse("Hello")
 
@@ -27,17 +25,13 @@ def main(request):
 class Data(generics.ListCreateAPIView):
     queryset = Setting.objects.all()
     serializer_class = MyData
-    queryset_predict = PredictCalendar.objects.all()
-    serializer_predict = PredictCalendar
     queryset_period = PeriodData.objects.all()
     serializer_period = MyHomePage
-
 
 
 class Diary(generics.ListCreateAPIView):
     queryset = PeriodData.objects.all()
     serializer_class = MyHomePage
-
 
 
 def login_request(request):
@@ -85,8 +79,8 @@ def my_form(request):
             return Response(status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
-        
-        
+
+
 @api_view(['POST', 'GET', 'PUT'])
 def my_diary(request):
     print(request.data)
@@ -109,14 +103,13 @@ def my_diary(request):
         period_data.start_date = request.data["start_date"]
         period_data.end_date = request.data["end_date"]
         period_data.save()
-        return Response(status=status.HTTP_201_CREATED) # or 204 -> recheck
+        return Response(status=status.HTTP_201_CREATED)  # or 204 -> recheck
     elif request.method == "GET":
         diary = PeriodData.objects.all()
         serializer = MyDiaryPage(diary, many=True)
         return JsonResponse(serializer.data, safe=False)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
-        
 
 
 def redirect_line(request):
