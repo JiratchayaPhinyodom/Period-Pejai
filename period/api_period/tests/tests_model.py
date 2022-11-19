@@ -1,5 +1,6 @@
 from ..models import Setting, PeriodData
 from django.test import TestCase
+import datetime
 
 
 class SettingModelTest(TestCase):
@@ -37,6 +38,11 @@ class PeriodDataModelTests(TestCase):
                                   start_date="2022-11-15T17:14:00+07:00"
                                   , end_date="2022-11-27T17:14:00+07:00", uid="abc1234",
                                   date="2022-11-19T17:14:00+07:00")
+
+    def test_pain_level_label(self):
+        period = PeriodData.objects.get(id=1)
+        field_label = period._meta.get_field('pain_level').verbose_name
+        self.assertEqual(field_label, 'pain level')
 
     def test_diary_text_max_length(self):
         period_data = PeriodData.objects.get(id=1)
