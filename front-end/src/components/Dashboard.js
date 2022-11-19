@@ -126,23 +126,26 @@ function handleSubmit(e) {
     <div className='input'>
       <span className='box-year'>
         <p className='year'>YEAR OF BIRTH </p>
+        <input type="number" value={setting.birth_year} className="input-border" placeholder="2002" onChange={(e) => userSetting({ ...setting, birth_year: e.target.value })}/>
       </span>
-          <input type="number" value={setting.birth_year} className="input-border" placeholder="2002" onChange={(e) => userSetting({ ...setting, birth_year: e.target.value })}/>
       <span className='box-period'>
-        <p className='year'>PERIOD LENGTH </p>
+        <p className='period-length'>PERIOD LENGTH </p>
+        <input type="number" value={setting.period_length} className="input-border" placeholder="7" onChange={(e) => userSetting({ ...setting, period_length: e.target.value })}/>
       </span>
-          <input type="number" value={setting.period_length} className="input-border" placeholder="7" onChange={(e) => userSetting({ ...setting, period_length: e.target.value })}/>
       <span className='box-cycle'>
-        <p className='year'>CYCLE LENGTH </p>
+        <p className='cycle-length'>CYCLE LENGTH </p>
+        <input type="number" value={setting.cycle_length} className="input-border" placeholder="28" onChange={(e) => userSetting({ ...setting, cycle_length: e.target.value })}/>
       </span>
-          <input type="number" value={setting.cycle_length} className="input-border" placeholder="28" onChange={(e) => userSetting({ ...setting, cycle_length: e.target.value })}/>
       <span className='box-phase'>
-        <p className='year'>LUTHEAL PHASE <br></br>LENGTH </p>
+        <p className='phase-length'>LUTHEAL PHASE LENGTH </p>
+        <input type="number" value={setting.luteal_length} className="input-border" placeholder="14" onChange={(e) => userSetting({ ...setting, luteal_length: e.target.value })}/>
       </span>
-          <input type="number" value={setting.luteal_length} className="input-border" placeholder="14" onChange={(e) => userSetting({ ...setting, luteal_length: e.target.value })}/>
       <button id="submit" className="setting-submit" type="submit" onClick={saveConfirm}> Save </button>
-      <RangePicker onChange={onChange} /> 
-      {showBtnSetting ? <button type="button" onClick={() => { submitDate()}} >Save</button> : null }
+      <div className="periodLastMonth">
+        <p className="last-month">Period Last Month</p>
+        <RangePicker onChange={onChange} className='setting-range-picker'/> 
+      </div>
+      {showBtnSetting ? <button className="period-submit" type="button" onClick={() => { submitDate()}} >Save</button> : null }
     </div>
   </div>
   </form>
