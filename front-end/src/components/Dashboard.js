@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import LineLink from "./pics/line_button.png";
 import { InputNumber, Space } from 'antd';
 import Input from "antd/lib/input/Input";
+import { DatePicker } from 'antd';
 
 import { auth } from '../firebase'
 
@@ -43,6 +44,37 @@ const Dashboard= () =>{
     luteal_length: "", 
   });
   console.log(setting);
+
+  const [collectRangeDateSetting, setCollectRangeDateSetting] = useState([])
+  const [showBtnSetting, setShowBtnSetting] = useState(false)
+  const [rangeDateSetting, setRangeDateSetting] = useState([])
+
+  const { RangePicker } = DatePicker;
+
+  const onChange = (dates, dateStrings) => {
+    let listRangeDate = []
+    if (dates) {
+      console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
+      // console.log("result = ", temp_reTemp)
+      listRangeDate.push(dateStrings[0]) //[[st,en], [], []]
+      listRangeDate.push(dateStrings[1])
+      setCollectRangeDateSetting(listRangeDate)
+      setShowBtnSetting(true)
+    } else {
+      console.log('Clear');
+      setCollectRangeDateSetting(listRangeDate)
+    }
+    
+  };
+
+  const submitDate = () => {
+    // console.log("in",rangeDate,collectRangeDate)
+    let range_date = rangeDateSetting
+    range_date.push(collectRangeDateSetting)
+    setRangeDateSetting(range_date)
+    console.log("submitRangeDate in setting page", range_date)
+    // console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
+    setShowBtnSetting(false) }
 
 function handleSubmit(e) {
   e.preventDefault();
@@ -92,31 +124,28 @@ function handleSubmit(e) {
   <form onSubmit={handleSubmit}>
   <div className='bc-input'>
     <div className='input'>
-
-      {/* <span className='box-year'><p className='year'>YEAR OF BIRTH </p><span className='mar'><Input_birth/></span></span>
-      <span className='box-period'><p className='period-length'>PERIOD LENGTH</p><span className='mar'><Input_period /> DAYS</span></span>
-      <span className='box-cycle'><p className='cycle-length'>CYCLE LENGTH</p><span className='mar'><Input_cycle /> DAYS</span></span>
-      <span className='box-phase'><p className='phase-length'>LUTEAL PHASE LENGTH </p><span className='mar'><Input_phase /> DAYS</span></span> */}
       <span className='box-year'>
         <p className='year'>YEAR OF BIRTH </p>
+        <input type="number" value={setting.birth_year} className="input-border" placeholder="2002" onChange={(e) => userSetting({ ...setting, birth_year: e.target.value })}/>
       </span>
-          <input type="number" value={setting.birth_year} className="input-border" placeholder="2002" onChange={(e) => userSetting({ ...setting, birth_year: e.target.value })}/>
       <span className='box-period'>
-        <p className='year'>PERIOD LENGTH </p>
+        <p className='period-length'>PERIOD LENGTH </p>
+        <input type="number" value={setting.period_length} className="input-border" placeholder="7" onChange={(e) => userSetting({ ...setting, period_length: e.target.value })}/>
       </span>
-          <input type="number" value={setting.period_length} className="input-border" placeholder="7" onChange={(e) => userSetting({ ...setting, period_length: e.target.value })}/>
       <span className='box-cycle'>
-        <p className='year'>CYCLE LENGTH </p>
+        <p className='cycle-length'>CYCLE LENGTH </p>
+        <input type="number" value={setting.cycle_length} className="input-border" placeholder="28" onChange={(e) => userSetting({ ...setting, cycle_length: e.target.value })}/>
       </span>
-          <input type="number" value={setting.cycle_length} className="input-border" placeholder="28" onChange={(e) => userSetting({ ...setting, cycle_length: e.target.value })}/>
       <span className='box-phase'>
-        <p className='year'>LUTHEAL PHASE <br></br>LENGTH </p>
+        <p className='phase-length'>LUTHEAL PHASE LENGTH </p>
+        <input type="number" value={setting.luteal_length} className="input-border" placeholder="14" onChange={(e) => userSetting({ ...setting, luteal_length: e.target.value })}/>
       </span>
-          <input type="number" value={setting.luteal_length} className="input-border" placeholder="14" onChange={(e) => userSetting({ ...setting, luteal_length: e.target.value })}/>
-      {/* <button disabled={loading} type="submit" className="setting-submit" onClick={saveConfirm}>
-          Save
-      </button> */}
       <button id="submit" className="setting-submit" type="submit" onClick={saveConfirm}> Save </button>
+      <div className="periodLastMonth">
+        <p className="last-month">Period Last Month</p>
+        <RangePicker onChange={onChange} className='setting-range-picker'/> 
+      </div>
+      {showBtnSetting ? <button className="period-submit" type="button" onClick={() => { submitDate()}} >Save</button> : null }
     </div>
   </div>
   </form>
