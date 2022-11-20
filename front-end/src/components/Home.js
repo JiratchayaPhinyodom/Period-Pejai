@@ -98,6 +98,7 @@ useEffect(() => {
                     if(date_diary === DateToString(date)) {
                         console.log('fuckkkkkkkkkkkkkkkkkk')
                         console.log(blood)
+                        setPainLevel(pain)
                         if (blood == 1) {
                             setactiveBtnBlood1(false);
                             setactiveBtnBlood2(true);
