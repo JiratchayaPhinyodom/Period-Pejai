@@ -63,7 +63,7 @@ def predict_luteal(request):
         setting_data = Setting.objects.filter(uid=request.GET["uid"])[0]
         # print(setting_data)
         tmp_list = sorted([i.period_phase for i in DateRange.objects.filter(uid=request.GET["uid"])])
-        # print(tmp_list)
+        print(tmp_list)
         period_start_day = ast.literal_eval(tmp_list[len(tmp_list)-1])
         period_start_day = datetime.datetime.strptime(period_start_day[len(period_start_day)-1][0], '%Y-%m-%d')
         # print(period_start_day)
