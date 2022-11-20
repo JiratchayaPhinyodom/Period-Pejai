@@ -47,6 +47,8 @@ const Dashboard= () =>{
 
   const [collectRangeDateSetting, setCollectRangeDateSetting] = useState([])
   const [showBtnSetting, setShowBtnSetting] = useState(false)
+  const [showRangeDatePicker, setshowRangeDatePicker] = useState(true)
+  const [showBtnHome, setShowBtnHome] = useState(false)
   const [rangeDateSetting, setRangeDateSetting] = useState([])
 
   const { RangePicker } = DatePicker;
@@ -74,7 +76,10 @@ const Dashboard= () =>{
     setRangeDateSetting(range_date)
     console.log("submitRangeDate in setting page", range_date)
     // console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
-    setShowBtnSetting(false) }
+    setShowBtnSetting(false)
+    setshowRangeDatePicker(false)
+    setShowBtnHome(true)
+   }
 
 function handleSubmit(e) {
   e.preventDefault();
@@ -103,10 +108,10 @@ function handleSubmit(e) {
       <SettingOutlined className='icon_setting'/><p className='setting_p'>Setting</p>
     </span>
     <span>
-      <Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/home"}} style={{ background: "#b8bedd"}}>
+      {showBtnHome ? <Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/home"}} style={{ background: "#b8bedd"}}>
         <HomeOutlined className='icon_home'/>
         <p className='home_p' >Home</p>
-      </Button>
+      </Button> : null}
     </span>
     <p className='reminder'>REMINDER</p>
       <ToggleSwitch label="Period"/>
@@ -143,7 +148,7 @@ function handleSubmit(e) {
       <button id="submit" className="setting-submit" type="submit" onClick={saveConfirm}> Save </button>
       <div className="periodLastMonth">
         <p className="last-month">Period Last Month</p>
-        <RangePicker onChange={onChange} className='setting-range-picker'/> 
+        {showRangeDatePicker ? <RangePicker onChange={onChange} className='setting-range-picker'/> : <p className="calculated">The next menstrual cycle has been calculated.</p> }
       </div>
       {showBtnSetting ? <button className="period-submit" type="button" onClick={() => { submitDate()}} >Save</button> : null }
     </div>
