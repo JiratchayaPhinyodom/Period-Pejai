@@ -13,7 +13,7 @@ import { faDroplet } from "@fortawesome/free-solid-svg-icons";
 import Calendars from "./Calendar"
 import { Button, Slider } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
-import { SettingOutlined, HomeOutlined, LogoutOutlined, UserOutlined} from '@ant-design/icons';
+import { SettingOutlined, HomeOutlined, LogoutOutlined, UserOutlined, SmileTwoTone, FrownTwoTone} from '@ant-design/icons';
 import { auth } from '../firebase'
 
 function Home() {
@@ -99,6 +99,9 @@ const [activeBtnBlood1, setactiveBtnBlood1] = useState(true)
 const [activeBtnBlood2, setactiveBtnBlood2] = useState(true)
 const [activeBtnBlood3, setactiveBtnBlood3] = useState(true)
 
+
+
+
 return (
     <div className="home">
         <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate } setRangeDate={setR } />
@@ -107,7 +110,7 @@ return (
         <div className="home-form">
             <div className="home-title">PAIN LEVEL</div>
                 <div className="pain-level-container">
-                    <Slider onChange={setPainLevel} value={painLevel}></Slider>
+                    <Slider onChange={setPainLevel} max={10} min={0} value={painLevel}></Slider>
                 </div>
             <div className="home-title">BLOOD LEVEL</div>
                 <div className="blood-level-container">
@@ -117,33 +120,36 @@ return (
                         setactiveBtnBlood1(false);
                         setactiveBtnBlood2(true);
                         setactiveBtnBlood3(true)
-                    }}>
-                    </button> : <button id="1" className="small-blood-level-block" style = {{background:"#ffb5a7"}}value={1} onClick={(e)=> {
+                    }}>Little
+                    </button> : <button id="2" className="small-blood-level-block" style = {{background:"#ffb5a7"}}value={1} onClick={(e)=> {
                         setactiveBtnBlood1(true);
                                 
-                    }}></button>}
-                    {activeBtnBlood2 ? <button id="2" className="small-blood-level-block" value={2} onClick={(e)=> {
+                    }}>Little
+                        </button>}
+                    {activeBtnBlood2 ? <button id="3" className="small-blood-level-block" value={2} onClick={(e)=> {
                         console.log(e.target.value);
                         setBloodLevel(e.target.value);
                         setactiveBtnBlood2(false)
                         setactiveBtnBlood1(true)
                         setactiveBtnBlood3(true)
-                    }}>
+                    }}>Medium
                     </button> : <button id="2" className="small-blood-level-block" style = {{background:"#ffb5a7"}} value={2} onClick={(e)=> {
                         setactiveBtnBlood2(true)
-                    }}></button>}
+                    }}>Medium
+                        </button>}
                     {activeBtnBlood3 ? <button id="3" className="small-blood-level-block" value={3} onClick={(e)=> {
                         console.log(e.target.value);
                         setBloodLevel(e.target.value);
                         setactiveBtnBlood3(false)
                         setactiveBtnBlood2(true)
                         setactiveBtnBlood1(true)
-                    }}>
+                    }}>A Lot
                     </button> : <button id="3" className="small-blood-level-block" style = {{background:"#ffb5a7"}} value={3} onClick={(e)=> {
                         // console.log(e.target.value);
                         // setBloodLevel(e.target.value);
                         setactiveBtnBlood3(true)
-                    }}></button>}
+                    }}>A Lot
+                        </button>}
                 </div>
             <div className="home-title">DIARY</div>
                 <input rows={10} placeholder="What do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} />
