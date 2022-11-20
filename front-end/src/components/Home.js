@@ -95,6 +95,10 @@ function handleSubmit(e) {
     .catch((err) => console.log(err));
 }
 
+const [activeBtnBlood1, setactiveBtnBlood1] = useState(true)
+const [activeBtnBlood2, setactiveBtnBlood2] = useState(true)
+const [activeBtnBlood3, setactiveBtnBlood3] = useState(true)
+
 return (
     <div className="home">
         <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate } setRangeDate={setR } />
@@ -107,21 +111,39 @@ return (
                 </div>
             <div className="home-title">BLOOD LEVEL</div>
                 <div className="blood-level-container">
-                    <button id="1" className="small-blood-level-block" value={1} onClick={(e)=> {
+                    {activeBtnBlood1 ? <button id="1" className="small-blood-level-block" value={1} onClick={(e)=> {
                         console.log(e.target.value);
                         setBloodLevel(e.target.value);
+                        setactiveBtnBlood1(false);
+                        setactiveBtnBlood2(true);
+                        setactiveBtnBlood3(true)
                     }}>
-                    </button>
-                    <button id="2" className="small-blood-level-block" value={2} onClick={(e)=> {
+                    </button> : <button id="1" className="small-blood-level-block" style = {{background:"#ffb5a7"}}value={1} onClick={(e)=> {
+                        setactiveBtnBlood1(true);
+                                
+                    }}></button>}
+                    {activeBtnBlood2 ? <button id="2" className="small-blood-level-block" value={2} onClick={(e)=> {
                         console.log(e.target.value);
                         setBloodLevel(e.target.value);
+                        setactiveBtnBlood2(false)
+                        setactiveBtnBlood1(true)
+                        setactiveBtnBlood3(true)
                     }}>
-                    </button>
-                    <button id="3" className="small-blood-level-block" value={3} onClick={(e)=> {
+                    </button> : <button id="2" className="small-blood-level-block" style = {{background:"#ffb5a7"}} value={2} onClick={(e)=> {
+                        setactiveBtnBlood2(true)
+                    }}></button>}
+                    {activeBtnBlood3 ? <button id="3" className="small-blood-level-block" value={3} onClick={(e)=> {
                         console.log(e.target.value);
                         setBloodLevel(e.target.value);
+                        setactiveBtnBlood3(false)
+                        setactiveBtnBlood2(true)
+                        setactiveBtnBlood1(true)
                     }}>
-                    </button>
+                    </button> : <button id="3" className="small-blood-level-block" style = {{background:"#ffb5a7"}} value={3} onClick={(e)=> {
+                        // console.log(e.target.value);
+                        // setBloodLevel(e.target.value);
+                        setactiveBtnBlood3(true)
+                    }}></button>}
                 </div>
             <div className="home-title">DIARY</div>
                 <input rows={10} placeholder="What do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} />
