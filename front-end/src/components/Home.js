@@ -69,19 +69,13 @@ const submitDiary = ()=> {
 
 const [date, setDate] = useState(new Date());
 const [rangeDate, setRangeDate] = useState([])
-const [x,X] = useState([])
+
+//set luteal
+
+const [luteal, setLuteal] = useState([])
+
+// const [x,X] = useState([])
     
-// useEffect(() => {
-//     console.log("click date 1",date)
-//     // call api ---> get data
-//     // x.forEach((xx) => {
-//     //     // if x.date == date
-//     //     // x.aaaa
-//     //     // x.bbbb 
-//     //     // x.cccc
-//     // })
-// },[date])
-// console.log('out',date)
 useEffect(() => {
     try {
         const url_diary = 'http://127.0.0.1:8000/api/diary' + '?uid=' + currentUser.uid
@@ -151,6 +145,7 @@ const setR = useCallback((data) => {
         console.log("response period",response)
         const url = 'http://127.0.0.1:8000/api/predict' + '?uid=' + currentUser.uid
         const url2 = 'http://127.0.0.1:8000/api/period' + '?uid=' + currentUser.uid
+        const url_luteal = 'http://127.0.0.1:8000/api/luteal' + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
 
         fetch(url2).then((res2) => {
@@ -170,6 +165,12 @@ const setR = useCallback((data) => {
                     res.json().then((res_json) => {
                         console.log("predict_data",res_json.result)
                         setPeriod(res_json.result)
+                    })
+                })
+                fetch(url_luteal).then((resLuteal) => {
+                    resLuteal.json().then((res_json) => {
+                        console.log("Callback lu", res_json.result)
+                        setLuteal(res_json.result)
                     })
                 })
             })
@@ -218,14 +219,11 @@ useEffect(async () => {
     console.log("TEST")
     try {
         const url2 = 'http://127.0.0.1:8000/api/period' + '?uid=' + currentUser.uid
-        const url3 = 'http://127.0.0.1:8000/api/luteal' + '?uid=' + currentUser.uid
+        const url_luteal = 'http://127.0.0.1:8000/api/luteal' + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
         const res2 = await fetch(url2)
-        const res3 = await fetch(url3)
         const res_json2 = await res2.json()
-        const res_json3 = await res3.json()
         console.log("res_json2 = ",res_json2)
-        console.log("res_json3 = ",res_json3) // luteal day
         const periodData = []
         // [ '[[]]','[[]]','[[]]' ]
         res_json2.forEach((ListInList) => {
@@ -238,6 +236,17 @@ useEffect(async () => {
         console.log("period_data",periodData)
         // setPeriod(res_json.result)
         setRangeDate(periodData)
+
+        const resLuteal = await fetch(url_luteal)
+        const res_Luteal_json = await resLuteal.json()
+        console.log("luteal day= ",res_Luteal_json.result) // luteal day
+        setLuteal(res_Luteal_json.result)
+
+    //     fetch(url_luteal).then((res_diary) => {
+    //         res_diary.json().then((res_all_diary) => {
+    //             console.log("lulu", res_all_diary.result)
+    //         })
+    // })
         
 
 
@@ -247,6 +256,8 @@ useEffect(async () => {
         const res_json = await res.json()
         console.log("predict_data",res_json.result)
         setPeriod(res_json.result)
+
+
 
         
     } catch (error) {
@@ -259,13 +270,19 @@ useEffect(async () => {
         
 },[period])
 
+useEffect(() => {
+    console.log("luuteal change",luteal)
+        
+},[luteal])
+    
+
 const [activeBtnBlood1, setactiveBtnBlood1] = useState(true)
 const [activeBtnBlood2, setactiveBtnBlood2] = useState(true)
 const [activeBtnBlood3, setactiveBtnBlood3] = useState(true)
 
 return (
     <div className="home">
-        <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate} setRangeDate={setR} period={period } />
+        <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate} setRangeDate={setR} period={period} luteal={luteal} />
         
 
         {/* <button type="button" onClick={(ev) => {console.log("button",rangeDate)}} >rangeDate</button> */}

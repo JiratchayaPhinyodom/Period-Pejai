@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from 'antd';
 import { DatePicker } from 'antd';
 
-function Calendars({date, setDate, rangeDate, setRangeDate, period}) {
+function Calendars({date, setDate, rangeDate, setRangeDate, period, luteal}) {
 
   // console.log(period)
   useEffect(() => {
@@ -36,10 +36,13 @@ function Calendars({date, setDate, rangeDate, setRangeDate, period}) {
           if(period.find(val => val === realDate)) {
             return 'highlight2'
           }
+          if(luteal.find(val => val === realDate)) {
+            return 'highlight3'
+          }
         }
       }
   />)}
-  },[period])
+  },[period], [luteal])
 
   const DateToString = (date) => {
     let day = date.getDate()
