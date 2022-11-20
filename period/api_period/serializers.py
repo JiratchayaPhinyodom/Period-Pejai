@@ -17,7 +17,7 @@ class MyData(serializers.ModelSerializer):
 
     class Meta:
         model = Setting
-        fields = ["birth_year", "period_length", "cycle_length", "luteal_length"]
+        fields = ["birth_year", "period_length", "cycle_length", "luteal_length", "uid"]
 
 
 class MyDiaryPage(serializers.ModelSerializer):

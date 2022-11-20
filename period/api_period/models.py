@@ -43,3 +43,4 @@ class Setting(models.Model):
     period_length = models.IntegerField()
     cycle_length = models.IntegerField()
     luteal_length = models.IntegerField()
+    uid = models.CharField(max_length=1000, default="")

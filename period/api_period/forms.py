@@ -7,9 +7,9 @@ from django.contrib.auth.models import User
 class MySettingPage(forms.ModelForm):
     class Meta:
         model = Setting
-        fields = ["birth_year", "period_length", "cycle_length", "luteal_length"]
+        fields = ["birth_year", "period_length", "cycle_length", "luteal_length", "uid"]
         labels = {"birth_year": "Year of Birth", "period_length": "Period length",
-                "cycle_length": "Cycle length", "luteal length": "Luteal length"}
+                "cycle_length": "Cycle length", "luteal length": "Luteal length", "uid":"Uid"}
         
 class MyHomePage(forms.ModelForm):
     class Meta:

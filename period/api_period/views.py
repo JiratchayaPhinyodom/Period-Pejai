@@ -12,6 +12,8 @@ from rest_framework.response import Response
 from .serializers import MyData, MyDiaryPage, MyPeriod
 from rest_framework import status
 from rest_framework.decorators import api_view
+import ast
+import datetime
 
 
 def main(request):
@@ -51,15 +53,31 @@ def predict_date(request):
     if request.method == "GET":
         print(request.data)
         list_data = []
-        period_start_day = request.data["period_phase"][-1][0]
-        setting_data = Setting.objects.filter(uid=request.data["uid"])
-        next_first_day = period_start_day + setting_data.cycle_length
-        list_data.append(next_first_day)
-        next_stop_day = next_first_day + setting_data.period_length
-        list_data.append(next_stop_day)
-        data = list_data
+        setting_data = Setting.objects.filter(uid=request.data["uid"])[0]
+        # print(setting_data)
+        period_start_day = ast.literal_eval(DateRange.objects.filter(uid=request.data["uid"]).last().period_phase)
+        period_start_day = datetime.datetime.strptime(period_start_day[len(period_start_day)-1][0], '%Y-%m-%d')
+        # print(period_start_day)
+        next_first_day = period_start_day + datetime.timedelta(days=setting_data.cycle_length)
+        for _ in range(setting_data.period_length):
+            list_data.append(str(next_first_day)[:10])
+            next_first_day += datetime.timedelta(days=1)
+        
         print(list_data)
-        return JsonResponse({"result": data})
+        return JsonResponse({"result": list_data})
+
+@api_view(['GET'])
+def predict_luteal(request):
+    if request.method == "GET":
+        print(request.data)
+        setting_data = Setting.objects.filter(uid=request.data["uid"])[0]
+        # print(setting_data)
+        period_start_day = ast.literal_eval(DateRange.objects.filter(uid=request.data["uid"]).last().period_phase)
+        period_start_day = datetime.datetime.strptime(period_start_day[len(period_start_day)-1][0], '%Y-%m-%d')
+        # print(period_start_day)
+        next_first_day = period_start_day + datetime.timedelta(days=setting_data.luteal_length)
+        next_first_day = str(next_first_day)[:10]
+        return JsonResponse({"result": [next_first_day]})
 
 
 def login_request(request):
@@ -106,8 +124,7 @@ def my_form(request):
             return Response(status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
-    
-    
+        
 @api_view(['POST', 'GET'])
 def my_period(request):
     print(request.data)

@@ -12,4 +12,5 @@ urlpatterns = [
     path('setting', my_form),
     path('notification', redirect_line),
     path('predict', views.predict_date),
+    path('luteal', views.predict_luteal),
 ]

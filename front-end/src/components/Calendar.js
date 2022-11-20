@@ -2,7 +2,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
 import 'antd/dist/antd.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from 'antd';
 import { DatePicker } from 'antd';
 
@@ -66,7 +66,18 @@ function Calendars({date, setDate, rangeDate, setRangeDate}) {
   const [collectRangeDate, setCollectRangeDate] = useState([])
   const [showBtn, setShowBtn] = useState(false)
   // const [rangeDate, setRangeDate] = useState([])
-    
+  const [predictCal, setPredictCal] = useState([])
+  
+  useEffect(async () => {
+    try {
+        const res = await fetch(`http://127.0.0.1:8000/api/predict`)
+        const predict_data = await res.json()
+        console.log(predict_data);
+        setPredictCal(predict_data)
+    } catch (error) {
+        console.log(error)
+    }
+}, [])
 
   const onChange = (dates, dateStrings) => {
     let listRangeDate = []
