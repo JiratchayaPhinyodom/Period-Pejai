@@ -31,7 +31,7 @@ const [dataDate, setDataDate] = useState(0);
 const {currentUser} = useAuth();
     const [period, setPeriod] = useState([]);
     const [showCa, setShowCa] = useState(null)
-console.log(currentUser.uid)
+// console.log(currentUser.uid)
 const [home, userHome] = useState({
     diary_text: "",
     blood_level: "",
@@ -89,15 +89,31 @@ useEffect(() => {
                 const painData = []
                 const dateData = []
                 res_all_diary.forEach((resGetDiary) => {
-                const pain = resGetDiary.pain_level
-                const blood = resGetDiary.blood_level
-                const diary = resGetDiary.diary_text
-                const date_diary = resGetDiary.date
-                painData.push(pain)
-                console.log("click",DateToString(date))
-                if(date_diary === DateToString(date)) {
-                    console.log('fuckkkkkkkkkkkkkkkkkk')
-                    console.log(blood)
+                    const pain = resGetDiary.pain_level
+                    const blood = resGetDiary.blood_level
+                    const diary = resGetDiary.diary_text
+                    const date_diary = resGetDiary.date
+                    painData.push(pain)
+                    console.log("click",DateToString(date))
+                    if(date_diary === DateToString(date)) {
+                        console.log('fuckkkkkkkkkkkkkkkkkk')
+                        console.log(blood)
+                        if (blood == 1) {
+                            setactiveBtnBlood1(false);
+                            setactiveBtnBlood2(true);
+                            setactiveBtnBlood3(true)
+                        }
+                        if (blood == 2) {
+                            setactiveBtnBlood2(false);
+                            setactiveBtnBlood1(true);
+                            setactiveBtnBlood3(true)
+                        }
+                        if (blood == 3) {
+                            setactiveBtnBlood3(false);
+                            setactiveBtnBlood1(true);
+                            setactiveBtnBlood3(true)
+                        }
+
                     } 
                 })
             })
@@ -275,7 +291,7 @@ return (
                          setactiveBtnBlood2(true)
                      }}></button>}
                      {activeBtnBlood3 ? <button id="3" className="small-blood-level-block" value={3} onClick={(e)=> {
-                         console.log(e.target.value);
+                        //  console.log(e.target.value);
                          setBloodLevel(e.target.value);
                          setactiveBtnBlood3(false)
                          setactiveBtnBlood2(true)
