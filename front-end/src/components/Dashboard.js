@@ -18,19 +18,6 @@ import { DatePicker } from 'antd';
 
 import { auth } from '../firebase'
 
-function saveConfirm(){
-  Swal.fire({
-    title: 'Your information has been saved!',
-    width: 600,
-    padding: '3em',
-    color: '#716add',
-    background: '#fff',
-    backdrop: `
-      rgba(0,0,123,0.4)
-    `
-  })
-}
-
 
 const Dashboard= () =>{
   const [error, setError] = useState("")
@@ -55,9 +42,26 @@ const Dashboard= () =>{
   //   });
   console.log(setting);
 
+  const [information, setInformation] = useState(false)
+  const saveConfirm = () => {
+  Swal.fire({
+    title: 'Your information has been saved!',
+    width: 600,
+    padding: '3em',
+    color: '#716add',
+    background: '#fff',
+    backdrop: `
+      rgba(0,0,123,0.4)
+    `
+  })
+  setInformation(true);
+}
+
   const [collectRangeDateSetting, setCollectRangeDateSetting] = useState([])
   const [showBtnSetting, setShowBtnSetting] = useState(false)
   const [rangeDateSetting, setRangeDateSetting] = useState([])
+  const [showRangeDatePicker, setshowRangeDatePicker] = useState(true)
+  const [showBtnHome, setShowBtnHome] = useState(false)
 
   const { RangePicker } = DatePicker;
 
@@ -99,6 +103,8 @@ const Dashboard= () =>{
     // console.log("submitRangeDate in setting page", range_date)
     // console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
     setShowBtnSetting(false)
+    setshowRangeDatePicker(false)
+    setShowBtnHome(true)
   }
 
 function handleInfoSubmit(e) {
@@ -149,10 +155,10 @@ function handleInfoSubmit(e) {
       <SettingOutlined className='icon_setting'/><p className='setting_p'>Setting</p>
     </span>
     <span>
-      <Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/home"}} style={{ background: "#b8bedd"}}>
+    {showBtnHome && information ? <Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/home"}} style={{ background: "#b8bedd"}}>
         <HomeOutlined className='icon_home'/>
         <p className='home_p' >Home</p>
-      </Button>
+      </Button> : null}
     </span>
     <p className='reminder'>REMINDER</p>
       <ToggleSwitch label="Period"/>
@@ -189,7 +195,7 @@ function handleInfoSubmit(e) {
       <button id="submit" className="setting-submit" type="submit" onClick={saveConfirm}> Save </button>
       <div className="periodLastMonth">
         <p className="last-month">Period Last Month</p>
-        <RangePicker onChange={onChange} className='setting-range-picker'/> 
+        {showRangeDatePicker ? <RangePicker onChange={onChange} className='setting-range-picker'/> : <p className="calculated">The next menstrual cycle has been calculated.</p> }
       </div>
       {showBtnSetting ? <button className="period-submit" type="button" onClick={() => { submitDate()}} >Save</button> : null }
     </div>
