@@ -11,7 +11,7 @@ function Calendars({date, setDate, rangeDate, setRangeDate, period}) {
   // console.log(period)
   useEffect(() => {
     // console.log("in period change ==>",rangeDate,period)
-     let range_date = rangeDate
+    let range_date = rangeDate
     const events2 = setEvents2(range_date)
     if (period != [])
     {

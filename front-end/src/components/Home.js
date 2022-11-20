@@ -164,10 +164,14 @@ useEffect(async () => {
     console.log("TEST")
     try {
         const url2 = 'http://127.0.0.1:8000/api/period' + '?uid=' + currentUser.uid
+        const url3 = 'http://127.0.0.1:8000/api/luteal' + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
         const res2 = await fetch(url2)
+        const res3 = await fetch(url3)
         const res_json2 = await res2.json()
+        const res_json3 = await res3.json()
         console.log("res_json2 = ",res_json2)
+        console.log("res_json3 = ",res_json3) // luteal day
         const periodData = []
         // [ '[[]]','[[]]','[[]]' ]
         res_json2.forEach((ListInList) => {
