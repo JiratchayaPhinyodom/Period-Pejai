@@ -25,6 +25,10 @@ const [isSubmitted, setIsSubmitted] = useState(false);
 const [painLevel, setPainLevel] = useState(0);
 const [bloodLevel, setBloodLevel] = useState(1);
 const diaryRef = useRef();
+
+//set diary
+const [diaryValue, setDiaryValue] = useState('')
+
 const uidRef = useRef();
 const [periodPhase, setPeriodPhase] = useState(0);
 const [dataDate, setDataDate] = useState(0);
@@ -95,9 +99,12 @@ useEffect(() => {
                     const date_diary = resGetDiary.date
                     painData.push(pain)
                     console.log("click",DateToString(date))
+                    // console.log(diaryRef.current.value == '55')
                     if(date_diary === DateToString(date)) {
                         console.log('fuckkkkkkkkkkkkkkkkkk')
                         console.log(blood)
+
+                        setDiaryValue(diary)
                         setPainLevel(pain)
                         if (blood == 1) {
                             setactiveBtnBlood1(false);
@@ -306,7 +313,7 @@ return (
                      }}>A Lot</button>}
                 </div>
             <div className="home-title">DIARY</div>
-                <input rows={10} placeholder="What do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} />
+                <input rows={10} placeholder="What do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} value={diaryValue} onChange={(e) => setDiaryValue(e.target.value)}/>
             <br></br>
             <Button type="primary" onClick={handleSubmit} >Save</Button>
         </div>
