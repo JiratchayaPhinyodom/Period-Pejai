@@ -16,6 +16,7 @@ import { DownloadOutlined } from '@ant-design/icons';
 import { SettingOutlined, HomeOutlined, LogoutOutlined, UserOutlined} from '@ant-design/icons';
 import { auth } from '../firebase'
 import { useAuth } from '../contexts/AuthContext';
+import axios from "axios";
 
 function Home() {
  // React States
@@ -28,6 +29,8 @@ const uidRef = useRef();
 const [periodPhase, setPeriodPhase] = useState(0);
 const [dataDate, setDataDate] = useState(0);
 const {currentUser} = useAuth();
+    const [period, setPeriod] = useState([]);
+    const [showCa, setShowCa] = useState(null)
 console.log(currentUser.uid)
 const [home, userHome] = useState({
     diary_text: "",
@@ -62,24 +65,62 @@ const submitDiary = ()=> {
 
 const [date, setDate] = useState(new Date());
 const [rangeDate, setRangeDate] = useState([])
-
+const [x,X] = useState([])
+    
 useEffect(() => {
+    console.log("click date",date)
     // call api ---> get data
-        // setRangeDate(data)
-},[])
+    x.forEach((xx) => {
+        // if x.date == date
+        // x.aaaa
+        // x.bbbb 
+        // x.cccc
+    })
+},[date])
     
 const setR = useCallback((data) => {
     console.log("date: ",data)
-    setRangeDate(data)
+    // setRangeDate(data)
 
     // use data ---> call api
+    // [[],[],[]] not use
+    // [[]] use this
     let url = "http://127.0.0.1:8000/api/period";
     fetch(url, {
-    method: "POST",
-    headers: { "Content-type": "application/json" },
-    body: JSON.stringify({ 
-        period_phase: data,
-        uid: currentUser.uid})
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ 
+            period_phase: JSON.stringify(data),
+            uid: currentUser.uid
+        })
+    }).then((response)=>{
+        console.log("response period",response)
+        const url = 'http://127.0.0.1:8000/api/predict' + '?uid=' + currentUser.uid
+        const url2 = 'http://127.0.0.1:8000/api/period' + '?uid=' + currentUser.uid
+        // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+
+        fetch(url2).then((res2) => {
+            res2.json().then((res_json2) => {
+
+                console.log(res_json2)
+                const periodData = []
+                res_json2.forEach((ListInList) => {
+                    const data = JSON.parse(ListInList.period_phase)
+                    const data_willPush = data[0]
+                    periodData.push(data_willPush)
+                })
+                console.log("period_data",periodData)
+                setRangeDate(periodData)
+
+                fetch(url).then((res) => {
+                    res.json().then((res_json) => {
+                        console.log("predict_data",res_json.result)
+                        setPeriod(res_json.result)
+                    })
+                })
+            })
+        })
+        
     })
     .catch((err) => console.log(err));
     console.log(
@@ -107,19 +148,64 @@ function handleSubmit(e) {
     .catch((err) => console.log(err));
 }
 
-// useEffect(async () => {
-//     try {
-//         const res = await fetch('http://127.0.0.1:8000/api/predict')
-//         const predict_data = await res.json()
-//         userHome(predict_data)
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }, [])
+// // Axios
+// const [post, setPost] = React.useState(null);
+// const baseURL = "http://127.0.0.1:8000/api/predict";
+// React.useEffect(() => {
+//     axios.get(baseURL).then((response) => {
+//     setPost(response.data);
+//     console.log(response);
+//     });
+// }, []);
+
+// if (!post) return null;
+
+useEffect(async () => {
+    console.log("TEST")
+    try {
+        const url2 = 'http://127.0.0.1:8000/api/period' + '?uid=' + currentUser.uid
+        // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+        const res2 = await fetch(url2)
+        const res_json2 = await res2.json()
+        console.log("res_json2 = ",res_json2)
+        const periodData = []
+        // [ '[[]]','[[]]','[[]]' ]
+        res_json2.forEach((ListInList) => {
+            const data = JSON.parse(ListInList.period_phase)
+            const data_willPush = data[0]
+            // console.log("data = ",data[0])
+            periodData.push(data_willPush)
+        })
+        // [ [], [], [] ]
+        console.log("period_data",periodData)
+        // setPeriod(res_json.result)
+        setRangeDate(periodData)
+        
+
+
+        const url = 'http://127.0.0.1:8000/api/predict' + '?uid=' + currentUser.uid
+        // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+        const res = await fetch(url)
+        const res_json = await res.json()
+        console.log("predict_data",res_json.result)
+        setPeriod(res_json.result)
+
+        
+    } catch (error) {
+        console.log(error)
+    }
+}, [])
+
+    useEffect(() => {
+    console.log("period change",period)
+        
+},[period])
 
 return (
     <div className="home">
-        <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate } setRangeDate={setR } />
+        <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate} setRangeDate={setR} period={period } />
+        
+
         {/* <button type="button" onClick={(ev) => {console.log("button",rangeDate)}} >rangeDate</button> */}
         {/* <button type="button" onClick={() => setClick(click+1)} >setClick</button> */}
         <div className="home-form">
@@ -153,6 +239,7 @@ return (
         <span><Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/"}} style={{ background: "#b8bedd"}}><p className='home_p' ><HomeOutlined className='icon_home'/>Setting</p></Button></span>
 
         <span><Button className='logout' type="primary" variant="link" onClick={() => {auth.signOut(); window.location.href = "./login"}} style={{ background: "#b8bedd"}}><p className='logout_p' ><LogoutOutlined className='icon_logout'/>Logout</p></Button></span>
+        {/* <Button onClick={handle}> test</Button> */}
 
     </div>
 );

@@ -36,26 +36,16 @@ class Period(generics.ListCreateAPIView):
     queryset = DateRange.objects.all()
     serializer_class = MyPeriod
 
-
-# def predict_date(request):
-#     if request.method == "GET":
-#         list_data = []
-#         for i in request.data["period_phase"]:
-#             first_day = i[0]
-#             setting_data = Setting.objects.filter(uid=request.data["uid"])
-#             first_day += setting_data.cycle_length
-#             list_data.append(first_day)
-#         data = list_data
-#         return JsonResponse({"result": data})
-
 @api_view(['GET'])
 def predict_date(request):
     if request.method == "GET":
-        print(request.data)
+        print(request.GET["uid"])
         list_data = []
-        setting_data = Setting.objects.filter(uid=request.data["uid"])[0]
+        setting_data = Setting.objects.filter(uid=request.GET["uid"])[0]
         # print(setting_data)
-        period_start_day = ast.literal_eval(DateRange.objects.filter(uid=request.data["uid"]).last().period_phase)
+        tmp_list = sorted([i.period_phase for i in DateRange.objects.filter(uid=request.GET["uid"])])
+        # print(tmp_list)
+        period_start_day = ast.literal_eval(tmp_list[len(tmp_list)-1])
         period_start_day = datetime.datetime.strptime(period_start_day[len(period_start_day)-1][0], '%Y-%m-%d')
         # print(period_start_day)
         next_first_day = period_start_day + datetime.timedelta(days=setting_data.cycle_length)
@@ -69,10 +59,12 @@ def predict_date(request):
 @api_view(['GET'])
 def predict_luteal(request):
     if request.method == "GET":
-        print(request.data)
-        setting_data = Setting.objects.filter(uid=request.data["uid"])[0]
+        print(request.GET["uid"])
+        setting_data = Setting.objects.filter(uid=request.GET["uid"])[0]
         # print(setting_data)
-        period_start_day = ast.literal_eval(DateRange.objects.filter(uid=request.data["uid"]).last().period_phase)
+        tmp_list = sorted([i.period_phase for i in DateRange.objects.filter(uid=request.GET["uid"])])
+        # print(tmp_list)
+        period_start_day = ast.literal_eval(tmp_list[len(tmp_list)-1])
         period_start_day = datetime.datetime.strptime(period_start_day[len(period_start_day)-1][0], '%Y-%m-%d')
         # print(period_start_day)
         next_first_day = period_start_day + datetime.timedelta(days=setting_data.luteal_length)
@@ -136,7 +128,7 @@ def my_period(request):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "GET":
-        range = DateRange.objects.all()
+        range = DateRange.objects.filter(uid=request.GET["uid"])
         serializer = MyPeriod(range, many=True)
         return JsonResponse(serializer.data, safe=False)
     return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -163,7 +155,8 @@ def my_diary(request):
         period_data.save()
         return Response(status=status.HTTP_201_CREATED)  # or 204 -> recheck
     elif request.method == "GET":
-        diary = PeriodData.objects.all()
+        diary = PeriodData.objects.filter(uid=request.GET["uid"])
+        print(diary)
         serializer = MyDiaryPage(diary, many=True)
         return JsonResponse(serializer.data, safe=False)
     return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -190,7 +183,12 @@ def redirect_line(request):
 #     msg = 'Hello LINE Notify'
 #     r = requests.post(url, headers=headers, data={'message': msg})
 #     print(r.text)
-#
+
+
+
+@api_view(["GET"])
+def ping(request):
+    return JsonResponse({"message": "hello world"})
 
 def response(code):
     code = ""

@@ -6,7 +6,40 @@ import React, { useState, useEffect } from "react";
 import { Button } from 'antd';
 import { DatePicker } from 'antd';
 
-function Calendars({date, setDate, rangeDate, setRangeDate}) {
+function Calendars({date, setDate, rangeDate, setRangeDate, period}) {
+
+  // console.log(period)
+  useEffect(() => {
+    // console.log("in period change ==>",rangeDate,period)
+     let range_date = rangeDate
+    const events2 = setEvents2(range_date)
+    if (period != [])
+    {
+      setCalen(<Calendar
+    onChange={setDate}
+    value={date}
+    locale="US"
+    tileClassName={({date}) => 
+        {
+          let day = date.getDate()
+          let month = date.getMonth() + 1
+          if(date.getMonth() < 10) {
+            month = '0' + month
+          }
+          if(date.getDate() < 10) {
+            day = '0' + day
+          }
+          const realDate = date.getFullYear() + '-' + month + '-' + day
+          if(events2.find(val => val === realDate)) {
+            return 'highlight'
+          }
+          if(period.find(val => val === realDate)) {
+            return 'highlight2'
+          }
+        }
+      }
+  />)}
+  },[period])
 
   const DateToString = (date) => {
     let day = date.getDate()
@@ -67,17 +100,6 @@ function Calendars({date, setDate, rangeDate, setRangeDate}) {
   const [showBtn, setShowBtn] = useState(false)
   // const [rangeDate, setRangeDate] = useState([])
   const [predictCal, setPredictCal] = useState([])
-  
-  useEffect(async () => {
-    try {
-        const res = await fetch(`http://127.0.0.1:8000/api/predict`)
-        const predict_data = await res.json()
-        console.log(predict_data);
-        setPredictCal(predict_data)
-    } catch (error) {
-        console.log(error)
-    }
-}, [])
 
   const onChange = (dates, dateStrings) => {
     let listRangeDate = []
@@ -96,35 +118,36 @@ function Calendars({date, setDate, rangeDate, setRangeDate}) {
   };
 
   const submitDate = () => {
-    console.log("in",rangeDate,collectRangeDate)
-    let range_date = rangeDate
+    console.log("in",collectRangeDate)
+    // let range_date = rangeDate
+    let range_date = []
     range_date.push(collectRangeDate)
     setRangeDate(range_date)
     // console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
-    const events2 = setEvents2(range_date)
+    // const events2 = setEvents2(range_date)
     // console.log("submitDate", events2) //ถ้าจะส่งค่าไปทุกวันที่ไฮไลท์ใช้อันนี้
     setShowBtn(false)
-    setCalen(<Calendar
-      onChange={setDate}
-      value={date}
-      locale="US"
-      tileClassName={({date}) => 
-        {
-          let day = date.getDate()
-          let month = date.getMonth() + 1
-          if(date.getMonth() < 10) {
-            month = '0' + month
-          }
-          if(date.getDate() < 10) {
-            day = '0' + day
-          }
-          const realDate = date.getFullYear() + '-' + month + '-' + day
-          if(events2.find(val => val === realDate)) {
-            return 'highlight'
-          }
-        }
-      }
-    />)
+    // setCalen(<Calendar
+    //   onChange={setDate}
+    //   value={date}
+    //   locale="US"
+    //   tileClassName={({date}) => 
+    //     {
+    //       let day = date.getDate()
+    //       let month = date.getMonth() + 1
+    //       if(date.getMonth() < 10) {
+    //         month = '0' + month
+    //       }
+    //       if(date.getDate() < 10) {
+    //         day = '0' + day
+    //       }
+    //       const realDate = date.getFullYear() + '-' + month + '-' + day
+    //       if(events2.find(val => val === realDate)) {
+    //         return 'highlight'
+    //       }
+    //     }
+    //   }
+    // />)
   }
 
   return (

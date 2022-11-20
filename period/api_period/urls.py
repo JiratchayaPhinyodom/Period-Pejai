@@ -13,4 +13,5 @@ urlpatterns = [
     path('notification', redirect_line),
     path('predict', views.predict_date),
     path('luteal', views.predict_luteal),
+    path('ping', views.ping),
 ]

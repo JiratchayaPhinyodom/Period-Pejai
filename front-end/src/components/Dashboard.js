@@ -42,6 +42,7 @@ const Dashboard= () =>{
     period_length: "", 
     cycle_length: "", 
     luteal_length: "", 
+    uid: currentUser.uid
   });
   // const [latest, periodLatest] = useState({
   //   diary_text: "",
@@ -81,9 +82,24 @@ const Dashboard= () =>{
     let range_date = rangeDateSetting
     range_date.push(collectRangeDateSetting)
     setRangeDateSetting(range_date)
-    console.log("submitRangeDate in setting page", range_date)
+    const body = {
+      period_phase: JSON.stringify(range_date),
+      uid: currentUser.uid
+    }
+    console.log(JSON.stringify(body))
+    let url = "http://127.0.0.1:8000/api/period";
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(body),
+    })
+    .then((response) => {
+      console.log(response)
+    })
+    // console.log("submitRangeDate in setting page", range_date)
     // console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
-    setShowBtnSetting(false) }
+    setShowBtnSetting(false)
+  }
 
 function handleInfoSubmit(e) {
   e.preventDefault();
@@ -97,7 +113,8 @@ function handleInfoSubmit(e) {
     userSetting({birth_year: "",
     period_length: "", 
     cycle_length: "", 
-    luteal_length: "", })
+    luteal_length: "", 
+    uid: currentUser.uid})
   })
   .catch((err) => console.log(err));
 }
