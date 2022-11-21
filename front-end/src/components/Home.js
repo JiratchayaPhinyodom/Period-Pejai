@@ -16,7 +16,7 @@ import { DownloadOutlined } from '@ant-design/icons';
 import { SettingOutlined, HomeOutlined, LogoutOutlined, UserOutlined} from '@ant-design/icons';
 import { auth } from '../firebase'
 import { useAuth } from '../contexts/AuthContext';
-import axios from "axios";
+import Swal from 'sweetalert2';
 
 function Home() {
  // React States
@@ -133,7 +133,7 @@ useEffect(() => {
                         if (blood == 3) {
                             setactiveBtnBlood3(false);
                             setactiveBtnBlood1(true);
-                            setactiveBtnBlood3(true);
+                            setactiveBtnBlood2(true);
                         }
                     } 
                     else {
@@ -221,6 +221,15 @@ const setR = useCallback((data) => {
 
 function handleSubmit(e) {
     e.preventDefault();
+    Swal.fire({
+        title: 'Your note is already saved!',
+        showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+        }
+    })
     let url = "http://127.0.0.1:8000/api/diary";
     fetch(url, {
     method: "POST",
@@ -237,6 +246,13 @@ function handleSubmit(e) {
 
 function handleEdit(e) {
     e.preventDefault();
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your change has been saved',
+        showConfirmButton: false,
+        timer: 1500
+    })
     var new_pain = historyDiary.old_pain_level;
     var new_blood = historyDiary.old_blood_level;
     var new_diary = historyDiary.old_diary_text
@@ -392,8 +408,8 @@ return (
             <div className="home-title">DIARY</div>
                 <input rows={10} placeholder="What do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} value={diaryValue} onChange={(e) => setDiaryValue(e.target.value)}/>
             <br></br>
-            { saveBtn ? <Button type="primary" onClick={handleSubmit} >Save</Button>: null}
-            { editBtn ? <Button type="primary" onClick={handleEdit} >Edit</Button>: null}
+            { saveBtn ? <button id="submit" className="home-submit" type="submit" onClick={handleSubmit} >Save</button>: null}
+            { editBtn ? <button id="submit" className="home-submit" type="submit" onClick={handleEdit} >Edit</button>: null}
         </div>
         <span><Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/"}} style={{ background: "#b8bedd"}}><p className='home_p' ><HomeOutlined className='icon_home'/>Setting</p></Button></span>
 

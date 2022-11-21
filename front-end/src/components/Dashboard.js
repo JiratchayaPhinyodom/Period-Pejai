@@ -128,7 +128,8 @@ function handleInfoSubmit(e) {
     body: JSON.stringify(setting)
   })
   .then((response) => {
-    userSetting({birth_year: "",
+    userSetting({
+    birth_year: "",
     period_length: "", 
     cycle_length: "", 
     luteal_length: "", 
@@ -139,6 +140,13 @@ function handleInfoSubmit(e) {
 
 function handleEditStt(e) {
   e.preventDefault();
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Your change has been saved',
+    showConfirmButton: false,
+    timer: 1500
+  })
   var new_birth = historySetting.old_birth_year;
   var new_period_length = historySetting.old_period_length;
   var new_cycle_length = historySetting.old_cycle_length;
@@ -234,7 +242,7 @@ function handleEditStt(e) {
             }
             else {
               if (check === 0) {
-                console.log('Edit mode unlock')
+                console.log('Edit mode lock')
                 setSaveBtnStt(true)
                 setEditBtnStt(false)
               }

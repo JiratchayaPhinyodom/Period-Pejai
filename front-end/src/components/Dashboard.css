@@ -197,3 +197,8 @@
     width: 50em;
     margin-left: -0.2cm;
   }
+
+  .swal2-title {
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+  }

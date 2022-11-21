@@ -31,6 +31,20 @@
     color: #c3996b;
 }
 
+.home-submit {
+    margin-top: 15px;
+    margin-left: 15em;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+    background: #7B7AAF;
+    border-radius: 30px;
+    color: white;
+    height: 2em;
+    width: 5em;
+}
+
 .pain-level-container {
     height: 100px;
     width:640px;
@@ -105,6 +119,11 @@
 
 .component-calendar { 
     margin-left:10em;
+}
+
+.swal2-title {
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
 }
 
 @media (prefers-reduced-motion: no-preference) {
