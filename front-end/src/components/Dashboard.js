@@ -60,6 +60,24 @@ const Dashboard= () =>{
   const [showBtnSetting, setShowBtnSetting] = useState(true)
   const [showRangeDatePicker, setshowRangeDatePicker] = useState(false)
   const [showBtnHome, setShowBtnHome] = useState(false)
+  const [url, setUrl] = useState(window.location.href)
+
+  // useEffect(async()=> {
+  // console.log(url);
+  // const url_line = new URL(url);
+  // let params = url_line.searchParams;
+  // const code = params.get('code'); // 'node'
+  // console.log("code", code);
+  // console.log("LINE GET request")
+  //   try {
+  //       const url_line_get = 'http://127.0.0.1:8000/api/get_token' + '?uid=' + currentUser.uid + '&' + '?code=' + code
+  //       const res_line = await fetch(url_line_get)
+  //       // const res_json_line = await res_line.json()
+  //       // console.log("res_json_line = ",res_json_line)
+  //     } catch (error) {
+  //       console.log(error)
+  //   }
+  // },[url]);
 
   const saveConfirm = () => {
   Swal.fire({
@@ -276,7 +294,7 @@ function handleEditStt(e) {
     <p className='reminder'>REMINDER</p>
       <ToggleSwitch label="Period"/>
       <ToggleSwitch label="Ovaluation"/>
-    <a href="https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=3i37SxxITCH1t4ngUNAPuz&redirect_uri=http://127.0.0.1:8000/api/setting&scope=notify&state=abcdef123456">
+    <a href="https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=3i37SxxITCH1t4ngUNAPuz&redirect_uri=http://localhost:3000/&scope=notify&state=abcdef123456">
             <img src={LineLink} className="line-logo" height = "50px"/>
     </a>
     <span>
