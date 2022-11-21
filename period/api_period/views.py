@@ -1,4 +1,3 @@
-from django.contrib.sites import requests
 from django.http import HttpResponse, JsonResponse
 from rest_framework import generics
 from django.contrib.auth.forms import AuthenticationForm
@@ -12,6 +11,8 @@ from rest_framework.response import Response
 from .serializers import MyData, MyDiaryPage
 from rest_framework import status
 from rest_framework.decorators import api_view
+from .line_notify import *
+from django.views import generic
 
 
 def main(request):
@@ -149,7 +150,7 @@ def response(code):
     pass
 
 
-## LineView จะต้องเอาไปเขียน class เพื่อใช้ส่งข้อความว่าจะส่งไปวันไหน
+# LineView จะต้องเอาไปเขียน class เพื่อใช้ส่งข้อความว่าจะส่งไปวันไหน
 # class LineView(generics.DetailCreateAPIView): 
 
 #     def get(self, request, *args, **kwargs):
@@ -158,10 +159,24 @@ def response(code):
 #         return HttpResponseRedirect(url)
 
 
-## Get code กลับมา
+# Get code กลับมา
 # class NotificationCallback(generics.Detail.View):
 #     """A class that handles the callback after user authorize notification."""
 
 #     def get(self, request, *args, **kwargs):
 #         code = request.GET['code'] # get the code ได้โค้ดไปใส่ใน get access token
-        
+
+class GetAccessToken(generic.DetailView):
+    def get(self, request, *args, **kwargs):
+        code = request.data["code"]
+        token = get_access_token(code)
+        return JsonResponse({"token": token})
+
+
+class NotificationCallback(generic.DetailView):
+    """A class that handles the callback after user authorize notification."""
+
+    def get(self, request, *args, **kwargs):
+        token = request.data['token']
+        message = request.data["message"]  # get the code ได้โค้ดไปใส่ใน get access token
+        send_notification(message, token)
