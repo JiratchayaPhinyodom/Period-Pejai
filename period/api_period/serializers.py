@@ -17,16 +17,16 @@ class MyData(serializers.ModelSerializer):
 
     class Meta:
         model = Setting
-        fields = ["birth_year", "period_length", "cycle_length", "luteal_length", "uid"]
+        fields = ["birth_year", "period_length", "cycle_length", "luteal_length"]
+
+
+class PredictCalendar(serializers.ModelSerializer):
+    class Meta:
+        model = PredictCalendar
+        fields = ["start_time"]
 
 
 class MyDiaryPage(serializers.ModelSerializer):
     class Meta:
         model = PeriodData
-        fields = ["pain_level", "blood_level", "diary_text", "uid", "date"]
-        
-
-class MyPeriod(serializers.ModelSerializer):
-    class Meta:
-        model = DateRange
-        fields = ["period_phase", "uid"]
+        fields = ["pain_level", "blood_level", "diary_text", "start_date", "end_date", "uid", "date"]

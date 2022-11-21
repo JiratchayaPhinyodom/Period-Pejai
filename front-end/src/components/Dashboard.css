@@ -12,19 +12,22 @@
     height: 60em;
     float: left;
   }
-
-  .h1-setting {
+  
+  .name {
+    font-size: 32px;
     font-weight: bold;
+    display: flex;
+    justify-content: flex-start;
   }
-
-  .name-user {
-    font-weight: bolder;
+  
+  .pic {
+    display: flex;
+    justify-content: flex-start;
   }
-
-  .profile-user {
-    border-radius: 50%;
-    max-width: 100%;
-    height: auto;
+  
+  .btn_profile {
+    display: flex;
+    justify-content: flex-start;
   }
   
   .setting {
@@ -37,29 +40,24 @@
     margin: 0.5cm;
     width: 14rem;
     height: 3rem;
-    margin-left: 1.5cm;
   }
   
-  .icon_home, .home_p, .setting_p, .icon_setting, .icon_logout {
+  .setting_p {
     font-size: 1.5rem;
     color: white; 
     font-weight: bold;
     display: flex;
     justify-content: center;
+    margin-left: 0.5cm;
     margin-top: 0.25cm;
   }
-
-  .icon_home, .icon_setting, .icon_logout {
-    margin-left: 1.25cm;
-  }
-
-  .setting_p, .home_p, .logout_p {
-    margin-top: 0.25rem;
-    margin-left: 0.25cm;
+  
+  .icon_setting {
+    margin-right: 0.1cm;
+    margin-top: 0.1cm;
   }
   
-  
-  .route_home, .logout {
+  .route_home {
     display: flex;
     justify-content: flex-start;
     border-style: solid;
@@ -69,24 +67,59 @@
     margin: 0.5cm;
     width: 14rem;
     height: 3rem;
-    margin-left: 1.5cm;
   }
   
-  .reminder {
-    font-size: 1.5rem;
-    color: #7b7aaf;
-    font-weight: bolder;
-    margin-top: 0.5cm;
-  }
-
-  .logout_p {
+  .home_p {
     font-size: 1.5rem;
     color: white; 
     font-weight: bold;
     display: flex;
     justify-content: center;
+    margin-left: 0.5cm;
+    margin-top: 0.25cm;
+  }
+  
+  .icon_home, .icon_logout, .icon_user {
+    margin-right: 0.1cm;
     margin-top: 0.1cm;
-  } 
+    margin-left: -0.25cm;
+  }
+  
+  .reminder {
+    font-size: 1.5rem;
+    color: #7b7aaf;
+    font-weight: bold;
+    margin-top: 0.5cm;
+  }
+  
+  .switch_period {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .logout, .update {
+    display: flex;
+    justify-content: flex-start;
+    border-style: solid;
+    border-radius: 3em;
+    border-color: #b8bedd;
+    background-color: #b8bedd;
+    margin: 0.5cm;
+    width: 14rem;
+    height: 3rem;
+  
+  }
+  
+  .logout_p, .update_p {
+    font-size: 1.5rem;
+    color: white; 
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    margin-left: 0.5cm;
+    margin-top: 0.25cm;
+  }
+  
   
   .bc-input {
     background-color: #fffaed;
@@ -124,50 +157,33 @@
     width: 5em;
 }
 
-.period-submit {
-  cursor: pointer;
-  font-size: 20px;
-  font-family: 'Gaegu', cursive;
-  font-weight: bold;
-  background: #7B7AAF;
-  border-radius: 30px;
-  color: white;
-  height: 2em;
-  width: 5em;
-  margin-top: -2.5cm;
-  margin-left: 8cm;
-}
-
-::placeholder {
-  color: #ffe4dc
-}
   
-  .year, .period-length, .cycle-length, .phase-length, .last-month {
+  .year, .period-length, .cycle-length, .phase-length {
     margin: 1cm;
-    margin-left: 1.5cm;
+    margin-left: 3cm;
     border-style: solid;
     border-width: 0.25;
-    border-color: #f0d8d2;
+    border-color: #f8ad9d;
     border-radius: 1em;
     background-color: #ffcdb2;
     box-shadow: 0.25em 0.25em #f8ad9d;
     display: flex;
-    width: 7cm; 
+    width: 5cm; 
     height: 1cm;
     justify-content: center;
     font-size: 16px;
     font-weight: bold;
   }
 
-  .input-border, .setting-range-picker {
-    margin: 1cm;
+  .input-border {
     border-style: solid;
     border-width: 0.25em;
     border-color: #f8ad9d;
     border-radius: 2em;
-    height: 1cm;
+    width: 5cm;
     font-weight: bold;
-    font-size: 16px;   
+    font-size: 16px;
+    
 }
   
   .box-year, .box-period, .box-cycle, .box-phase {
@@ -181,24 +197,4 @@
   
   .mar {
     margin: 1cm;
-  }
-
-  .periodLastMonth {
-    font-weight: bold;
-    display: flex;
-    flex-direction: row;
-    float: left;
-    border-style: solid;
-    border-color: #ffe4dc;
-    background-color: #ffe4dc;
-    border-radius: 3em;
-    box-shadow: 0.5em 0.5em #f8ad9d;
-    margin: 2cm;
-    width: 50em;
-    margin-left: -0.2cm;
-  }
-
-  .swal2-title {
-    font-family: 'Gaegu', cursive;
-    font-weight: bold;
   }
