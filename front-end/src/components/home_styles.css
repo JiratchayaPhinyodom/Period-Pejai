@@ -130,6 +130,11 @@
     font-weight: bold;
 }
 
+.location_setting {
+    margin-top: 3.5cm;
+    margin-bottom: -1cm;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
 .App-logo {

@@ -175,7 +175,7 @@ function Calendars({date, setDate, rangeDate, setRangeDate, period, luteal}) {
       
       {/* Use range date */}
       <p>What the range of your period</p>
-      <RangePicker onChange={onChange} /> 
+      <RangePicker onChange={onChange} className='userperiod'/> 
       {showBtn ? <button type="button" onClick={() => { submitDate()}} >Save</button> : null }
         <br></br>
     </div>
