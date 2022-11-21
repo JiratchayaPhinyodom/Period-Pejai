@@ -29,6 +29,10 @@ const diaryRef = useRef();
 //set diary
 const [diaryValue, setDiaryValue] = useState('')
 
+//set btn save and edit
+const [saveBtn, setSaveBtn] = useState(true);
+const [editBtn, setEditBtn] = useState(false);
+
 const uidRef = useRef();
 const [periodPhase, setPeriodPhase] = useState(0);
 const [dataDate, setDataDate] = useState(0);
@@ -103,6 +107,8 @@ useEffect(() => {
                         console.log(check)
                         setDiaryValue(diary)
                         setPainLevel(pain)
+                        setSaveBtn(false)
+                        setEditBtn(true)
                         if (blood == 1) {
                             setactiveBtnBlood1(false);
                             setactiveBtnBlood2(true);
@@ -121,6 +127,8 @@ useEffect(() => {
                     } 
                     else {
                         if (check == 0) {
+                            setSaveBtn(true)
+                            setEditBtn(false)
                             console.log('success')
                             setDiaryValue('')    
                             setPainLevel(0);
@@ -345,7 +353,8 @@ return (
             <div className="home-title">DIARY</div>
                 <input rows={10} placeholder="What do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} value={diaryValue} onChange={(e) => setDiaryValue(e.target.value)}/>
             <br></br>
-            <Button type="primary" onClick={handleSubmit} >Save</Button>
+            { saveBtn ? <Button type="primary" onClick={handleSubmit} >Save</Button>: null}
+            { editBtn ? <Button type="primary" onClick={handleSubmit} >Edit</Button>: null}
         </div>
         <span><Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/"}} style={{ background: "#b8bedd"}}><p className='home_p' ><HomeOutlined className='icon_home'/>Setting</p></Button></span>
 
