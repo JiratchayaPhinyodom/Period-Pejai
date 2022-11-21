@@ -1,8 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
 import LogoPic from "./pics/app_logo.png";
-import Dots from "./pics/dots.png";
-import Curve from "./pics/curve.png";
+import Droplet from "./pics/droplet.png";
 import InputDiary from './component_setting/input/input_diary';
 import IconSlider from './component_setting/input/input_painlevel';
 import "./home_styles.css";
@@ -13,167 +12,419 @@ import { faDroplet } from "@fortawesome/free-solid-svg-icons";
 import Calendars from "./Calendar"
 import { Button, Slider } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
-// import { rangeDate } from Calendars
-
-
+import { SettingOutlined, HomeOutlined, LogoutOutlined, UserOutlined} from '@ant-design/icons';
+import { auth } from '../firebase'
+import { useAuth } from '../contexts/AuthContext';
+import Swal from 'sweetalert2';
 
 function Home() {
-  // React States
-    const [errorMessages, setErrorMessages] = useState({});
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const [painLevel, setPainLevel] = useState(0);
-    const [bloodLevel, setBloodLevel] = useState(1);
-    const diaryRef = useRef();
-    const uidRef = useRef();
-    const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
-    const [date, setDate] = useState();
-    const [home, userHome] = useState({
-        diary_text: "",
-        blood_level: "",
-        pain_level: "",
-        start_date: "",
-        end_date: "",
-        uid: "",
-        date: "",
-        });
+ // React States
+const [errorMessages, setErrorMessages] = useState({});
+const [isSubmitted, setIsSubmitted] = useState(false);
+const [painLevel, setPainLevel] = useState(0);
+const [bloodLevel, setBloodLevel] = useState(1);
+const diaryRef = useRef();
 
-  // User Login info
-//     const database = [
-//     {
-//         username: "user1",
-//         password: "pass1"
-//     },
-//     {
-//         username: "user2",
-//         password: "pass2"
-//     }
-// ];
 
-// const errors = {
-//     uname: "invalid username",
-//     pass: "invalid password"
-// };
+// States for edit button
+const [historyDiary, setHistoryDiary] = useState({
+    old_diary_text: "",
+    old_blood_level: "",
+    old_pain_level: "",
+})
 
-// const handleSubmit = (event) => {
-//     //Prevent page reload
-//     event.preventDefault();
+//set diary
+const [diaryValue, setDiaryValue] = useState('')
 
-//     var { uname, pass } = document.forms[0];
+//set btn save and edit
+const [saveBtn, setSaveBtn] = useState(true);
+const [editBtn, setEditBtn] = useState(false);
 
-//     // Find user login info
-//     const userData = database.find((user) => user.username === uname.value);
-
-//     // Compare user info
-//     if (userData) {
-//         if (userData.password !== pass.value) {
-//         // Invalid password
-//         setErrorMessages({ name: "pass", message: errors.pass });
-//     } else {
-//         setIsSubmitted(true);
-//     }
-//     } else {
-//       // Username not found
-//         setErrorMessages({ name: "uname", message: errors.uname });
-//     }
-// };
-
-//   // Generate JSX code for error message
-//     const renderErrorMessage = (name) =>
-//     name === errorMessages.name && (
-//     <div className="error">{errorMessages.message}</div>
-//     );
-
-//   // JSX code for login form
-//     const renderForm = (
-//     <form onSubmit={handleSubmit}>
-//     </form>
-// );
+const uidRef = useRef();
+const [periodPhase, setPeriodPhase] = useState(0);
+const [dataDate, setDataDate] = useState(0);
+const {currentUser} = useAuth();
+    const [period, setPeriod] = useState([]);
+    const [showCa, setShowCa] = useState(null)
+// console.log(currentUser.uid)
+const [home, userHome] = useState({
+    diary_text: "",
+    blood_level: "",
+    pain_level: "",
+    uid: "",
+    date: "",
+    });
 
 // calen
 const { TextArea } = Input;
-// const onChangeDiary = (e)  => {
-//     setDiary(e.target.value);
-//     console.log('Change:', e.target.value);
-//   };
-// const [inputIcon, setInputIcon] = useState(1);
-// const onChangeIcon = (newValue) => {
-//     setInputIcon(newValue);
-//     console.log(inputIcon)
-// }
 
+const DateToString = (date) => {
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    if(date.getMonth() < 10) {
+    month = '0' + month
+    }
+    if(date.getDate() < 10) {
+    day = '0' + day
+    }
+    return date.getFullYear() + '-' + month + '-' + day
+}
 
 const submitDiary = ()=> {
     console.log(`Pain Level: ${painLevel}`);
     console.log(`Blood Level: ${bloodLevel}`);
     console.log(`Diary: ${diaryRef.current.value}`);
-    // console.log(`Date: ${date.toDateString()}`) 
-    // new
+    console.log(`Date: ${DateToString(date)}`)
 }
 
-// const onChangeIcon = (e) => {
-//     console.log('Change:', e.target.value);
-// }
+const [date, setDate] = useState(new Date());
+const [rangeDate, setRangeDate] = useState([])
+
+//set luteal
+
+const [luteal, setLuteal] = useState([])
+
+// const [x,X] = useState([])
+    
+useEffect(() => {
+    try {
+        const url_diary = 'http://127.0.0.1:8000/api/diary' + '?uid=' + currentUser.uid
+        // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+
+        fetch(url_diary).then((res_diary) => {
+            res_diary.json().then((res_all_diary) => {
+                console.log("all", res_all_diary)
+                // const painData = []
+                // const dateData = []
+                let check = 0;
+                res_all_diary.forEach((resGetDiary) => {
+                    const pain = resGetDiary.pain_level
+                    const blood = resGetDiary.blood_level
+                    const diary = resGetDiary.diary_text
+                    const date_diary = resGetDiary.date
+                    console.log("History diary", historyDiary);
+                    // painData.push(pain)
+                    console.log("click",DateToString(date))
+                    // console.log(diaryRef.current.value == '55')
+
+                    if(date_diary === DateToString(date)) {
+                        console.log('Hello test')
+                        console.log(blood)
+                        check = 9999
+                        console.log(check)
+                        setDiaryValue(diary)
+                        setPainLevel(pain)
+                        historyDiary.old_diary_text = diary;
+                        historyDiary.old_blood_level = blood;
+                        historyDiary.old_pain_level = pain;
+                        if (blood == 1) {
+                            setactiveBtnBlood1(false);
+                            setactiveBtnBlood2(true);
+                            setactiveBtnBlood3(true);
+                        }
+                        if (blood == 2) {
+                            setactiveBtnBlood2(false);
+                            setactiveBtnBlood1(true);
+                            setactiveBtnBlood3(true);
+                        }
+                        if (blood == 3) {
+                            setactiveBtnBlood3(false);
+                            setactiveBtnBlood1(true);
+                            setactiveBtnBlood2(true);
+                        }
+                    } 
+                    else {
+                        if (check == 0) {
+                            setSaveBtn(true)
+                            setEditBtn(false)
+                            console.log('success')
+                            setDiaryValue('')    
+                            setPainLevel(0);
+                            setactiveBtnBlood3(true);
+                            setactiveBtnBlood1(true);
+                            setactiveBtnBlood2(true);
+
+                        }
+                    }
+                })
+            })
+        })
+    }
+    catch (error) {
+        console.log(error)
+    }
+}, [date])
+    
+const setR = useCallback((data) => {
+    console.log("date: ",data)
+    // setRangeDate(data)
+
+    // use data ---> call api
+    // [[],[],[]] not use
+    // [[]] use this
+    let url = "http://127.0.0.1:8000/api/period";
+    fetch(url, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ 
+            period_phase: JSON.stringify(data),
+            uid: currentUser.uid
+        })
+    }).then((response)=>{
+        console.log("response period",response)
+        const url = 'http://127.0.0.1:8000/api/predict' + '?uid=' + currentUser.uid
+        const url2 = 'http://127.0.0.1:8000/api/period' + '?uid=' + currentUser.uid
+        const url_luteal = 'http://127.0.0.1:8000/api/luteal' + '?uid=' + currentUser.uid
+        // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+
+        fetch(url2).then((res2) => {
+            res2.json().then((res_json2) => {
+
+                console.log(res_json2)
+                const periodData = []
+                res_json2.forEach((ListInList) => {
+                    const data = JSON.parse(ListInList.period_phase)
+                    const data_willPush = data[0]
+                    periodData.push(data_willPush)
+                })
+                console.log("period_data",periodData)
+                setRangeDate(periodData)
+
+                fetch(url).then((res) => {
+                    res.json().then((res_json) => {
+                        console.log("predict_data",res_json.result)
+                        setPeriod(res_json.result)
+                    })
+                })
+                fetch(url_luteal).then((resLuteal) => {
+                    resLuteal.json().then((res_json) => {
+                        console.log("Callback lu", res_json.result)
+                        setLuteal(res_json.result)
+                    })
+                })
+            })
+        })
+        
+    })
+    .catch((err) => console.log(err));
+    console.log(
+        JSON.stringify({ 
+        period_phase: data,
+        uid: currentUser.uid})
+    );
+
+},[rangeDate])
+
 
 function handleSubmit(e) {
-    // userHome({ diary_text: diaryRef.current.value,
-    // blood_level: bloodLevel,
-    // pain_level: painLevel,})
+    setSaveBtn(false)
+    setEditBtn(true)
     e.preventDefault();
+    Swal.fire({
+        title: 'Your note is already saved!',
+        showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+        }
+    })
     let url = "http://127.0.0.1:8000/api/diary";
     fetch(url, {
-    method: "PUT",
+    method: "POST",
     headers: { "Content-type": "application/json" },
-    body: JSON.stringify({ diary_text: diaryRef.current.value,
+    body: JSON.stringify({ 
+        diary_text: diaryRef.current.value,
         blood_level: bloodLevel,
         pain_level: painLevel,
-        start_date: "",
-        end_date: "",
-        uid: "",
-        date: "",}),
+        uid: currentUser.uid,
+        date: DateToString(date)}),
+    })
+    .catch((err) => console.log(err));
+}
+
+function handleEdit(e) {
+    e.preventDefault();
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your change has been saved',
+        showConfirmButton: false,
+        timer: 1500
+    })
+    var new_pain = historyDiary.old_pain_level;
+    var new_blood = historyDiary.old_blood_level;
+    var new_diary = historyDiary.old_diary_text
+    if (painLevel != historyDiary.old_pain_level)
+    {
+        console.log("pain change");
+        // new_dict["pain_level"] = painLevel;
+        new_pain = painLevel;
+    }
+    if (bloodLevel != historyDiary.old_blood_level)
+    {
+        console.log("blood change");
+        // new_dict["blood_level"] = bloodLevel;
+        new_blood = bloodLevel;
+    }
+    if (diaryRef.current.value != historyDiary.old_diary_text)
+    {
+        console.log("diary change");
+        // new_dict["diary_text"] = diaryRef;
+        new_diary = diaryRef.current.value;
+    }
+    console.log("new", new_diary);
+    let url = "http://127.0.0.1:8000/api/diary";
+    fetch(url, {
+    method: "PATCH",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ 
+        diary_text: new_diary,
+        blood_level: new_blood,
+        pain_level: new_pain,
+        uid: currentUser.uid,
+        date: DateToString(date)}),
     })
     .catch((err) => console.log(err));
 }
 
 
 
+useEffect(async () => {
+    console.log("TEST")
+    try {
+        const url2 = 'http://127.0.0.1:8000/api/period' + '?uid=' + currentUser.uid
+        const url_luteal = 'http://127.0.0.1:8000/api/luteal' + '?uid=' + currentUser.uid
+        // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+        const res2 = await fetch(url2)
+        const res_json2 = await res2.json()
+        console.log("res_json2 = ",res_json2)
+        const periodData = []
+        // [ '[[]]','[[]]','[[]]' ]
+        res_json2.forEach((ListInList) => {
+            const data = JSON.parse(ListInList.period_phase)
+            const data_willPush = data[0]
+            // console.log("data = ",data[0])
+            periodData.push(data_willPush)
+        })
+        // [ [], [], [] ]
+        console.log("period_data",periodData)
+        // setPeriod(res_json.result)
+        setRangeDate(periodData)
+
+        const resLuteal = await fetch(url_luteal)
+        const res_Luteal_json = await resLuteal.json()
+        console.log("luteal day= ",res_Luteal_json.result) // luteal day
+        setLuteal(res_Luteal_json.result)
+
+    //     fetch(url_luteal).then((res_diary) => {
+    //         res_diary.json().then((res_all_diary) => {
+    //             console.log("lulu", res_all_diary.result)
+    //         })
+    // })
+        
+
+
+        const url = 'http://127.0.0.1:8000/api/predict' + '?uid=' + currentUser.uid
+        // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+        const res = await fetch(url)
+        const res_json = await res.json()
+        console.log("predict_data",res_json.result)
+        setPeriod(res_json.result)
+
+
+
+        
+    } catch (error) {
+        console.log(error)
+    }
+}, [])
+
+    useEffect(() => {
+    console.log("period change",period)
+        
+},[period])
+
+useEffect(() => {
+    console.log("luuteal change",luteal)
+        
+},[luteal])
+    
+
+const [activeBtnBlood1, setactiveBtnBlood1] = useState(true)
+const [activeBtnBlood2, setactiveBtnBlood2] = useState(true)
+const [activeBtnBlood3, setactiveBtnBlood3] = useState(true)
+
 return (
     <div className="home">
-        <Calendars className="component-calendar"/>
+        <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate} setRangeDate={setR} period={period} luteal={luteal} />
+        
+
+        {/* <button type="button" onClick={(ev) => {console.log("button",rangeDate)}} >rangeDate</button> */}
+        {/* <button type="button" onClick={() => setClick(click+1)} >setClick</button> */}
         <div className="home-form">
             <div className="home-title">PAIN LEVEL</div>
                 <div className="pain-level-container">
-                    <Slider onChange={setPainLevel} value={painLevel}></Slider>
+                    <Slider className="slider-position" onChange={setPainLevel} value={painLevel} min={0} max={10}></Slider>
                 </div>
             <div className="home-title">BLOOD LEVEL</div>
                 <div className="blood-level-container">
-                    <button id="1" className="small-blood-level-block" value={1} onClick={(e)=> {
+                {activeBtnBlood1 ? <button id="1" className="small-blood-level-block" value={1} onClick={(e)=> {
                         console.log(e.target.value);
                         setBloodLevel(e.target.value);
+                        setactiveBtnBlood1(false);
+                        setactiveBtnBlood2(true);
+                        setactiveBtnBlood3(true)
                     }}>
-                        {/* <FontAwesomeIcon icon={faDroplet} size="3x" /> */}
-                    </button>
-                    <button id="2" className="small-blood-level-block" value={2} onClick={(e)=> {
+                        <img src={Droplet} height = "60px"/>
+                    </button> : <button id="1" className="small-blood-level-block" style = {{background:"#b8bedd"}}value={1} onClick={(e)=> {
+                        setactiveBtnBlood1(true);
+
+                    }}> 
+                    <img src={Droplet} height = "60px"/>
+                        </button>}
+                    {activeBtnBlood2 ? <button id="2" className="small-blood-level-block" value={2} onClick={(e)=> {
                         console.log(e.target.value);
                         setBloodLevel(e.target.value);
+                        setactiveBtnBlood2(false)
+                        setactiveBtnBlood1(true)
+                        setactiveBtnBlood3(true)
                     }}>
-                        {/* <FontAwesomeIcon icon={faDroplet} size="3x"/>
-                        <FontAwesomeIcon icon={faDroplet} size="3x" /> */}
-                    </button>
-                    <button id="3" className="small-blood-level-block" value={3} onClick={(e)=> {
-                        console.log(e.target.value);
+                    <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
+                    </button> : <button id="2" className="small-blood-level-block" style = {{background:"#b8bedd"}} value={2} onClick={(e)=> {
+                        setactiveBtnBlood2(true)
+                    }}>
+                        <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
+                        </button>}
+                    {activeBtnBlood3 ? <button id="3" className="small-blood-level-block" value={3} onClick={(e)=> {
+                        //  console.log(e.target.value);
                         setBloodLevel(e.target.value);
+                        setactiveBtnBlood3(false)
+                        setactiveBtnBlood2(true)
+                        setactiveBtnBlood1(true)
                     }}>
-                        {/* <FontAwesomeIcon icon={faDroplet} size="3x" />
-                        <FontAwesomeIcon icon={faDroplet} size="3x" />
-                        <FontAwesomeIcon icon={faDroplet} size="3x" /> */}
-                    </button>
+                        <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
+                    </button> : <button id="3" className="small-blood-level-block" style = {{background:"#b8bedd"}} value={3} onClick={(e)=> {
+                         // console.log(e.target.value);
+                         // setBloodLevel(e.target.value);
+                        setactiveBtnBlood3(true)
+                    }}>
+                        <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
+                        </button>}
                 </div>
             <div className="home-title">DIARY</div>
-                <input rows={10} placeholder="What do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} />
+                <textarea rows={10} placeholder="How do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} value={diaryValue} onChange={(e) => setDiaryValue(e.target.value)}/>
             <br></br>
-            <Button type="primary" onClick={handleSubmit} >Save</Button>
+            { saveBtn ? <button id="submit" className="home-submit" type="submit" onClick={handleSubmit} >Save</button>: null}
+            { editBtn ? <button id="submit" className="home-submit" type="submit" onClick={handleEdit} >Edit</button>: null}
         </div>
+        <span className="location_setting"><Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/"}} style={{ background: "#b8bedd"}}>
+            <p className='home_p' >
+            <HomeOutlined className='icon_home'/>Setting</p></Button></span>
+
+        <span className="location_logout"><Button className='logout' type="primary" variant="link" onClick={() => {auth.signOut(); window.location.href = "./login"}} style={{ background: "#b8bedd"}}><p className='logout_p' >
+            <LogoutOutlined className='icon_logout'/>Logout</p></Button></span>
+
     </div>
 );
 }

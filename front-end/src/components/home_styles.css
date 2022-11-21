@@ -31,6 +31,20 @@
     color: #c3996b;
 }
 
+.home-submit {
+    margin-top: 15px;
+    margin-left: 15em;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+    background: #7B7AAF;
+    border-radius: 30px;
+    color: white;
+    height: 2em;
+    width: 5em;
+}
+
 .pain-level-container {
     height: 100px;
     width:640px;
@@ -39,9 +53,13 @@
     margin-left: 32px;
     border-radius: 25px;
     position: relative;
-    /* display: flex;
+    display: inline-block;
     justify-content: center;
-    align-items: center; */
+    align-items: center;
+}
+
+.slider-position {
+    top: 30%;
 }
 
 .small-blood-level-block{
@@ -106,6 +124,17 @@
 .component-calendar { 
     margin-left:10em;
 }
+
+.swal2-title {
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+}
+
+.location_setting {
+    margin-top: 3.5cm;
+    margin-bottom: -1cm;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
 .App-logo {
