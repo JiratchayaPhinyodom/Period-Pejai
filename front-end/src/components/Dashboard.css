@@ -138,13 +138,16 @@
   margin-left: 8cm;
 }
 
+::placeholder {
+  color: #ffe4dc
+}
   
   .year, .period-length, .cycle-length, .phase-length, .last-month {
     margin: 1cm;
     margin-left: 1.5cm;
     border-style: solid;
     border-width: 0.25;
-    border-color: #f8ad9d;
+    border-color: #f0d8d2;
     border-radius: 1em;
     background-color: #ffcdb2;
     box-shadow: 0.25em 0.25em #f8ad9d;

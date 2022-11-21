@@ -31,6 +31,14 @@ const Dashboard= () =>{
     luteal_length: "", 
     uid: currentUser.uid
   });
+
+  // States for edit button
+  const [historySetting, setHistorySetting] = useState({
+    old_birth_year: "",
+    old_period_length: "",
+    old_cycle_length: "",
+    old_luteal_length: "",
+  });
   // const [latest, periodLatest] = useState({
   //   diary_text: "",
   //   blood_level: "",
@@ -42,12 +50,16 @@ const Dashboard= () =>{
   //   });
   console.log(setting);
 
-  const [information, setInformation] = useState(true)
+  // states for button
+  const [saveBtnStt, setSaveBtnStt] = useState(true);
+  const [editBtnStt, setEditBtnStt] = useState(false);
+
+  const [information, setInformation] = useState(false)
   const [collectRangeDateSetting, setCollectRangeDateSetting] = useState([])
   const [rangeDateSetting, setRangeDateSetting] = useState([])
   const [showBtnSetting, setShowBtnSetting] = useState(true)
-  const [showRangeDatePicker, setshowRangeDatePicker] = useState(true)
-  const [showBtnHome, setShowBtnHome] = useState(true)
+  const [showRangeDatePicker, setshowRangeDatePicker] = useState(false)
+  const [showBtnHome, setShowBtnHome] = useState(false)
 
   const saveConfirm = () => {
   Swal.fire({
@@ -125,6 +137,51 @@ function handleInfoSubmit(e) {
   .catch((err) => console.log(err));
 }
 
+function handleEditStt(e) {
+  e.preventDefault();
+  var new_birth = historySetting.old_birth_year;
+  var new_period_length = historySetting.old_period_length;
+  var new_cycle_length = historySetting.old_cycle_length;
+  var new_luteal_length = historySetting.old_luteal_length;
+  if (setting.birth_year != historySetting.old_birth_year)
+  {
+      console.log("pain change");
+      // new_dict["pain_level"] = painLevel;
+      new_birth = setting.birth_year;
+  }
+  if (setting.period_length != historySetting.old_period_length)
+  {
+      console.log("pain change");
+      // new_dict["pain_level"] = painLevel;
+      new_period_length = setting.period_length;
+  }
+  if (setting.cycle_length != historySetting.old_cycle_length)
+  {
+      console.log("blood change");
+      // new_dict["blood_level"] = bloodLevel;
+      new_cycle_length = setting.cycle_length;
+  }
+  if (setting.luteal_length != historySetting.old_luteal_length)
+  {
+      console.log("diary change");
+      // new_dict["diary_text"] = diaryRef;
+      new_luteal_length = setting.luteal_length;
+  }
+  let url = "http://127.0.0.1:8000/api/setting";
+  fetch(url, {
+  method: "PATCH",
+  headers: { "Content-type": "application/json" },
+  body: JSON.stringify({ 
+    birth_year: new_birth,
+    period_length: new_period_length, 
+    cycle_length: new_cycle_length, 
+    luteal_length: new_luteal_length, 
+    uid: currentUser.uid}),
+  })
+  .catch((err) => console.log(err));
+}
+
+
 // function handleLatestSubmit(e) {
 //   // userHome({ diary_text: diaryRef.current.value,
 //   // blood_level: bloodLevel,
@@ -156,22 +213,32 @@ function handleInfoSubmit(e) {
           console.log('all_data', res_all_data)
           let check = 0;
           res_all_data.forEach((resGetData) => {
-            // const user = resGetData.uid
+            const user = resGetData.uid
             const birth_year = resGetData.birth_year
             const period_length = resGetData.period_length
             const luteal_length = resGetData.luteal_length
             const cycle_length = resGetData.cycle_length
-            // console.log('all', user)
-            // if (user === currentUser.uid) {
-            //   check = 5555
-            //   console.log('check', user, birth_year, period_length, luteal_length, cycle_length)
-            //   userSetting({ ...setting, birth_year: birth_year, period_length: period_length, luteal_length: luteal_length, cycle_length: cycle_length })
-            // }
-            // else {
-            //   if (check === 0) {
-            //     console.log('yeahhhhh')
-            //   }
-            // }
+
+            historySetting.old_cycle_length = resGetData.birth_year
+            historySetting.old_period_length = resGetData.period_length
+            historySetting.old_luteal_length = resGetData.luteal_length
+            historySetting.old_cycle_length = resGetData.cycle_length
+
+            console.log('all', user)
+            if (user === currentUser.uid) {
+              check = 5555
+              console.log('check', user, birth_year, period_length, luteal_length, cycle_length)
+              userSetting({ ...setting, birth_year: birth_year, period_length: period_length, luteal_length: luteal_length, cycle_length: cycle_length })
+              setSaveBtnStt(false)
+              setEditBtnStt(true)
+            }
+            else {
+              if (check === 0) {
+                console.log('Edit mode unlock')
+                setSaveBtnStt(true)
+                setEditBtnStt(false)
+              }
+            }
           })
 
         })
@@ -230,7 +297,8 @@ function handleInfoSubmit(e) {
         <p className='phase-length'>LUTHEAL PHASE LENGTH </p>
         <input type="number" value={setting.luteal_length} className="input-border" placeholder="14" onChange={(e) => userSetting({ ...setting, luteal_length: e.target.value })}/>
       </span>
-      <button id="submit" className="setting-submit" type="submit" onClick={saveConfirm}> Save </button>
+      { saveBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={saveConfirm}> Save </button>: null }
+      { editBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={handleEditStt}> Edit </button>: null }
       <div className="periodLastMonth">
         <p className="last-month">Period Last Month</p>
         {showRangeDatePicker ? <RangePicker onChange={onChange} className='setting-range-picker'/> : <p className="calculated">The next menstrual cycle has been calculated.</p> }
