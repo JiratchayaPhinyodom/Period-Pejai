@@ -54,11 +54,13 @@ const Dashboard= () =>{
   const [saveBtnStt, setSaveBtnStt] = useState(true);
   const [editBtnStt, setEditBtnStt] = useState(false);
 
-  const [information, setInformation] = useState(false)
+
   const [collectRangeDateSetting, setCollectRangeDateSetting] = useState([])
   const [rangeDateSetting, setRangeDateSetting] = useState([])
-  const [showBtnSetting, setShowBtnSetting] = useState(true)
-  const [showRangeDatePicker, setshowRangeDatePicker] = useState(false)
+
+
+  const [showBtnSave, setShowBtnSave] = useState(false)
+  const [showRangeDatePicker, setshowRangeDatePicker] = useState(true)
   const [showBtnHome, setShowBtnHome] = useState(false)
   const [url, setUrl] = useState(window.location.href)
 
@@ -103,7 +105,7 @@ const Dashboard= () =>{
       listRangeDate.push(dateStrings[0]) //[[st,en], [], []]
       listRangeDate.push(dateStrings[1])
       setCollectRangeDateSetting(listRangeDate)
-      // setShowBtnSetting(true)
+      setShowBtnSave(true)
     } else {
       console.log('Clear');
       setCollectRangeDateSetting(listRangeDate)
@@ -134,6 +136,7 @@ const Dashboard= () =>{
     // console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
     // setShowBtnSetting(false)
     setshowRangeDatePicker(false)
+    setShowBtnSave(false)
     setShowBtnHome(true)
   }
 
@@ -286,7 +289,7 @@ function handleEditStt(e) {
       <SettingOutlined className='icon_setting'/><p className='setting_p'>Setting</p>
     </span>
     <span>
-    {showBtnHome && information ? <Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/home"}} style={{ background: "#b8bedd"}}>
+    {showBtnHome && editBtnStt ? <Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/home"}} style={{ background: "#b8bedd"}}>
         <HomeOutlined className='icon_home'/>
         <p className='home_p' >Home</p>
       </Button> : null}
@@ -329,7 +332,7 @@ function handleEditStt(e) {
         <p className="last-month">Period Last Month</p>
         {showRangeDatePicker ? <RangePicker onChange={onChange} className='setting-range-picker'/> : <p className="calculated">The next menstrual cycle has been calculated.</p> }
       </div>
-      {showBtnSetting ? <button className="period-submit" type="button" onClick={() => { submitDate()}} >Save</button> : null }
+      {showBtnSave ? <button className="period-submit" type="button" onClick={() => { submitDate()}} >Save</button> : null }
     </div>
   </div>
   </form>
