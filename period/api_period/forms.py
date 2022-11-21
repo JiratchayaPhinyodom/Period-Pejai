@@ -1,5 +1,5 @@
 from django import forms
-from .models import Setting, PeriodData
+from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -7,16 +7,22 @@ from django.contrib.auth.models import User
 class MySettingPage(forms.ModelForm):
     class Meta:
         model = Setting
-        fields = ["birth_year", "period_length", "cycle_length", "luteal_length"]
+        fields = ["birth_year", "period_length", "cycle_length", "luteal_length", "uid"]
         labels = {"birth_year": "Year of Birth", "period_length": "Period length",
-                "cycle_length": "Cycle length", "luteal length": "Luteal length"}
+                "cycle_length": "Cycle length", "luteal length": "Luteal length", "uid":"Uid"}
         
 class MyHomePage(forms.ModelForm):
     class Meta:
         model = PeriodData
-        fields = ["diary_text", "blood_level", "pain_level"]
-        labels = {"diary_text" : "Diary Text", "blood_level" : "Blood Level", "pain_level": "Pain Level"}
-
+        fields = ["diary_text", "blood_level", "pain_level", "uid", "date"]
+        labels = {"diary_text" : "Diary Text", "blood_level" : "Blood Level",
+                "pain_level": "Pain Level", "uid": "Uid", "date":"Date"}
+        
+class MyPeriodData(forms.ModelForm):
+    class Meta:
+        model = DateRange
+        fields = ["period_phase", "uid"]
+        labels = {"period_phase": "Period Phase", "uid": "UID"}
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)

@@ -1,18 +1,17 @@
 from .views import *
-from django.urls import path, include
-from rest_framework import routers
-from .views import UploadPicture
-
-load = routers.DefaultRouter()
-load.register('upload', UploadPredict, basename='upload')
+from django.urls import path
+from . import views
 
 urlpatterns = [
     path('home', main),
     path('data', Data.as_view()),
     path('diary', my_diary),
-    path('login', login_request),
+    path('period', my_period),
     path('signup', register_request),
-    path('', include(load.urls)),  # api/upload/
+    path('login', login_request),
     path('setting', my_form),
     path('notification', redirect_line),
+    path('predict', views.predict_date),
+    path('luteal', views.predict_luteal),
+    path('ping', views.ping),
 ]
