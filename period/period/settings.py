@@ -23,7 +23,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG', '') == 'False'
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -51,7 +51,6 @@ SECURE_SSL_REDIRECT = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -126,6 +125,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / "static_build"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -137,4 +140,3 @@ LOGIN_REDIRECT_URL = "home"
 # auth and allauth
 # AUTH_USER_MODEL = 'periods.User'
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
