@@ -113,7 +113,7 @@ function handleInfoSubmit(e) {
     fetch(url, {
     method: "POST",
     headers: { "Content-type": "application/json" },
-    body: JSON.stringify(setting),
+    body: JSON.stringify(setting)
   })
   .then((response) => {
     userSetting({birth_year: "",
@@ -144,6 +144,49 @@ function handleInfoSubmit(e) {
 //   })
 //   .catch((err) => console.log(err));
 // }
+
+  useEffect(() => {
+    try {
+    //   let url_data = 'http://127.0.0.1:8000/api/data' + '?uid=' + currentUser.uid
+    //   fetch(url_data, {
+    //     method: "POST",
+    //     headers: { "Content-type": "application/json" },
+    //     body: JSON.stringify({ 
+    //         // period_phase: JSON.stringify(data),
+    //         uid: currentUser.uid
+    //     })
+    // }).then((response)=>{
+    //   console.log("response period",response)
+    // })
+      const url_data = 'http://127.0.0.1:8000/api/data' + '?uid=' + currentUser.uid
+      fetch(url_data).then((res_data) => {
+        // {birth_year: 2002, period_length: 7, cycle_length: 28, luteal_length: 14, uid: '6FzQ7n2JRQfygAwkXpKhJOfa83v2'}
+        // console.log("all", res_data.json())
+        res_data.json().then((res_all_data) => { 
+
+          console.log('all_data', res_all_data)
+          let check = 0;
+          res_all_data.forEach((resGetData) => {
+            const user = resGetData.uid
+            const birth_year = resGetData.birth_year
+            const period_length = resGetData.period_length
+            const luteal_length = resGetData.luteal_length
+            console.log('all', user)
+            if (user === currentUser.uid) {
+              check = 5555
+              console.log('check', user, birth_year, period_length, luteal_length)
+            }
+          })
+
+        })
+      })
+
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+)
 
   return (
     <div className='App'>

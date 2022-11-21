@@ -88,15 +88,15 @@ useEffect(() => {
         fetch(url_diary).then((res_diary) => {
             res_diary.json().then((res_all_diary) => {
                 console.log("all", res_all_diary)
-                const painData = []
-                const dateData = []
+                // const painData = []
+                // const dateData = []
                 let check = 0;
                 res_all_diary.forEach((resGetDiary) => {
                     const pain = resGetDiary.pain_level
                     const blood = resGetDiary.blood_level
                     const diary = resGetDiary.diary_text
                     const date_diary = resGetDiary.date
-                    painData.push(pain)
+                    // painData.push(pain)
                     console.log("click",DateToString(date))
                     // console.log(diaryRef.current.value == '55')
 
