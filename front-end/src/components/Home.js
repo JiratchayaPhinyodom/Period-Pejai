@@ -86,6 +86,7 @@ useEffect(() => {
                 console.log("all", res_all_diary)
                 const painData = []
                 const dateData = []
+                let check = 0;
                 res_all_diary.forEach((resGetDiary) => {
                     const pain = resGetDiary.pain_level
                     const blood = resGetDiary.blood_level
@@ -94,10 +95,12 @@ useEffect(() => {
                     painData.push(pain)
                     console.log("click",DateToString(date))
                     // console.log(diaryRef.current.value == '55')
+
                     if(date_diary === DateToString(date)) {
                         console.log('fuckkkkkkkkkkkkkkkkkk')
                         console.log(blood)
-
+                        check = 9999
+                        console.log(check)
                         setDiaryValue(diary)
                         setPainLevel(pain)
                         if (blood == 1) {
@@ -116,13 +119,17 @@ useEffect(() => {
                             setactiveBtnBlood3(true);
                         }
                     } 
-                    // else if(date_diary !== DateToString(date)) {
-                    //     setDiaryValue('')    
-                    //     setPainLevel(0);
-                    //     setactiveBtnBlood3(true);
-                    //     setactiveBtnBlood1(true);
-                    //     setactiveBtnBlood3(true);
-                    // }
+                    else {
+                        if (check == 0) {
+                            console.log('success')
+                            setDiaryValue('')    
+                            setPainLevel(0);
+                            setactiveBtnBlood3(true);
+                            setactiveBtnBlood1(true);
+                            setactiveBtnBlood2(true);
+
+                        }
+                    }
                 })
             })
         })
