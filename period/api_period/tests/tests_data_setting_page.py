@@ -50,4 +50,3 @@ class TestDataDetailAPIViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data["luteal_length"], 14)
 
-

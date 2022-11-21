@@ -39,9 +39,9 @@ class PeriodDataModelTests(TestCase):
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
         PeriodData.objects.create(pain_level=1, blood_level=1, diary_text="Hello",
-                                  start_date="2022-11-15T17:14:00+07:00"
-                                  , end_date="2022-11-27T17:14:00+07:00", uid="abc1234",
-                                  date="2022-11-19T17:14:00+07:00")
+                                start_date="2022-11-15T17:14:00+07:00"
+                                , end_date="2022-11-27T17:14:00+07:00", uid="abc1234",
+                                date="2022-11-19T17:14:00+07:00")
 
     def test_pain_level_label(self):
         """Checking Verbose-name 'pain level' """
@@ -60,4 +60,3 @@ class PeriodDataModelTests(TestCase):
         period_data = PeriodData.objects.get(id=1)
         max_length = period_data._meta.get_field('diary_text').max_length
         self.assertEqual(max_length, 1000)
-

@@ -58,9 +58,13 @@ const Dashboard= () =>{
   const [collectRangeDateSetting, setCollectRangeDateSetting] = useState([])
   const [rangeDateSetting, setRangeDateSetting] = useState([])
 
-
   const [showBtnSave, setShowBtnSave] = useState(false)
   const [showRangeDatePicker, setshowRangeDatePicker] = useState(true)
+  // useEffect (() => {
+  //   if (btnCheck == 0) {
+  //   }
+
+  // })
   const [showBtnHome, setShowBtnHome] = useState(false)
   const [url, setUrl] = useState(window.location.href)
 
@@ -136,7 +140,6 @@ const Dashboard= () =>{
     // setShowBtnSetting(false)
     setshowRangeDatePicker(false)
     setShowBtnSave(false)
-    setShowBtnHome(true)
   }
 
 function handleInfoSubmit(e) {
@@ -288,7 +291,8 @@ function handleEditStt(e) {
       <SettingOutlined className='icon_setting'/><p className='setting_p'>Setting</p>
     </span>
     <span>
-    {showBtnHome && editBtnStt ? <Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/home"}} style={{ background: "#b8bedd"}}>
+    {/* showBtnHome &&  */}
+    { editBtnStt ? <Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/home"}} style={{ background: "#b8bedd"}}>
         <HomeOutlined className='icon_home'/>
         <p className='home_p' >Home</p>
       </Button> : null}
@@ -327,6 +331,7 @@ function handleEditStt(e) {
       </span>
       { saveBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={saveConfirm}> Save </button>: null }
       { editBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={handleEditStt}> Edit </button>: null }
+      <p className="must">You must fill here first</p>
       <div className="periodLastMonth">
         <p className="last-month">Period Last Month</p>
         {showRangeDatePicker ? <RangePicker onChange={onChange} className='setting-range-picker'/> : <p className="calculated">The next menstrual cycle has been calculated.</p> }

@@ -36,8 +36,7 @@ def send_notification(message, token):  # เอาไว้ส่งข้อ�
     url = 'https://notify-api.line.me/api/notify'
     token = token
     headers = {'content-type': 'application/x-www-form-urlencoded',
-               'Authorization': 'Bearer ' + token}
+            'Authorization': 'Bearer ' + token}
 
     r = requests.post(url, headers=headers, data={'message': message})
     return r.json()['status']
-

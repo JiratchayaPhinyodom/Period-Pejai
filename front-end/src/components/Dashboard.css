@@ -1,130 +1,118 @@
 .App {
-    font-family: 'Gaegu', cursive;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  .left-side {
-    text-align: center;
-    font-family: 'Gaegu', cursive;
-    background-color: #dde0eb;
-    width: 25em;
-    height: 60em;
-    float: left;
-  }
-
-  .h1-setting {
-    font-weight: bold;
-  }
-
-  .name-user {
-    font-weight: bolder;
-  }
-
-  .profile-user {
-    border-radius: 50%;
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .setting {
-    display: flex;
-    justify-content: flex-start;
-    border-style: solid;
-    border-radius: 3em;
-    border-color: #7b7aaf;
-    background-color: #7b7aaf;
-    margin: 0.5cm;
-    width: 14rem;
-    height: 3rem;
-    margin-left: 1.5cm;
-  }
-  
-  .icon_home, .home_p, .setting_p, .icon_setting, .icon_logout {
-    font-size: 1.5rem;
-    color: white; 
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    margin-top: 0.25cm;
-  }
-
-  .icon_home, .icon_setting, .icon_logout {
-    margin-left: 1.25cm;
-  }
-
-  .setting_p, .home_p, .logout_p {
-    margin-top: 0.25rem;
-    margin-left: 0.25cm;
-  }
-  
-  
-  .route_home, .logout {
-    display: flex;
-    justify-content: flex-start;
-    border-style: solid;
-    border-radius: 3em;
-    border-color: #b8bedd;
-    background-color: #b8bedd;
-    margin: 0.5cm;
-    width: 14rem;
-    height: 3rem;
-    margin-left: 1.5cm;
-  }
-  
-  .reminder {
-    font-size: 1.5rem;
-    color: #7b7aaf;
-    font-weight: bolder;
-    margin-top: 0.5cm;
-  }
-
-  .logout_p {
-    font-size: 1.5rem;
-    color: white; 
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    margin-top: 0.1cm;
-  } 
-  
-  .bc-input {
-    background-color: #fffaed;
-    height: 60em;
-  }
-  
-  .input {
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    float: left;
-    border-style: solid;
-    border-color: #ffe4dc;
-    background-color: #ffe4dc;
-    border-radius: 3em;
-    box-shadow: 0.5em 0.5em #f8ad9d;
-    width: 50em;
-    height: 35em;
-    margin: 5cm;
-    margin-top: -20cm;
-    margin-left: 15cm;
-  }
-
-  .setting-submit {
-    margin-top: 15px;
-    margin-left: 15em;
-    cursor: pointer;
-    font-size: 20px;
-    font-family: 'Gaegu', cursive;
-    font-weight: bold;
-    background: #7B7AAF;
-    border-radius: 30px;
-    color: white;
-    height: 2em;
-    width: 5em;
+  font-family: 'Gaegu', cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.period-submit {
+.left-side {
+  text-align: center;
+  font-family: 'Gaegu', cursive;
+  background-color: #dde0eb;
+  width: 25em;
+  height: 60em;
+  float: left;
+}
+
+.h1-setting {
+  font-weight: bold;
+}
+
+.name-user {
+  font-weight: bolder;
+}
+
+.profile-user {
+  border-radius: 50%;
+  max-width: 100%;
+  height: auto;
+}
+
+.setting {
+  display: flex;
+  justify-content: flex-start;
+  border-style: solid;
+  border-radius: 3em;
+  border-color: #7b7aaf;
+  background-color: #7b7aaf;
+  margin: 0.5cm;
+  width: 14rem;
+  height: 3rem;
+  margin-left: 1.5cm;
+}
+
+.icon_home, .home_p, .setting_p, .icon_setting, .icon_logout {
+  font-size: 1.5rem;
+  color: white; 
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.25cm;
+}
+
+.icon_home, .icon_setting, .icon_logout {
+  margin-left: 1.25cm;
+}
+
+.setting_p, .home_p, .logout_p {
+  margin-top: 0.25rem;
+  margin-left: 0.25cm;
+}
+
+
+.route_home, .logout {
+  display: flex;
+  justify-content: flex-start;
+  border-style: solid;
+  border-radius: 3em;
+  border-color: #b8bedd;
+  background-color: #b8bedd;
+  margin: 0.5cm;
+  width: 14rem;
+  height: 3rem;
+  margin-left: 1.5cm;
+}
+
+.reminder {
+  font-size: 1.5rem;
+  color: #7b7aaf;
+  font-weight: bolder;
+  margin-top: 0.5cm;
+}
+
+.logout_p {
+  font-size: 1.5rem;
+  color: white; 
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.1cm;
+} 
+
+.bc-input {
+  background-color: #fffaed;
+  height: 60em;
+}
+
+.input {
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  border-style: solid;
+  border-color: #ffe4dc;
+  background-color: #ffe4dc;
+  border-radius: 3em;
+  box-shadow: 0.5em 0.5em #f8ad9d;
+  width: 50em;
+  height: 35em;
+  margin: 5cm;
+  margin-top: -20cm;
+  margin-left: 15cm;
+}
+
+.setting-submit {
+  margin-top: 15px;
+  margin-left: 15em;
   cursor: pointer;
   font-size: 20px;
   font-family: 'Gaegu', cursive;
@@ -134,71 +122,88 @@
   color: white;
   height: 2em;
   width: 5em;
-  margin-top: -2.5cm;
-  margin-left: 8cm;
+}
+
+.period-submit {
+cursor: pointer;
+font-size: 20px;
+font-family: 'Gaegu', cursive;
+font-weight: bold;
+background: #7B7AAF;
+border-radius: 30px;
+color: white;
+height: 2em;
+width: 5em;
+margin-top: -2.5cm;
+margin-left: 8cm;
 }
 
 ::placeholder {
-  color: #ffe4dc
+color: #ffe4dc
 }
-  
-  .year, .period-length, .cycle-length, .phase-length, .last-month {
-    margin: 1cm;
-    margin-left: 1.5cm;
-    border-style: solid;
-    border-width: 0.25;
-    border-color: #f0d8d2;
-    border-radius: 1em;
-    background-color: #ffcdb2;
-    box-shadow: 0.25em 0.25em #f8ad9d;
-    display: flex;
-    width: 7cm; 
-    height: 1cm;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: bold;
-  }
 
-  .input-border, .setting-range-picker {
-    margin: 1cm;
-    border-style: solid;
-    border-width: 0.25em;
-    border-color: #f8ad9d;
-    border-radius: 2em;
-    height: 1cm;
-    font-weight: bold;
-    font-size: 16px;   
+.year, .period-length, .cycle-length, .phase-length, .last-month {
+  margin: 1cm;
+  margin-left: 1.5cm;
+  border-style: solid;
+  border-width: 0.25;
+  border-color: #f0d8d2;
+  border-radius: 1em;
+  background-color: #ffcdb2;
+  box-shadow: 0.25em 0.25em #f8ad9d;
+  display: flex;
+  width: 7cm; 
+  height: 1cm;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
 }
-  
-  .box-year, .box-period, .box-cycle, .box-phase {
-    display: flex;
-    flex-direction: row;
-  }
 
-  .line-logo {
-    margin-top: 20px;
+.input-border, .setting-range-picker {
+  margin: 1cm;
+  border-style: solid;
+  border-width: 0.25em;
+  border-color: #f8ad9d;
+  border-radius: 2em;
+  height: 1cm;
+  font-weight: bold;
+  font-size: 16px;   
 }
-  
-  .mar {
-    margin: 1cm;
-  }
 
-  .periodLastMonth {
-    font-weight: bold;
-    display: flex;
-    flex-direction: row;
-    float: left;
-    border-style: solid;
-    border-color: #ffe4dc;
-    background-color: #ffe4dc;
-    border-radius: 3em;
-    box-shadow: 0.5em 0.5em #f8ad9d;
-    margin: 2cm;
-    width: 50em;
-    margin-left: -0.2cm;
-  }
+.box-year, .box-period, .box-cycle, .box-phase {
+  display: flex;
+  flex-direction: row;
+}
 
-  .swal2-title {
-    font-family: 'Gaegu', cursive;
-    font-weight: bold;
-  }
+.line-logo {
+  margin-top: 20px;
+}
+
+.mar {
+  margin: 1cm;
+}
+
+.periodLastMonth {
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  float: left;
+  border-style: solid;
+  border-color: #ffe4dc;
+  background-color: #ffe4dc;
+  border-radius: 3em;
+  box-shadow: 0.5em 0.5em #f8ad9d;
+  margin: 2cm;
+  width: 50em;
+  margin-left: -0.2cm;
+}
+
+.swal2-title {
+  font-family: 'Gaegu', cursive;
+  font-weight: bold;
+}
+
+.must {
+  font-size: 20px;
+  margin-bottom: -2cm;
+}
