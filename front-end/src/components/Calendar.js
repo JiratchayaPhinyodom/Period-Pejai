@@ -2,11 +2,47 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
 import 'antd/dist/antd.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from 'antd';
 import { DatePicker } from 'antd';
 
-function Calendars({date, setDate, rangeDate, setRangeDate}) {
+function Calendars({date, setDate, rangeDate, setRangeDate, period, luteal}) {
+
+  // console.log(period)
+  useEffect(() => {
+    // console.log("in period change ==>",rangeDate,period)
+    let range_date = rangeDate
+    const events2 = setEvents2(range_date)
+    if (period != [])
+    {
+      setCalen(<Calendar
+    onChange={setDate}
+    value={date}
+    locale="US"
+    tileClassName={({date}) => 
+        {
+          let day = date.getDate()
+          let month = date.getMonth() + 1
+          if(date.getMonth() < 10) {
+            month = '0' + month
+          }
+          if(date.getDate() < 10) {
+            day = '0' + day
+          }
+          const realDate = date.getFullYear() + '-' + month + '-' + day
+          if(events2.find(val => val === realDate)) {
+            return 'highlight'
+          }
+          if(period.find(val => val === realDate)) {
+            return 'highlight2'
+          }
+          if(luteal.find(val => val === realDate)) {
+            return 'highlight3'
+          }
+        }
+      }
+  />)}
+  },[period], [luteal])
 
   const DateToString = (date) => {
     let day = date.getDate()
@@ -66,7 +102,7 @@ function Calendars({date, setDate, rangeDate, setRangeDate}) {
   const [collectRangeDate, setCollectRangeDate] = useState([])
   const [showBtn, setShowBtn] = useState(false)
   // const [rangeDate, setRangeDate] = useState([])
-    
+  const [predictCal, setPredictCal] = useState([])
 
   const onChange = (dates, dateStrings) => {
     let listRangeDate = []
@@ -85,35 +121,36 @@ function Calendars({date, setDate, rangeDate, setRangeDate}) {
   };
 
   const submitDate = () => {
-    console.log("in",rangeDate,collectRangeDate)
-    let range_date = rangeDate
+    console.log("in",collectRangeDate)
+    // let range_date = rangeDate
+    let range_date = []
     range_date.push(collectRangeDate)
     setRangeDate(range_date)
     // console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
-    const events2 = setEvents2(range_date)
+    // const events2 = setEvents2(range_date)
     // console.log("submitDate", events2) //ถ้าจะส่งค่าไปทุกวันที่ไฮไลท์ใช้อันนี้
     setShowBtn(false)
-    setCalen(<Calendar
-      onChange={setDate}
-      value={date}
-      locale="US"
-      tileClassName={({date}) => 
-        {
-          let day = date.getDate()
-          let month = date.getMonth() + 1
-          if(date.getMonth() < 10) {
-            month = '0' + month
-          }
-          if(date.getDate() < 10) {
-            day = '0' + day
-          }
-          const realDate = date.getFullYear() + '-' + month + '-' + day
-          if(events2.find(val => val === realDate)) {
-            return 'highlight'
-          }
-        }
-      }
-    />)
+    // setCalen(<Calendar
+    //   onChange={setDate}
+    //   value={date}
+    //   locale="US"
+    //   tileClassName={({date}) => 
+    //     {
+    //       let day = date.getDate()
+    //       let month = date.getMonth() + 1
+    //       if(date.getMonth() < 10) {
+    //         month = '0' + month
+    //       }
+    //       if(date.getDate() < 10) {
+    //         day = '0' + day
+    //       }
+    //       const realDate = date.getFullYear() + '-' + month + '-' + day
+    //       if(events2.find(val => val === realDate)) {
+    //         return 'highlight'
+    //       }
+    //     }
+    //   }
+    // />)
   }
 
   return (
@@ -137,13 +174,12 @@ function Calendars({date, setDate, rangeDate, setRangeDate}) {
       )}
       
       {/* Use range date */}
-      <p>What the range of your period</p>
-      <RangePicker onChange={onChange} /> 
+      <p>When is your period come?</p>
+      <RangePicker onChange={onChange} className='userperiod'/> 
       {showBtn ? <button type="button" onClick={() => { submitDate()}} >Save</button> : null }
         <br></br>
     </div>
     
-   
   );
 }
 
