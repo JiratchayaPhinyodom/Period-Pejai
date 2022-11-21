@@ -3,15 +3,16 @@ from django.urls import path, include
 from rest_framework import routers
 from .views import UploadPicture
 
-upload = routers.DefaultRouter()
-upload.register('upload', UploadPicture, basename="upload")
+load = routers.DefaultRouter()
+load.register('upload', UploadPredict, basename='upload')
 
 urlpatterns = [
     path('home', main),
     path('data', Data.as_view()),
+    path('diary', my_diary),
     path('login', login_request),
     path('signup', register_request),
-    path('', include(upload.urls)),  # api/upload/
+    path('', include(load.urls)),  # api/upload/
     path('setting', my_form),
     path('notification', redirect_line),
 ]
