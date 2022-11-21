@@ -44,11 +44,13 @@ class PeriodDataModelTests(TestCase):
                                   date="2022-11-19T17:14:00+07:00")
 
     def test_pain_level_label(self):
+        """Checking Verbose-name 'pain level' """
         period = PeriodData.objects.get(id=1)
         field_label = period._meta.get_field('pain_level').verbose_name
         self.assertEqual(field_label, 'pain level')
 
     def test_blood_level_label(self):
+        """Checking Verbose-name 'blood level' """
         period = PeriodData.objects.get(id=1)
         field_label = period._meta.get_field('blood_level').verbose_name
         self.assertEqual(field_label, 'blood level')
