@@ -43,6 +43,12 @@ const Dashboard= () =>{
   console.log(setting);
 
   const [information, setInformation] = useState(false)
+  const [collectRangeDateSetting, setCollectRangeDateSetting] = useState([])
+  const [rangeDateSetting, setRangeDateSetting] = useState([])
+  const [showBtnSetting, setShowBtnSetting] = useState(true)
+  const [showRangeDatePicker, setshowRangeDatePicker] = useState(false)
+  const [showBtnHome, setShowBtnHome] = useState(false)
+
   const saveConfirm = () => {
   Swal.fire({
     title: 'Your information has been saved!',
@@ -57,12 +63,6 @@ const Dashboard= () =>{
   setInformation(true);
 }
 
-  const [collectRangeDateSetting, setCollectRangeDateSetting] = useState([])
-  const [showBtnSetting, setShowBtnSetting] = useState(false)
-  const [rangeDateSetting, setRangeDateSetting] = useState([])
-  const [showRangeDatePicker, setshowRangeDatePicker] = useState(true)
-  const [showBtnHome, setShowBtnHome] = useState(false)
-
   const { RangePicker } = DatePicker;
 
   const onChange = (dates, dateStrings) => {
@@ -73,7 +73,7 @@ const Dashboard= () =>{
       listRangeDate.push(dateStrings[0]) //[[st,en], [], []]
       listRangeDate.push(dateStrings[1])
       setCollectRangeDateSetting(listRangeDate)
-      setShowBtnSetting(true)
+      // setShowBtnSetting(true)
     } else {
       console.log('Clear');
       setCollectRangeDateSetting(listRangeDate)
@@ -102,7 +102,7 @@ const Dashboard= () =>{
     })
     // console.log("submitRangeDate in setting page", range_date)
     // console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
-    setShowBtnSetting(false)
+    // setShowBtnSetting(false)
     setshowRangeDatePicker(false)
     setShowBtnHome(true)
   }
@@ -147,17 +147,6 @@ function handleInfoSubmit(e) {
 
   useEffect(() => {
     try {
-    //   let url_data = 'http://127.0.0.1:8000/api/data' + '?uid=' + currentUser.uid
-    //   fetch(url_data, {
-    //     method: "POST",
-    //     headers: { "Content-type": "application/json" },
-    //     body: JSON.stringify({ 
-    //         // period_phase: JSON.stringify(data),
-    //         uid: currentUser.uid
-    //     })
-    // }).then((response)=>{
-    //   console.log("response period",response)
-    // })
       const url_data = 'http://127.0.0.1:8000/api/data' + '?uid=' + currentUser.uid
       fetch(url_data).then((res_data) => {
         // {birth_year: 2002, period_length: 7, cycle_length: 28, luteal_length: 14, uid: '6FzQ7n2JRQfygAwkXpKhJOfa83v2'}
@@ -171,10 +160,17 @@ function handleInfoSubmit(e) {
             const birth_year = resGetData.birth_year
             const period_length = resGetData.period_length
             const luteal_length = resGetData.luteal_length
+            const cycle_length = resGetData.cycle_length
             console.log('all', user)
             if (user === currentUser.uid) {
               check = 5555
-              console.log('check', user, birth_year, period_length, luteal_length)
+              console.log('check', user, birth_year, period_length, luteal_length, cycle_length)
+              userSetting({ ...setting, birth_year: birth_year, period_length: period_length, luteal_length: luteal_length, cycle_length: cycle_length })
+            }
+            else {
+              if (check === 0) {
+                console.log('yeahhhhh')
+              }
             }
           })
 
@@ -185,8 +181,7 @@ function handleInfoSubmit(e) {
     catch (error) {
       console.log(error)
     }
-  }
-)
+  }, [])
 
   return (
     <div className='App'>
