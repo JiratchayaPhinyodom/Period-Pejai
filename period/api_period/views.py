@@ -231,17 +231,17 @@ def response(code):
 #     def get(self, request, *args, **kwargs):
 #         code = request.GET['code'] # get the code ได้โค้ดไปใส่ใน get access token
 
-class GetAccessToken(generic.DetailView):
-    def get(self, request, *args, **kwargs):
-        code = request.data["code"]
-        token = get_access_token(code)
-        return JsonResponse({"token": token})
+# class GetAccessToken(generics.DetailView):
+#     def get(self, request, *args, **kwargs):
+#         code = request.data["code"]
+#         token = get_access_token(code)
+#         return JsonResponse({"token": token})
 
 
-class NotificationCallback(generic.DetailView):
-    """A class that handles the callback after user authorize notification."""
+# class NotificationCallback(generic.DetailView):
+#     """A class that handles the callback after user authorize notification."""
 
-    def get(self, request, *args, **kwargs):
-        token = request.data['token']
-        message = request.data["message"]  # get the code ได้โค้ดไปใส่ใน get access token
-        send_notification(message, token)
+#     def get(self, request, *args, **kwargs):
+#         token = request.data['token']
+#         message = request.data["message"]  # get the code ได้โค้ดไปใส่ใน get access token
+#         send_notification(message, token)

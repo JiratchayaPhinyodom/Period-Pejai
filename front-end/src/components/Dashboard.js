@@ -92,7 +92,6 @@ const Dashboard= () =>{
       rgba(0,0,123,0.4)
     `
   })
-  setInformation(true);
 }
 
   const { RangePicker } = DatePicker;
