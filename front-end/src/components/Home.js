@@ -108,6 +108,8 @@ useEffect(() => {
                     // console.log(diaryRef.current.value == '55')
 
                     if(date_diary === DateToString(date)) {
+                        setSaveBtn(false)
+                        setEditBtn(true)
                         console.log('Hello test')
                         console.log(blood)
                         check = 9999
