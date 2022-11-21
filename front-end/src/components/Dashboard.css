@@ -27,23 +27,6 @@
     height: auto;
   }
   
-  /* .name {
-    font-size: 32px;
-    font-weight: bold;
-    display: flex;
-    justify-content: flex-start;
-  } */
-  
-  /* .pic {
-    display: flex;
-    justify-content: flex-start;
-  } */
-  
-  /* .btn_profile {
-    display: flex;
-    justify-content: flex-start;
-  } */
-  
   .setting {
     display: flex;
     justify-content: flex-start;
@@ -141,10 +124,24 @@
     width: 5em;
 }
 
+.period-submit {
+  cursor: pointer;
+  font-size: 20px;
+  font-family: 'Gaegu', cursive;
+  font-weight: bold;
+  background: #7B7AAF;
+  border-radius: 30px;
+  color: white;
+  height: 2em;
+  width: 5em;
+  margin-top: -2.5cm;
+  margin-left: 8cm;
+}
+
   
-  .year, .period-length, .cycle-length, .phase-length {
+  .year, .period-length, .cycle-length, .phase-length, .last-month {
     margin: 1cm;
-    margin-left: 3cm;
+    margin-left: 1.5cm;
     border-style: solid;
     border-width: 0.25;
     border-color: #f8ad9d;
@@ -152,22 +149,22 @@
     background-color: #ffcdb2;
     box-shadow: 0.25em 0.25em #f8ad9d;
     display: flex;
-    width: 5cm; 
+    width: 7cm; 
     height: 1cm;
     justify-content: center;
     font-size: 16px;
     font-weight: bold;
   }
 
-  .input-border {
+  .input-border, .setting-range-picker {
+    margin: 1cm;
     border-style: solid;
     border-width: 0.25em;
     border-color: #f8ad9d;
     border-radius: 2em;
-    width: 5cm;
+    height: 1cm;
     font-weight: bold;
-    font-size: 16px;
-    
+    font-size: 16px;   
 }
   
   .box-year, .box-period, .box-cycle, .box-phase {
@@ -181,4 +178,19 @@
   
   .mar {
     margin: 1cm;
+  }
+
+  .periodLastMonth {
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    float: left;
+    border-style: solid;
+    border-color: #ffe4dc;
+    background-color: #ffe4dc;
+    border-radius: 3em;
+    box-shadow: 0.5em 0.5em #f8ad9d;
+    margin: 2cm;
+    width: 50em;
+    margin-left: -0.2cm;
   }
