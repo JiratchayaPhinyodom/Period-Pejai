@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
 import LogoPic from "./pics/app_logo.png";
-// import Droplet from "./pics/droplet.png";
+import Droplet from "./pics/droplet.png";
 import InputDiary from './component_setting/input/input_diary';
 import IconSlider from './component_setting/input/input_painlevel';
 import "./home_styles.css";
@@ -376,12 +376,12 @@ return (
                         setactiveBtnBlood2(true);
                         setactiveBtnBlood3(true)
                     }}>
-                        {/* <img src={Droplet} height = "60px"/> */}
+                        <img src={Droplet} height = "60px"/>
                     </button> : <button id="1" className="small-blood-level-block" style = {{background:"#b8bedd"}}value={1} onClick={(e)=> {
                         setactiveBtnBlood1(true);
 
                     }}> 
-                    {/* <img src={Droplet} height = "60px"/> */}
+                    <img src={Droplet} height = "60px"/>
                         </button>}
                     {activeBtnBlood2 ? <button id="2" className="small-blood-level-block" value={2} onClick={(e)=> {
                         console.log(e.target.value);
@@ -390,11 +390,11 @@ return (
                         setactiveBtnBlood1(true)
                         setactiveBtnBlood3(true)
                     }}>
-                    {/* <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/> */}
+                    <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
                     </button> : <button id="2" className="small-blood-level-block" style = {{background:"#b8bedd"}} value={2} onClick={(e)=> {
                         setactiveBtnBlood2(true)
                     }}>
-                        {/* <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/> */}
+                        <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
                         </button>}
                     {activeBtnBlood3 ? <button id="3" className="small-blood-level-block" value={3} onClick={(e)=> {
                         //  console.log(e.target.value);
@@ -403,13 +403,13 @@ return (
                         setactiveBtnBlood2(true)
                         setactiveBtnBlood1(true)
                     }}>
-                        {/* <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/> */}
+                        <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
                     </button> : <button id="3" className="small-blood-level-block" style = {{background:"#b8bedd"}} value={3} onClick={(e)=> {
                          // console.log(e.target.value);
                          // setBloodLevel(e.target.value);
                         setactiveBtnBlood3(true)
                     }}>
-                        {/* <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/> */}
+                        <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
                         </button>}
                 </div>
             <div className="home-title">DIARY</div>
