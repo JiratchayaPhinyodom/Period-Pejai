@@ -53,9 +53,13 @@
     margin-left: 32px;
     border-radius: 25px;
     position: relative;
-    /* display: flex;
+    display: inline-block;
     justify-content: center;
-    align-items: center; */
+    align-items: center;
+}
+
+.slider-position {
+    top: 30%;
 }
 
 .small-blood-level-block{
@@ -125,6 +129,7 @@
     font-family: 'Gaegu', cursive;
     font-weight: bold;
 }
+
 
 @media (prefers-reduced-motion: no-preference) {
 .App-logo {

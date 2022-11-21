@@ -98,16 +98,16 @@
    }
   
    .highlight {
-    color:red;
-    background: pink;
+    color:#6f48eb;
+    background: #ffb5a7;
   }
 
   .highlight2 {
-    color:red;
+    color:#6f48eb;
     background: rgb(211, 211, 211);
   }
 
   .highlight3 {
-    color:red;
+    color:orange;
     background: rgb(252, 255, 166);
   }

@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
 import LogoPic from "./pics/app_logo.png";
-import Dots from "./pics/dots.png";
-import Curve from "./pics/curve.png";
+import Droplet from "./pics/droplet.png";
 import InputDiary from './component_setting/input/input_diary';
 import IconSlider from './component_setting/input/input_painlevel';
 import "./home_styles.css";
@@ -366,7 +365,7 @@ return (
         <div className="home-form">
             <div className="home-title">PAIN LEVEL</div>
                 <div className="pain-level-container">
-                    <Slider onChange={setPainLevel} value={painLevel} min={0} max={10}></Slider>
+                    <Slider className="slider-position" onChange={setPainLevel} value={painLevel} min={0} max={10}></Slider>
                 </div>
             <div className="home-title">BLOOD LEVEL</div>
                 <div className="blood-level-container">
@@ -376,11 +375,11 @@ return (
                         setactiveBtnBlood1(false);
                         setactiveBtnBlood2(true);
                         setactiveBtnBlood3(true)
-                    }}>Little
-                    </button> : <button id="1" className="small-blood-level-block" style = {{background:"#ffb5a7"}}value={1} onClick={(e)=> {
+                    }}><img src={Droplet} height = "60px"/>
+                    </button> : <button id="1" className="small-blood-level-block" style = {{background:"#b8bedd"}}value={1} onClick={(e)=> {
                         setactiveBtnBlood1(true);
 
-                    }}>Little
+                    }}> <img src={Droplet} height = "60px"/>
                         </button>}
                     {activeBtnBlood2 ? <button id="2" className="small-blood-level-block" value={2} onClick={(e)=> {
                         console.log(e.target.value);
@@ -388,25 +387,25 @@ return (
                         setactiveBtnBlood2(false)
                         setactiveBtnBlood1(true)
                         setactiveBtnBlood3(true)
-                    }}>Medium
-                    </button> : <button id="2" className="small-blood-level-block" style = {{background:"#ffb5a7"}} value={2} onClick={(e)=> {
+                    }}><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
+                    </button> : <button id="2" className="small-blood-level-block" style = {{background:"#b8bedd"}} value={2} onClick={(e)=> {
                         setactiveBtnBlood2(true)
-                    }}>Medium</button>}
+                    }}><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/></button>}
                     {activeBtnBlood3 ? <button id="3" className="small-blood-level-block" value={3} onClick={(e)=> {
                         //  console.log(e.target.value);
                         setBloodLevel(e.target.value);
                         setactiveBtnBlood3(false)
                         setactiveBtnBlood2(true)
                         setactiveBtnBlood1(true)
-                    }}>A Lot
-                    </button> : <button id="3" className="small-blood-level-block" style = {{background:"#ffb5a7"}} value={3} onClick={(e)=> {
+                    }}><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
+                    </button> : <button id="3" className="small-blood-level-block" style = {{background:"#b8bedd"}} value={3} onClick={(e)=> {
                          // console.log(e.target.value);
                          // setBloodLevel(e.target.value);
                         setactiveBtnBlood3(true)
-                    }}>A Lot</button>}
+                    }}><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/></button>}
                 </div>
             <div className="home-title">DIARY</div>
-                <input rows={10} placeholder="What do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} value={diaryValue} onChange={(e) => setDiaryValue(e.target.value)}/>
+                <textarea rows={10} placeholder="How do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} value={diaryValue} onChange={(e) => setDiaryValue(e.target.value)}/>
             <br></br>
             { saveBtn ? <button id="submit" className="home-submit" type="submit" onClick={handleSubmit} >Save</button>: null}
             { editBtn ? <button id="submit" className="home-submit" type="submit" onClick={handleEdit} >Edit</button>: null}
