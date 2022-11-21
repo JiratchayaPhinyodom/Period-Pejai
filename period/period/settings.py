@@ -17,13 +17,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY', cast=str, default='missing-secret-key')
-# SECRET_KEY = os.environ.get('DJANGO_SECRETKEY', default='28y5s0l^fhej+)(3=helvnh(&fxaf75nk=-vmbwr%rv39^izg0')
+# SECRET_KEY = config('SECRET_KEY', cast=str, default='missing-secret-key')
+SECRET_KEY = os.environ.get('DJANGO_SECRETKEY', default='28y5s0l^fhej+)(3=helvnh(&fxaf75nk=-vmbwr%rv39^izg0')
 # DEBUG = os.environ.get('DJANGO_DEBUG', '') == 'True'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -124,8 +124,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
-STATICFILES_DIRS = [BASE_DIR / "static_build"]
+STATIC_URL = "/static/"
+# STATICFILES_DIRS = [BASE_DIR / "static_build"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
