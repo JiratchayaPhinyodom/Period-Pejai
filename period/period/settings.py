@@ -50,8 +50,8 @@ SECURE_HSTS_SECONDS = True
 SECURE_SSL_REDIRECT = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-providers = ["...", "python"]
 
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -135,3 +135,5 @@ LOGIN_REDIRECT_URL = "home"
 
 # auth and allauth
 # AUTH_USER_MODEL = 'periods.User'
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
