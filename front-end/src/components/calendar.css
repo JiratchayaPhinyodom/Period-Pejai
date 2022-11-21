@@ -104,10 +104,10 @@
 
   .highlight2 {
     color:red;
-    background: lightgray;
+    background: rgb(211, 211, 211);
   }
 
   .highlight3 {
     color:red;
-    background: yellow;
+    background: rgb(252, 255, 166);
   }

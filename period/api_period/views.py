@@ -41,8 +41,11 @@ def predict_date(request):
     if request.method == "GET":
         print(request.GET["uid"])
         list_data = []
-        setting_data = Setting.objects.filter(uid=request.GET["uid"])[0]
+        setting_data = Setting.objects.filter(uid=request.GET["uid"])
         # print(setting_data)
+        if not setting_data.exists():
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        setting_data = setting_data[0]    
         tmp_list = sorted([i.period_phase for i in DateRange.objects.filter(uid=request.GET["uid"])])
         # print(tmp_list)
         period_start_day = ast.literal_eval(tmp_list[len(tmp_list)-1])
@@ -60,8 +63,11 @@ def predict_date(request):
 def predict_luteal(request):
     if request.method == "GET":
         print(request.GET["uid"])
-        setting_data = Setting.objects.filter(uid=request.GET["uid"])[0]
+        setting_data = Setting.objects.filter(uid=request.GET["uid"])
+        if not setting_data.exists():
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         # print(setting_data)
+        setting_data = setting_data[0]
         tmp_list = sorted([i.period_phase for i in DateRange.objects.filter(uid=request.GET["uid"])])
         print(tmp_list)
         period_start_day = ast.literal_eval(tmp_list[len(tmp_list)-1])
@@ -104,7 +110,7 @@ def register_request(request):
     return render(request=request, template_name="registration/register.html", context={"register_form": form})
 
 
-@api_view(['POST'])
+@api_view(['POST', 'PATCH'])
 def my_form(request):
     print(request.data)
     if request.method == "POST":
@@ -114,10 +120,17 @@ def my_form(request):
             return Response(status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "PATCH":
+        setting_data = Setting.objects.get(uid=request.data["uid"])
+        print(setting_data)
+        serializer = MyData(setting_data, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(status=status.HTTP_201_CREATED, data=serializer.data)            
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
         
-@api_view(['POST', 'GET'])
+@api_view(['POST', 'GET', 'DELETE'])
 def my_period(request):
     print(request.data)
     if request.method == "POST":
@@ -129,12 +142,19 @@ def my_period(request):
             return Response(status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "GET":
         range = DateRange.objects.filter(uid=request.GET["uid"])
+        # if len(range) == 0:
+        if not range.exists():
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         serializer = MyPeriod(range, many=True)
+        for i in serializer.data:
+            del i["uid"]
         return JsonResponse(serializer.data, safe=False)
+    # elif request.method == "DELETE":
+
     return Response(status=status.HTTP_400_BAD_REQUEST)
     
     
-@api_view(['POST', 'GET', 'PUT'])
+@api_view(['POST', 'GET', 'PATCH'])
 def my_diary(request):
     print(request.data)
     print(type(request.data))
@@ -145,19 +165,19 @@ def my_diary(request):
             return Response(status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == "PUT":
+    elif request.method == "PATCH":
         period_data = PeriodData.objects.get(uid=request.data["uid"], date=request.data["date"])
-        print(period_data)
-        form = MyHomePage(request.data)
-        period_data.pain_level = request.data["pain_level"]
-        period_data.blood_level = request.data["blood_level"]
-        period_data.diary_text = request.data["diary_text"]
-        period_data.save()
-        return Response(status=status.HTTP_201_CREATED)  # or 204 -> recheck
+        serializer = MyDiaryPage(period_data, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(status=status.HTTP_201_CREATED, data=serializer.data)
     elif request.method == "GET":
         diary = PeriodData.objects.filter(uid=request.GET["uid"])
-        print(diary)
+        if len(diary) == 0:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         serializer = MyDiaryPage(diary, many=True)
+        for i in serializer.data:
+            del i["uid"]
         return JsonResponse(serializer.data, safe=False)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 

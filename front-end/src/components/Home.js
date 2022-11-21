@@ -26,6 +26,14 @@ const [painLevel, setPainLevel] = useState(0);
 const [bloodLevel, setBloodLevel] = useState(1);
 const diaryRef = useRef();
 
+
+// States for edit button
+const [historyDiary, setHistoryDiary] = useState({
+    old_diary_text: "",
+    old_blood_level: "",
+    old_pain_level: "",
+})
+
 //set diary
 const [diaryValue, setDiaryValue] = useState('')
 
@@ -44,7 +52,6 @@ const [home, userHome] = useState({
     diary_text: "",
     blood_level: "",
     pain_level: "",
-    period_phase: "",
     uid: "",
     date: "",
     });
@@ -96,12 +103,13 @@ useEffect(() => {
                     const blood = resGetDiary.blood_level
                     const diary = resGetDiary.diary_text
                     const date_diary = resGetDiary.date
+                    console.log("History diary", historyDiary);
                     // painData.push(pain)
                     console.log("click",DateToString(date))
                     // console.log(diaryRef.current.value == '55')
 
                     if(date_diary === DateToString(date)) {
-                        console.log('fuckkkkkkkkkkkkkkkkkk')
+                        console.log('Hello test')
                         console.log(blood)
                         check = 9999
                         console.log(check)
@@ -109,6 +117,9 @@ useEffect(() => {
                         setPainLevel(pain)
                         setSaveBtn(false)
                         setEditBtn(true)
+                        historyDiary.old_diary_text = diary;
+                        historyDiary.old_blood_level = blood;
+                        historyDiary.old_pain_level = pain;
                         if (blood == 1) {
                             setactiveBtnBlood1(false);
                             setactiveBtnBlood2(true);
@@ -224,17 +235,45 @@ function handleSubmit(e) {
     .catch((err) => console.log(err));
 }
 
-// // Axios
-// const [post, setPost] = React.useState(null);
-// const baseURL = "http://127.0.0.1:8000/api/predict";
-// React.useEffect(() => {
-//     axios.get(baseURL).then((response) => {
-//     setPost(response.data);
-//     console.log(response);
-//     });
-// }, []);
+function handleEdit(e) {
+    e.preventDefault();
+    var new_pain = historyDiary.old_pain_level;
+    var new_blood = historyDiary.old_blood_level;
+    var new_diary = historyDiary.old_diary_text
+    if (painLevel != historyDiary.old_pain_level)
+    {
+        console.log("pain change");
+        // new_dict["pain_level"] = painLevel;
+        new_pain = painLevel;
+    }
+    if (bloodLevel != historyDiary.old_blood_level)
+    {
+        console.log("blood change");
+        // new_dict["blood_level"] = bloodLevel;
+        new_blood = bloodLevel;
+    }
+    if (diaryRef.current.value != historyDiary.old_diary_text)
+    {
+        console.log("diary change");
+        // new_dict["diary_text"] = diaryRef;
+        new_diary = diaryRef.current.value;
+    }
+    console.log("new", new_diary);
+    let url = "http://127.0.0.1:8000/api/diary";
+    fetch(url, {
+    method: "PATCH",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ 
+        diary_text: new_diary,
+        blood_level: new_blood,
+        pain_level: new_pain,
+        uid: currentUser.uid,
+        date: DateToString(date)}),
+    })
+    .catch((err) => console.log(err));
+}
 
-// if (!post) return null;
+
 
 useEffect(async () => {
     console.log("TEST")
@@ -316,50 +355,49 @@ return (
             <div className="home-title">BLOOD LEVEL</div>
                 <div className="blood-level-container">
                 {activeBtnBlood1 ? <button id="1" className="small-blood-level-block" value={1} onClick={(e)=> {
-                         console.log(e.target.value);
-                         setBloodLevel(e.target.value);
-                         setactiveBtnBlood1(false);
-                         setactiveBtnBlood2(true);
-                         setactiveBtnBlood3(true)
-                     }}>Little
-                     </button> : <button id="1" className="small-blood-level-block" style = {{background:"#ffb5a7"}}value={1} onClick={(e)=> {
-                         setactiveBtnBlood1(true);
+                        console.log(e.target.value);
+                        setBloodLevel(e.target.value);
+                        setactiveBtnBlood1(false);
+                        setactiveBtnBlood2(true);
+                        setactiveBtnBlood3(true)
+                    }}>Little
+                    </button> : <button id="1" className="small-blood-level-block" style = {{background:"#ffb5a7"}}value={1} onClick={(e)=> {
+                        setactiveBtnBlood1(true);
 
-                     }}>Little
+                    }}>Little
                         </button>}
-                     {activeBtnBlood2 ? <button id="2" className="small-blood-level-block" value={2} onClick={(e)=> {
-                         console.log(e.target.value);
-                         setBloodLevel(e.target.value);
-                         setactiveBtnBlood2(false)
-                         setactiveBtnBlood1(true)
-                         setactiveBtnBlood3(true)
-                     }}>Medium
-                     </button> : <button id="2" className="small-blood-level-block" style = {{background:"#ffb5a7"}} value={2} onClick={(e)=> {
-                         setactiveBtnBlood2(true)
-                     }}>Medium</button>}
-                     {activeBtnBlood3 ? <button id="3" className="small-blood-level-block" value={3} onClick={(e)=> {
+                    {activeBtnBlood2 ? <button id="2" className="small-blood-level-block" value={2} onClick={(e)=> {
+                        console.log(e.target.value);
+                        setBloodLevel(e.target.value);
+                        setactiveBtnBlood2(false)
+                        setactiveBtnBlood1(true)
+                        setactiveBtnBlood3(true)
+                    }}>Medium
+                    </button> : <button id="2" className="small-blood-level-block" style = {{background:"#ffb5a7"}} value={2} onClick={(e)=> {
+                        setactiveBtnBlood2(true)
+                    }}>Medium</button>}
+                    {activeBtnBlood3 ? <button id="3" className="small-blood-level-block" value={3} onClick={(e)=> {
                         //  console.log(e.target.value);
-                         setBloodLevel(e.target.value);
-                         setactiveBtnBlood3(false)
-                         setactiveBtnBlood2(true)
-                         setactiveBtnBlood1(true)
-                     }}>A Lot
-                     </button> : <button id="3" className="small-blood-level-block" style = {{background:"#ffb5a7"}} value={3} onClick={(e)=> {
+                        setBloodLevel(e.target.value);
+                        setactiveBtnBlood3(false)
+                        setactiveBtnBlood2(true)
+                        setactiveBtnBlood1(true)
+                    }}>A Lot
+                    </button> : <button id="3" className="small-blood-level-block" style = {{background:"#ffb5a7"}} value={3} onClick={(e)=> {
                          // console.log(e.target.value);
                          // setBloodLevel(e.target.value);
-                         setactiveBtnBlood3(true)
-                     }}>A Lot</button>}
+                        setactiveBtnBlood3(true)
+                    }}>A Lot</button>}
                 </div>
             <div className="home-title">DIARY</div>
                 <input rows={10} placeholder="What do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} value={diaryValue} onChange={(e) => setDiaryValue(e.target.value)}/>
             <br></br>
             { saveBtn ? <Button type="primary" onClick={handleSubmit} >Save</Button>: null}
-            { editBtn ? <Button type="primary" onClick={handleSubmit} >Edit</Button>: null}
+            { editBtn ? <Button type="primary" onClick={handleEdit} >Edit</Button>: null}
         </div>
         <span><Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/"}} style={{ background: "#b8bedd"}}><p className='home_p' ><HomeOutlined className='icon_home'/>Setting</p></Button></span>
 
         <span><Button className='logout' type="primary" variant="link" onClick={() => {auth.signOut(); window.location.href = "./login"}} style={{ background: "#b8bedd"}}><p className='logout_p' ><LogoutOutlined className='icon_logout'/>Logout</p></Button></span>
-        {/* <Button onClick={handle}> test</Button> */}
 
     </div>
 );

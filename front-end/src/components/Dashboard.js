@@ -42,12 +42,12 @@ const Dashboard= () =>{
   //   });
   console.log(setting);
 
-  const [information, setInformation] = useState(false)
+  const [information, setInformation] = useState(true)
   const [collectRangeDateSetting, setCollectRangeDateSetting] = useState([])
   const [rangeDateSetting, setRangeDateSetting] = useState([])
   const [showBtnSetting, setShowBtnSetting] = useState(true)
-  const [showRangeDatePicker, setshowRangeDatePicker] = useState(false)
-  const [showBtnHome, setShowBtnHome] = useState(false)
+  const [showRangeDatePicker, setshowRangeDatePicker] = useState(true)
+  const [showBtnHome, setShowBtnHome] = useState(true)
 
   const saveConfirm = () => {
   Swal.fire({
@@ -156,22 +156,22 @@ function handleInfoSubmit(e) {
           console.log('all_data', res_all_data)
           let check = 0;
           res_all_data.forEach((resGetData) => {
-            const user = resGetData.uid
+            // const user = resGetData.uid
             const birth_year = resGetData.birth_year
             const period_length = resGetData.period_length
             const luteal_length = resGetData.luteal_length
             const cycle_length = resGetData.cycle_length
-            console.log('all', user)
-            if (user === currentUser.uid) {
-              check = 5555
-              console.log('check', user, birth_year, period_length, luteal_length, cycle_length)
-              userSetting({ ...setting, birth_year: birth_year, period_length: period_length, luteal_length: luteal_length, cycle_length: cycle_length })
-            }
-            else {
-              if (check === 0) {
-                console.log('yeahhhhh')
-              }
-            }
+            // console.log('all', user)
+            // if (user === currentUser.uid) {
+            //   check = 5555
+            //   console.log('check', user, birth_year, period_length, luteal_length, cycle_length)
+            //   userSetting({ ...setting, birth_year: birth_year, period_length: period_length, luteal_length: luteal_length, cycle_length: cycle_length })
+            // }
+            // else {
+            //   if (check === 0) {
+            //     console.log('yeahhhhh')
+            //   }
+            // }
           })
 
         })
@@ -244,5 +244,3 @@ function handleInfoSubmit(e) {
 }
 
 export default Dashboard;
-
-// แป้งโกะทำ submit date แล้วเราจะสร้าง handle submit ไว้ไหนนะ
