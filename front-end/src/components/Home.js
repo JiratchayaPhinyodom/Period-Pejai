@@ -88,7 +88,7 @@ const [luteal, setLuteal] = useState([])
     
 useEffect(() => {
     try {
-        const url_diary = 'http://127.0.0.1:8000/api/diary' + '?uid=' + currentUser.uid
+        const url_diary = 'https://creammmm.pythonanywhere.com/api/diary' + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
 
         fetch(url_diary).then((res_diary) => {
@@ -162,7 +162,7 @@ const setR = useCallback((data) => {
     // use data ---> call api
     // [[],[],[]] not use
     // [[]] use this
-    let url = "http://127.0.0.1:8000/api/period";
+    let url = "https://creammmm.pythonanywhere.com/api/period";
     fetch(url, {
         method: "POST",
         headers: { "Content-type": "application/json" },
@@ -172,9 +172,9 @@ const setR = useCallback((data) => {
         })
     }).then((response)=>{
         console.log("response period",response)
-        const url = 'http://127.0.0.1:8000/api/predict' + '?uid=' + currentUser.uid
-        const url2 = 'http://127.0.0.1:8000/api/period' + '?uid=' + currentUser.uid
-        const url_luteal = 'http://127.0.0.1:8000/api/luteal' + '?uid=' + currentUser.uid
+        const url = 'https://creammmm.pythonanywhere.com/api/predict' + '?uid=' + currentUser.uid
+        const url2 = 'https://creammmm.pythonanywhere.com/api/period' + '?uid=' + currentUser.uid
+        const url_luteal = 'https://creammmm.pythonanywhere.com/api/luteal' + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
 
         fetch(url2).then((res2) => {
@@ -229,7 +229,7 @@ function handleSubmit(e) {
         popup: 'animate__animated animate__fadeOutUp'
         }
     })
-    let url = "http://127.0.0.1:8000/api/diary";
+    let url = "https://creammmm.pythonanywhere.com/api/diary";
     fetch(url, {
     method: "POST",
     headers: { "Content-type": "application/json" },
@@ -274,7 +274,7 @@ function handleEdit(e) {
         new_diary = diaryRef.current.value;
     }
     console.log("new", new_diary);
-    let url = "http://127.0.0.1:8000/api/diary";
+    let url = "https://creammmm.pythonanywhere.com/api/diary";
     fetch(url, {
     method: "PATCH",
     headers: { "Content-type": "application/json" },
@@ -293,8 +293,8 @@ function handleEdit(e) {
 useEffect(async () => {
     console.log("TEST")
     try {
-        const url2 = 'http://127.0.0.1:8000/api/period' + '?uid=' + currentUser.uid
-        const url_luteal = 'http://127.0.0.1:8000/api/luteal' + '?uid=' + currentUser.uid
+        const url2 = 'https://creammmm.pythonanywhere.com/api/period' + '?uid=' + currentUser.uid
+        const url_luteal = 'https://creammmm.pythonanywhere.com/api/luteal' + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
         const res2 = await fetch(url2)
         const res_json2 = await res2.json()
@@ -325,7 +325,7 @@ useEffect(async () => {
         
 
 
-        const url = 'http://127.0.0.1:8000/api/predict' + '?uid=' + currentUser.uid
+        const url = 'https://creammmm.pythonanywhere.com/api/predict' + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
         const res = await fetch(url)
         const res_json = await res.json()

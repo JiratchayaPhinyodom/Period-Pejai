@@ -126,7 +126,7 @@ const Dashboard= () =>{
       uid: currentUser.uid
     }
     console.log(JSON.stringify(body))
-    let url = "http://127.0.0.1:8000/api/period";
+    let url = "https://creammmm.pythonanywhere.com/api/period";
     fetch(url, {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -144,7 +144,7 @@ const Dashboard= () =>{
 
 function handleInfoSubmit(e) {
   e.preventDefault();
-    let url = "http://127.0.0.1:8000/api/setting";
+    let url = "https://creammmm.pythonanywhere.com/api/setting";
     fetch(url, {
     method: "POST",
     headers: { "Content-type": "application/json" },
@@ -198,7 +198,7 @@ function handleEditStt(e) {
       // new_dict["diary_text"] = diaryRef;
       new_luteal_length = setting.luteal_length;
   }
-  let url = "http://127.0.0.1:8000/api/setting";
+  let url = "https://creammmm.pythonanywhere.com/api/setting";
   fetch(url, {
   method: "PATCH",
   headers: { "Content-type": "application/json" },
@@ -218,7 +218,7 @@ function handleEditStt(e) {
 //   // blood_level: bloodLevel,
 //   // pain_level: painLevel,})
 //   e.preventDefault();
-//   let url = "http://127.0.0.1:8000/api/diary";
+//   let url = "http://creammmm.pythonanywhere.com/api/diary";
 //   fetch(url, {
 //   method: "PUT",
 //   headers: { "Content-type": "application/json" },
@@ -235,7 +235,7 @@ function handleEditStt(e) {
 
   useEffect(() => {
     try {
-      const url_data = 'http://127.0.0.1:8000/api/data' + '?uid=' + currentUser.uid
+      const url_data = 'https://creammmm.pythonanywhere.com/api/data' + '?uid=' + currentUser.uid
       fetch(url_data).then((res_data) => {
         // {birth_year: 2002, period_length: 7, cycle_length: 28, luteal_length: 14, uid: '6FzQ7n2JRQfygAwkXpKhJOfa83v2'}
         // console.log("all", res_data.json())
