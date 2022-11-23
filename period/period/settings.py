@@ -6,7 +6,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 from decouple import config
 
@@ -17,13 +17,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY', cast=str, default='missing-secret-key')
-
+# SECRET_KEY = config('SECRET_KEY', cast=str, default='missing-secret-key')
+SECRET_KEY = os.environ.get('DJANGO_SECRETKEY', default='28y5s0l^fhej+)(3=helvnh(&fxaf75nk=-vmbwr%rv39^izg0')
+# DEBUG = os.environ.get('DJANGO_DEBUG', '') == 'True'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = []
+CORS_ALLOWED_ORIGINS = [
+ "https://period-pejai-front-end.vercel.app/",
+]
 
+ALLOWED_HOSTS = ['creammmm.pythonanywhere.com']
+os.environ['DJANGO_SETTINGS_MODULE'] = 'period.settings'
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,15 +42,16 @@ INSTALLED_APPS = [
     "api_period.apps.ApiPeriodConfig",
     "corsheaders", #new
     "period",
-    'django_crontab'
 ]
-
+# 'django_crontab'
 CRONJOBS = [
     ('* * * * *', 'api_period.cron.my_cron_job')
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -55,9 +61,6 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
-)
 
 ROOT_URLCONF = "period.urls"
 
@@ -115,7 +118,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+# STATICFILES_DIRS = [BASE_DIR / "static_build"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -126,3 +133,12 @@ LOGIN_REDIRECT_URL = "home"
 
 # auth and allauth
 # AUTH_USER_MODEL = 'periods.User'
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
