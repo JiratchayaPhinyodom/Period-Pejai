@@ -131,7 +131,7 @@ LOGIN_REDIRECT_URL = "home"
 # AUTH_USER_MODEL = 'periods.User'
 
 CORS_ALLOWED_ORIGINS = [
- "https://period-pejai-front-end.vercel.app/",
+ "https://period-pejai-front-end.vercel.app",
  "http://localhost:3000",
 ]
 
