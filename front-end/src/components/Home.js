@@ -16,6 +16,7 @@ import { SettingOutlined, HomeOutlined, LogoutOutlined, UserOutlined} from '@ant
 import { auth } from '../firebase'
 import { useAuth } from '../contexts/AuthContext';
 import Swal from 'sweetalert2';
+import ButtonKub from './ButtonKub'
 
 function Home() {
  // React States
@@ -114,6 +115,7 @@ useEffect(() => {
                         console.log(check)
                         setDiaryValue(diary)
                         setPainLevel(pain)
+                        setBloodLevel(blood)
                         historyDiary.old_diary_text = diary;
                         historyDiary.old_blood_level = blood;
                         historyDiary.old_pain_level = pain;
@@ -135,6 +137,7 @@ useEffect(() => {
                     } 
                     else {
                         if (check == 0) {
+                            setBloodLevel(0)
                             setSaveBtn(true)
                             setEditBtn(false)
                             console.log('success')
@@ -367,8 +370,22 @@ return (
                 <div className="pain-level-container">
                     <Slider className="slider-position" onChange={setPainLevel} value={painLevel} min={0} max={10}></Slider>
                 </div>
-            <div className="home-title">BLOOD LEVEL</div>
-                {Droplet && (
+            <div className="home-title">BLOOD LEVEL {bloodLevel}</div>
+                
+            <div className="blood-level-container">
+                    {[1, 2, 3].map((value, index) => (
+                        <ButtonKub
+                        imageSrc={Droplet}
+                        value={value}
+                        active={bloodLevel === value}
+                        setBloodLevel={() => {
+                            setBloodLevel(value);
+                        }}
+                        key={index}
+                        />
+                        ))}
+                    </div>
+                {/* {Droplet && (
                 <div className="blood-level-container">
                 {activeBtnBlood1 ? <button id="1" className="small-blood-level-block" value={1} onClick={(e)=> {
                         console.log(e.target.value);
@@ -413,7 +430,7 @@ return (
                     }}>
                         <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
                         </button>}
-                </div> )}
+                </div> )} */}
             <div className="home-title">DIARY</div>
                 <textarea rows={10} placeholder="How do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} value={diaryValue} onChange={(e) => setDiaryValue(e.target.value)}/>
             <br></br>

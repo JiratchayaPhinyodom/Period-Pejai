@@ -16,6 +16,7 @@ import { InputNumber, Space } from 'antd';
 import Input from "antd/lib/input/Input";
 import { DatePicker } from 'antd';
 
+
 import { auth } from '../firebase'
 
 
@@ -285,14 +286,18 @@ function handleEditStt(e) {
     <div className='App'>
     <div className='left-side'>
     <h1 className="h1-setting">WELCOME TO PERIOD-PEJAI</h1>
-    <img src={currentUser.photoURL} alt="" className="profile-user"/>
-    <h2 className="name-user">{currentUser.displayName.toUpperCase()}</h2>
+    {currentUser && (
+      <>
+          <img src={currentUser.photoURL} alt="" className="profile-user"/>
+          <h2 className="name-user">{currentUser.displayName.toUpperCase()}</h2> </>
+    )}
+
     <span className='setting'>
       <SettingOutlined className='icon_setting'/><p className='setting_p'>Setting</p>
     </span>
     <span>
     {/* showBtnHome &&  */}
-    { editBtnStt ? <Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/home"}} style={{ background: "#b8bedd"}}>
+    { editBtnStt ? <Button className='route_home' type="primary" variant="link" onClick={()=>{history.push("/home")}} style={{ background: "#b8bedd"}}>
         <HomeOutlined className='icon_home'/>
         <p className='home_p' >Home</p>
       </Button> : null}
@@ -304,7 +309,7 @@ function handleEditStt(e) {
             <img src={LineLink} className="line-logo" height = "50px"/>
     </a>
     <span>
-      <Button className='logout' type="primary" variant="link" onClick={() => {auth.signOut(); window.location.href = "./login"}} style={{ background: "#b8bedd"}}>
+      <Button className='logout' type="primary" variant="link" onClick={() => {auth.signOut(); {history.push("/login")}}} style={{ background: "#b8bedd"}}>
         <LogoutOutlined className='icon_logout'/>
           <p className='logout_p' >Logout</p>
         </Button>

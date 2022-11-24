@@ -106,8 +106,8 @@
   width: 50em;
   height: 35em;
   margin: 5cm;
-  margin-top: -20cm;
-  margin-left: 15cm;
+  /* margin-top: -20cm;
+  margin-left: 15cm; */
 }
 
 .setting-submit {
