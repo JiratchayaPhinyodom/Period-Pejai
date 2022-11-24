@@ -1,7 +1,6 @@
-import datetime
-from .line_notify import send_notification
+from .line_notify import *
+from .serializers import *
 
+# Notification.objects.filter(uid=)
 
-def update_notification():
-    send_notification(f"message", 'token')
-    pass
+send_notification('Your period will likely start in the next 3 days.', 'uid')
