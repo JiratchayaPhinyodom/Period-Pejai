@@ -6,7 +6,8 @@ class TestDataAPIViewTests(APITestCase):
     """To check get/post in data page """
 
     def setUp(self):
-        self.data = {'birth_year': 2002, 'period_length': 7, 'cycle_length': 28, 'luteal_length': 14}
+        self.data = {'birth_year': 2002, 'period_length': 7, 'cycle_length': 28, 'luteal_length': 14,
+                     'uid': "6FzQ7n2JRQfygAwkXpKhJOfa83v2"}
 
     def test_get_data(self):
         """Test can get /api/data """
@@ -17,12 +18,13 @@ class TestDataAPIViewTests(APITestCase):
         """Test /api/data can post, also checking len of data"""
         response = self.client.post('/api/data', self.data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(len(response.data), 4)
+        self.assertEqual(len(response.data), 5)
 
 
 class TestDataDetailAPIViewTests(APITestCase):
     def setUp(self):
-        self.data = {'birth_year': 2002, 'period_length': 7, 'cycle_length': 28, 'luteal_length': 14}
+        self.data = {'birth_year': 2002, 'period_length': 7, 'cycle_length': 28, 'luteal_length': 14,
+                     "uid": "6FzQ7n2JRQfygAwkXpKhJOfa83v2"}
         self.client.post(
             self.client.get('/api/data'), self.data, format='json')
 
@@ -50,3 +52,8 @@ class TestDataDetailAPIViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data["luteal_length"], 14)
 
+    def test_post_uid(self):
+        """Test can post luteal_length"""
+        response = self.client.post('/api/data', self.data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data["uid"], "6FzQ7n2JRQfygAwkXpKhJOfa83v2")
