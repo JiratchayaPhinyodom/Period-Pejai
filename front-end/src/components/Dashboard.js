@@ -68,22 +68,22 @@ const Dashboard= () =>{
   const [showBtnHome, setShowBtnHome] = useState(false)
   const [url, setUrl] = useState(window.location.href)
 
-  // useEffect(async()=> {
-  // console.log(url);
-  // const url_line = new URL(url);
-  // let params = url_line.searchParams;
-  // const code = params.get('code'); // 'node'
-  // console.log("code", code);
-  // console.log("LINE GET request")
-  //   try {
-  //       const url_line_get = 'http://127.0.0.1:8000/api/get_token' + '?uid=' + currentUser.uid + '&' + '?code=' + code
-  //       const res_line = await fetch(url_line_get)
-  //       // const res_json_line = await res_line.json()
-  //       // console.log("res_json_line = ",res_json_line)
-  //     } catch (error) {
-  //       console.log(error)
-  //   }
-  // },[url]);
+   useEffect(async()=> {
+   console.log(url);
+   const url_line = new URL(url);
+   let params = url_line.searchParams;
+   const code = params.get('code'); // 'node'
+   console.log("code", code);
+   console.log("LINE GET request")
+     try {
+         const url_line_get = 'http://127.0.0.1:8000/api/get_token' + '?uid=' + currentUser.uid + '&' + '?code=' + code
+         const res_line = await fetch(url_line_get)
+         // const res_json_line = await res_line.json()
+         // console.log("res_json_line = ",res_json_line)
+       } catch (error) {
+         console.log(error)
+     }
+   },[url]);
 
   const saveConfirm = () => {
   Swal.fire({
