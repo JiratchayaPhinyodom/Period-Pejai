@@ -368,6 +368,7 @@ return (
                     <Slider className="slider-position" onChange={setPainLevel} value={painLevel} min={0} max={10}></Slider>
                 </div>
             <div className="home-title">BLOOD LEVEL</div>
+                {Droplet && (
                 <div className="blood-level-container">
                 {activeBtnBlood1 ? <button id="1" className="small-blood-level-block" value={1} onClick={(e)=> {
                         console.log(e.target.value);
@@ -391,13 +392,14 @@ return (
                         setactiveBtnBlood3(true)
                     }}>
                     <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
-                    </button> : <button id="2" className="small-blood-level-block" style = {{background:"#b8bedd"}} value={2} onClick={(e)=> {
+                    </button> : <button id="2" className="small-blood-level-block" style={{ background: "#b8bedd" }} value={2} onClick={(e) => {
                         setactiveBtnBlood2(true)
                     }}>
                         <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
                         </button>}
                     {activeBtnBlood3 ? <button id="3" className="small-blood-level-block" value={3} onClick={(e)=> {
                         //  console.log(e.target.value);
+                        console.log(e.target.value);
                         setBloodLevel(e.target.value);
                         setactiveBtnBlood3(false)
                         setactiveBtnBlood2(true)
@@ -411,7 +413,7 @@ return (
                     }}>
                         <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
                         </button>}
-                </div>
+                </div> )}
             <div className="home-title">DIARY</div>
                 <textarea rows={10} placeholder="How do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} value={diaryValue} onChange={(e) => setDiaryValue(e.target.value)}/>
             <br></br>
