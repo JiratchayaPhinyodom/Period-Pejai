@@ -320,24 +320,12 @@ useEffect(async () => {
         console.log("luteal day= ",res_Luteal_json.result) // luteal day
         setLuteal(res_Luteal_json.result)
 
-    //     fetch(url_luteal).then((res_diary) => {
-    //         res_diary.json().then((res_all_diary) => {
-    //             console.log("lulu", res_all_diary.result)
-    //         })
-    // })
-        
-
-
         const url = 'https://creammmm.pythonanywhere.com/api/predict' + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
         const res = await fetch(url)
         const res_json = await res.json()
         console.log("predict_data",res_json.result)
         setPeriod(res_json.result)
-
-
-
-        
     } catch (error) {
         console.log(error)
     }
@@ -385,52 +373,6 @@ return (
                         />
                         ))}
                     </div>
-                {/* {Droplet && (
-                <div className="blood-level-container">
-                {activeBtnBlood1 ? <button id="1" className="small-blood-level-block" value={1} onClick={(e)=> {
-                        console.log(e.target.value);
-                        setBloodLevel(e.target.value);
-                        setactiveBtnBlood1(false);
-                        setactiveBtnBlood2(true);
-                        setactiveBtnBlood3(true)
-                    }}>
-                        <img src={Droplet} height = "60px"/>
-                    </button> : <button id="1" className="small-blood-level-block" style = {{background:"#b8bedd"}}value={1} onClick={(e)=> {
-                        setactiveBtnBlood1(true);
-
-                    }}> 
-                    <img src={Droplet} height = "60px"/>
-                        </button>}
-                    {activeBtnBlood2 ? <button id="2" className="small-blood-level-block" value={2} onClick={(e)=> {
-                        console.log(e.target.value);
-                        setBloodLevel(e.target.value);
-                        setactiveBtnBlood2(false)
-                        setactiveBtnBlood1(true)
-                        setactiveBtnBlood3(true)
-                    }}>
-                    <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
-                    </button> : <button id="2" className="small-blood-level-block" style={{ background: "#b8bedd" }} value={2} onClick={(e) => {
-                        setactiveBtnBlood2(true)
-                    }}>
-                        <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
-                        </button>}
-                    {activeBtnBlood3 ? <button id="3" className="small-blood-level-block" value={3} onClick={(e)=> {
-                        //  console.log(e.target.value);
-                        console.log(e.target.value);
-                        setBloodLevel(e.target.value);
-                        setactiveBtnBlood3(false)
-                        setactiveBtnBlood2(true)
-                        setactiveBtnBlood1(true)
-                    }}>
-                        <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
-                    </button> : <button id="3" className="small-blood-level-block" style = {{background:"#b8bedd"}} value={3} onClick={(e)=> {
-                         // console.log(e.target.value);
-                         // setBloodLevel(e.target.value);
-                        setactiveBtnBlood3(true)
-                    }}>
-                        <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
-                        </button>}
-                </div> )} */}
             <div className="home-title">DIARY</div>
                 <textarea rows={10} placeholder="How do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} value={diaryValue} onChange={(e) => setDiaryValue(e.target.value)}/>
             <br></br>

@@ -49,7 +49,7 @@ const Dashboard= () =>{
   //   uid: "",
   //   date: "",
   //   });
-  console.log(setting);
+  // console.log(setting);
 
   // states for button
   const [saveBtnStt, setSaveBtnStt] = useState(true);
@@ -69,6 +69,8 @@ const Dashboard= () =>{
   const [showBtnHome, setShowBtnHome] = useState(false)
   const [url, setUrl] = useState(window.location.href)
 
+  const [checkPeriod, setCheckPeriod] = useState(false)
+
   // useEffect(async()=> {
   // console.log(url);
   // const url_line = new URL(url);
@@ -85,6 +87,26 @@ const Dashboard= () =>{
   //       console.log(error)
   //   }
   // },[url]);
+  useEffect(() => {
+    try {
+      const url_period = 'https://creammmm.pythonanywhere.com/api/period' + '?uid=' + currentUser.uid
+      fetch(url_period).then((res_period) => {
+        res_period.json().then((res_all_period) => {
+          console.log("peee", res_all_period.length)
+          if (res_all_period.length > 0) {
+            console.log('kkkkk')
+            setCheckPeriod(true)
+          }
+          else {
+            setCheckPeriod(false)
+          }
+        })
+      })
+    }
+    catch (error) {
+      console.log(error)
+  }
+  }, [])
 
   const saveConfirm = () => {
   Swal.fire({
@@ -256,7 +278,7 @@ function handleEditStt(e) {
             historySetting.old_luteal_length = resGetData.luteal_length
             historySetting.old_cycle_length = resGetData.cycle_length
 
-            console.log('all', user)
+            // console.log('all', user)
             if (user === currentUser.uid) {
               check = 5555
               console.log('check', user, birth_year, period_length, luteal_length, cycle_length)
@@ -297,7 +319,7 @@ function handleEditStt(e) {
     </span>
     <span>
     {/* showBtnHome &&  */}
-    { editBtnStt ? <Button className='route_home' type="primary" variant="link" onClick={()=>{history.push("/home")}} style={{ background: "#b8bedd"}}>
+    { editBtnStt && checkPeriod ? <Button className='route_home' type="primary" variant="link" onClick={()=>{history.push("/home")}} style={{ background: "#b8bedd"}}>
         <HomeOutlined className='icon_home'/>
         <p className='home_p' >Home</p>
       </Button> : null}
@@ -320,19 +342,19 @@ function handleEditStt(e) {
     <div className='input'>
       <span className='box-year'>
         <p className='year'>YEAR OF BIRTH </p>
-        <input type="number" value={setting.birth_year} className="input-border" placeholder="2002" onChange={(e) => userSetting({ ...setting, birth_year: e.target.value })}/>
+        <input type="number" value={setting.birth_year} maxLength={1992} minLength={2000} className="input-border" placeholder="2002" onChange={(e) => userSetting({ ...setting, birth_year: e.target.value })}/>
       </span>
       <span className='box-period'>
         <p className='period-length'>PERIOD LENGTH </p>
-        <input type="number" value={setting.period_length} className="input-border" placeholder="7" onChange={(e) => userSetting({ ...setting, period_length: e.target.value })}/>
+        <input type="number" value={setting.period_length} maxLength={60} minLength={1} className="input-border" placeholder="7" onChange={(e) => userSetting({ ...setting, period_length: e.target.value })}/>
       </span>
       <span className='box-cycle'>
         <p className='cycle-length'>CYCLE LENGTH </p>
-        <input type="number" value={setting.cycle_length} className="input-border" placeholder="28" onChange={(e) => userSetting({ ...setting, cycle_length: e.target.value })}/>
+        <input type="number" value={setting.cycle_length} maxLength={60} minLength={1} className="input-border" placeholder="28" onChange={(e) => userSetting({ ...setting, cycle_length: e.target.value })}/>
       </span>
       <span className='box-phase'>
         <p className='phase-length'>LUTHEAL PHASE LENGTH </p>
-        <input type="number" value={setting.luteal_length} className="input-border" placeholder="14" onChange={(e) => userSetting({ ...setting, luteal_length: e.target.value })}/>
+        <input type="number" value={setting.luteal_length} maxLength={60} minLength={1}  className="input-border" placeholder="14" onChange={(e) => userSetting({ ...setting, luteal_length: e.target.value })}/>
       </span>
       { saveBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={saveConfirm}> Save </button>: null }
       { editBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={handleEditStt}> Edit </button>: null }
@@ -340,6 +362,7 @@ function handleEditStt(e) {
       <div className="periodLastMonth">
         <p className="last-month">Period Last Month</p>
         {showRangeDatePicker ? <RangePicker onChange={onChange} className='setting-range-picker'/> : <p className="calculated">The next menstrual cycle has been calculated.</p> }
+
       </div>
       {showBtnSave ? <button className="period-submit" type="button" onClick={() => { submitDate()}} >Save</button> : null }
     </div>
