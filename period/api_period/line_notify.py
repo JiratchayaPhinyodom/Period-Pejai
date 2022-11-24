@@ -11,12 +11,13 @@
 import requests
 
 
-def get_access_token(code):  # ได้ token ออกมา
+def get_access_token(code, uid):  # ได้ token ออกมา
     api_url = "https://notify-bot.line.me/oauth/token"
     content_type = "application/x-www-form-urlencoded"
 
     grant_type = "authorization_code"
     code = code
+    uid = uid
     redirect_uri = 'http://localhost:3000/'
     client_id = '3i37SxxITCH1t4ngUNAPuz'
     client_secret = 'OL8v9BglCOlCvn1AVEpw2xwbsUuRU4iYRjES6jrL7GQ'
@@ -24,6 +25,7 @@ def get_access_token(code):  # ได้ token ออกมา
     data = {
         "grant_type": grant_type,
         "code": code,
+        "uid": uid,
         "redirect_uri": redirect_uri,
         "client_id": client_id,
         "client_secret": client_secret
@@ -36,7 +38,7 @@ def send_notification(message, token):  # เอาไว้ส่งข้อ�
     url = 'https://notify-api.line.me/api/notify'
     token = token
     headers = {'content-type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Bearer ' + token}
+               'Authorization': 'Bearer ' + token}
 
     r = requests.post(url, headers=headers, data={'message': message})
     return r.json()['status']
