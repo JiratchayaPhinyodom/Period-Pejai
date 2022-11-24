@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 ]
 
 CRONJOBS = [
-    ('* * * * *', 'api_period.cron.my_cron_job')
+    ('*/5 * * * *', 'api_period.cron.my_cron_job')
 ]
 
 MIDDLEWARE = [
