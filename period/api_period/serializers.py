@@ -24,9 +24,15 @@ class MyDiaryPage(serializers.ModelSerializer):
     class Meta:
         model = PeriodData
         fields = ["pain_level", "blood_level", "diary_text", "uid", "date"]
-        
+
 
 class MyPeriod(serializers.ModelSerializer):
     class Meta:
         model = DateRange
         fields = ["period_phase", "uid"]
+
+
+class MyNotification(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = ["token", "uid"]
