@@ -23,9 +23,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRETKEY', default='28y5s0l^fhej+)(3=helvnh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-CORS_ALLOWED_ORIGINS = [
- "https://period-pejai-front-end.vercel.app/",
-]
+
 
 ALLOWED_HOSTS = ['creammmm.pythonanywhere.com']
 os.environ['DJANGO_SETTINGS_MODULE'] = 'period.settings'
@@ -48,7 +46,6 @@ CRONJOBS = [
     ('* * * * *', 'api_period.cron.my_cron_job')
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -60,7 +57,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
 ]
-
 
 ROOT_URLCONF = "period.urls"
 
@@ -134,6 +130,13 @@ LOGIN_REDIRECT_URL = "home"
 # auth and allauth
 # AUTH_USER_MODEL = 'periods.User'
 
+CORS_ALLOWED_ORIGINS = [
+ "https://period-pejai-front-end.vercel.app/",
+ "http://localhost:3000",
+]
+
+CORS_ALLOW_ALL_ORIGINS = False
+
 CORS_ALLOW_METHODS = [
     "DELETE",
     "GET",
@@ -142,3 +145,17 @@ CORS_ALLOW_METHODS = [
     "POST",
     "PUT",
 ]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
+CORS_ALLOW_CREDENTIALS = False
