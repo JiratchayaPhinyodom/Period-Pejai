@@ -105,9 +105,8 @@
   box-shadow: 0.5em 0.5em #f8ad9d;
   width: 50em;
   height: 35em;
-  margin: 5cm;
-  /* margin-top: -20cm;
-  margin-left: 15cm; */
+  margin: 2.5cm;
+  margin-left: 5cm;
 }
 
 .setting-submit {
