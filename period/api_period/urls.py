@@ -11,6 +11,8 @@ urlpatterns = [
     path('login', login_request),
     path('setting', my_form),
     path('notification', redirect_line),
+    path('get_token', views.GetAccessToken.as_view()),
+    # path('send_message', views.NotificationCallback.as_view()),
     path('predict', views.predict_date),
     path('luteal', views.predict_luteal),
     path('ping', views.ping),

@@ -13,6 +13,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 import ast
 import datetime
+from .line_notify import *
+from django.views import generic
 
 
 def main(request):
@@ -29,11 +31,12 @@ class Data(generics.ListCreateAPIView):
 class Diary(generics.ListCreateAPIView):
     queryset = PeriodData.objects.all()
     serializer_class = MyDiaryPage
-    
+
 
 class Period(generics.ListCreateAPIView):
     queryset = DateRange.objects.all()
     serializer_class = MyPeriod
+
 
 @api_view(['GET'])
 def predict_date(request):
@@ -44,19 +47,20 @@ def predict_date(request):
         # print(setting_data)
         if not setting_data.exists():
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        setting_data = setting_data[0]    
+        setting_data = setting_data[0]
         tmp_list = sorted([i.period_phase for i in DateRange.objects.filter(uid=request.GET["uid"])])
         # print(tmp_list)
-        period_start_day = ast.literal_eval(tmp_list[len(tmp_list)-1])
-        period_start_day = datetime.datetime.strptime(period_start_day[len(period_start_day)-1][0], '%Y-%m-%d')
+        period_start_day = ast.literal_eval(tmp_list[len(tmp_list) - 1])
+        period_start_day = datetime.datetime.strptime(period_start_day[len(period_start_day) - 1][0], '%Y-%m-%d')
         # print(period_start_day)
         next_first_day = period_start_day + datetime.timedelta(days=setting_data.cycle_length)
         for _ in range(setting_data.period_length):
             list_data.append(str(next_first_day)[:10])
             next_first_day += datetime.timedelta(days=1)
-        
+
         print(list_data)
         return JsonResponse({"result": list_data})
+
 
 @api_view(['GET'])
 def predict_luteal(request):
@@ -69,8 +73,8 @@ def predict_luteal(request):
         setting_data = setting_data[0]
         tmp_list = sorted([i.period_phase for i in DateRange.objects.filter(uid=request.GET["uid"])])
         print(tmp_list)
-        period_start_day = ast.literal_eval(tmp_list[len(tmp_list)-1])
-        period_start_day = datetime.datetime.strptime(period_start_day[len(period_start_day)-1][0], '%Y-%m-%d')
+        period_start_day = ast.literal_eval(tmp_list[len(tmp_list) - 1])
+        period_start_day = datetime.datetime.strptime(period_start_day[len(period_start_day) - 1][0], '%Y-%m-%d')
         # print(period_start_day)
         next_first_day = period_start_day + datetime.timedelta(days=setting_data.luteal_length)
         next_first_day = str(next_first_day)[:10]
@@ -125,10 +129,11 @@ def my_form(request):
         serializer = MyData(setting_data, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(status=status.HTTP_201_CREATED, data=serializer.data)            
+            return JsonResponse(status=status.HTTP_201_CREATED, data=serializer.data)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
-        
+
+
 @api_view(['POST', 'GET', 'DELETE'])
 def my_period(request):
     print(request.data)
@@ -151,8 +156,8 @@ def my_period(request):
     # elif request.method == "DELETE":
 
     return Response(status=status.HTTP_400_BAD_REQUEST)
-    
-    
+
+
 @api_view(['POST', 'GET', 'PATCH'])
 def my_diary(request):
     print(request.data)
@@ -204,15 +209,9 @@ def redirect_line(request):
 #     print(r.text)
 
 
-
 @api_view(["GET"])
 def ping(request):
     return JsonResponse({"message": "hello world"})
-
-def response(code):
-    code = ""
-    state = ""
-    pass
 
 
 # LineView จะต้องเอาไปเขียน class เพื่อใช้ส่งข้อความว่าจะส่งไปวันไหน
@@ -231,16 +230,21 @@ def response(code):
 #     def get(self, request, *args, **kwargs):
 #         code = request.GET['code'] # get the code ได้โค้ดไปใส่ใน get access token
 
-# class GetAccessToken(generics.DetailView):
-#     def get(self, request, *args, **kwargs):
-#         code = request.data["code"]
-#         token = get_access_token(code)
-#         return JsonResponse({"token": token})
-
+class GetAccessToken(generic.DetailView):
+    def get(self, request, *args, **kwargs):
+        if request.method == "GET":
+            code = request.GET["code"]
+            uid = request.GET["uid"]
+            print(code)
+            print(uid)
+            token = get_access_token(code, uid)
+            Notification.objects.create(token=token, uid=uid)
+            send_notification("Your period will likely start in the next 3 days.", token)
+            return JsonResponse({"token": token})
 
 # class NotificationCallback(generic.DetailView):
 #     """A class that handles the callback after user authorize notification."""
-
+#
 #     def get(self, request, *args, **kwargs):
 #         token = request.data['token']
 #         message = request.data["message"]  # get the code ได้โค้ดไปใส่ใน get access token
