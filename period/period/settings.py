@@ -36,11 +36,11 @@ INSTALLED_APPS = [
     "api_period.apps.ApiPeriodConfig",
     "corsheaders",  # new
     "period",
-    "django_crontab"
+    # "django_crontab"
 ]
 
 CRONJOBS = [
-    ('*/5 * * * *', 'api_period.cron.my_cron_job')
+    ('* * * * *', 'api_period.cron.my_scheduled_job')
 ]
 
 MIDDLEWARE = [
