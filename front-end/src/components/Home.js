@@ -362,7 +362,7 @@ return (
                 <div className="pain-level-container">
                     <Slider className="slider-position" onChange={setPainLevel} value={painLevel} min={0} max={10}></Slider>
                 </div>
-            <div className="home-title">BLOOD LEVEL {bloodLevel}</div>
+            <div className="home-title">BLOOD LEVEL</div>
                 
             <div className="blood-level-container">
                     {[1, 2, 3].map((value, index) => (
