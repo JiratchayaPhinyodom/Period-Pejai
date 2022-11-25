@@ -14,7 +14,7 @@ import StepFour from "./pics/step4.png";
 import StepFive from "./pics/step5.png";
 import StepSix from "./pics/step6.png";
 import ScrollToTop from "./ScrollToTop";
-import 'animate.css';
+// import 'animate.css';
 
 //sign in with google
 import { signInWithGoogle } from "../firebase"

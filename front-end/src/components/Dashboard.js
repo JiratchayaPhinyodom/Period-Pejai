@@ -21,9 +21,7 @@ import { auth } from '../firebase'
 
 
 const Dashboard= () =>{
-  const [error, setError] = useState("")
   const { currentUser} = useAuth()
-  const [loading, setLoading] = useState(false)
   const history = useHistory();
   const [setting, userSetting] = useState({
     birth_year: "",
@@ -304,6 +302,18 @@ function handleEditStt(e) {
     }
   }, [])
 
+  const [loadingInput, setLoadingInput] = useState(false)
+  useEffect(()=> {
+    console.log('type', typeof setting.birth_year)
+    if (typeof setting.birth_year === "number" && typeof setting.period_length === "number" && typeof setting.cycle_length === "number" && typeof setting.luteal_length){
+      if (setting.birth_year > 1960 && setting.birth_year < 2022 && setting.period_length > 0 && setting.cycle_length > 0 && setting.period_length > 0) {
+        setLoadingInput(true)
+        // hover()
+        console.log('success')
+      }
+      }
+    },[setting])
+
   return (
     <div className='App'>
     <div className='left-side'>
@@ -356,8 +366,8 @@ function handleEditStt(e) {
         <p className='phase-length'>LUTHEAL PHASE LENGTH </p>
         <input type="number" value={setting.luteal_length} maxLength={60} minLength={1}  className="input-border" placeholder="14" onChange={(e) => userSetting({ ...setting, luteal_length: e.target.value })}/>
       </span>
-      { saveBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={saveConfirm}> Save </button>: null }
-      { editBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={handleEditStt}> Edit </button>: null }
+      { saveBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={saveConfirm} disabled={loadingInput}> Save </button>: null }
+      { editBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={handleEditStt} disabled={loadingInput}> Edit </button>: null }
       <p className="must">You must fill here first</p>
       <div className="periodLastMonth">
         <p className="last-month">Period Last Month</p>
