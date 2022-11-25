@@ -15,7 +15,7 @@ import LineLink from "./pics/line_button.png";
 import { InputNumber, Space } from 'antd';
 import Input from "antd/lib/input/Input";
 import { DatePicker } from 'antd';
-
+import moment from 'moment';
 
 import { auth } from '../firebase'
 
@@ -371,7 +371,13 @@ function handleEditStt(e) {
       <p className="must">You must fill here first</p>
       <div className="periodLastMonth">
         <p className="last-month">Period Last Month</p>
-        {showRangeDatePicker ? <RangePicker onChange={onChange} className='setting-range-picker'/> : <p className="calculated">The next menstrual cycle has been calculated.</p> }
+        {showRangeDatePicker ? <RangePicker onChange={onChange} className='setting-range-picker'
+        disabledDate={(current) => {
+          let customDate = moment().format("YYYY-MM-DD");
+          return current && current < moment(customDate, "YYYY-MM-DD").subtract(2, 'M');
+        }} 
+        
+        /> : <p className="calculated">The next menstrual cycle has been calculated.</p> }
 
       </div>
       {showBtnSave ? <button className="period-submit" type="button" onClick={() => { submitDate()}} >Save</button> : null }

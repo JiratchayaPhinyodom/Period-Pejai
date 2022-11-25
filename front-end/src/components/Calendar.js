@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import React, { useState, useEffect } from "react";
 import { Button } from 'antd';
 import { DatePicker } from 'antd';
+import moment from 'moment';
 
 function Calendars({date, setDate, rangeDate, setRangeDate, period, luteal}) {
 
@@ -175,7 +176,10 @@ function Calendars({date, setDate, rangeDate, setRangeDate, period, luteal}) {
       
       {/* Use range date */}
       <p>When is your period come?</p>
-      <RangePicker onChange={onChange} className='userperiod'/> 
+      <RangePicker onChange={onChange} className='userperiod'  disabledDate={(current) => {
+          let customDate = moment().format("YYYY-MM-DD");
+          return current && current < moment(customDate, "YYYY-MM-DD").subtract(2, 'M');
+        }} /> 
       {showBtn ? <button type="button" onClick={() => { submitDate()}} >Save</button> : null }
         <br></br>
     </div>
