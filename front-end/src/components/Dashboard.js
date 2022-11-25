@@ -76,7 +76,7 @@ const Dashboard= () =>{
    console.log("code", code);
    console.log("LINE GET request")
      try {
-         const url_line_get = 'http://127.0.0.1:8000/api/get_token' + '?uid=' + currentUser.uid + '&' + '?code=' + code
+         const url_line_get = 'http://127.0.0.1:8000/api/get_token' + '?uid=' + currentUser.uid + '&' + 'code=' + code
          const res_line = await fetch(url_line_get)
          // const res_json_line = await res_line.json()
          // console.log("res_json_line = ",res_json_line)
