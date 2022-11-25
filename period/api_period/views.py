@@ -33,6 +33,11 @@ class Diary(generics.ListCreateAPIView):
     serializer_class = MyDiaryPage
 
 
+class Notification(generics.ListCreateAPIView):
+    queryset = Notification.objects.all()
+    serializer_class = MyNotification
+
+
 class Period(generics.ListCreateAPIView):
     queryset = DateRange.objects.all()
     serializer_class = MyPeriod
@@ -204,6 +209,6 @@ class GetAccessToken(generic.DetailView):
             return JsonResponse({"token": token})
 
 
-class NotificationViewSet(generic.DetailView):
-    queryset = Notification.objects.all()
-    serializer_class = MyNotification
+# class NotificationViewSet(generic.DetailView):
+#     queryset = Notification.objects.all()
+#     serializer_class = MyNotification

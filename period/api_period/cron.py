@@ -1,7 +1,6 @@
 import requests
 from datetime import datetime
 
-
 def send_notification(message, token):  # เอาไว้ส่งข้อความพร้อมกับ token
     url = 'https://notify-api.line.me/api/notify'
     token = token
