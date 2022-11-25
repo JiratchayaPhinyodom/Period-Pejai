@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom"
 import "./Login.css"
 import Dots from "./pics/dots.png";
 import LogoPic from "./pics/app_logo.png";
+import ScrollToTop from "./ScrollToTop";
 
 //sign in with google
 import { signInWithGoogle } from "../firebase"
@@ -28,6 +29,7 @@ export default function Login() {
 
   return (
     <div className="login">
+      <ScrollToTop></ScrollToTop>
       <div className="hero">
           <ul>
             <li onClick={() => scrollToSection(whatis)} className="link"> What is Period Pejai?</li>

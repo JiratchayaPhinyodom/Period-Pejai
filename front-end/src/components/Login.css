@@ -1,0 +1,149 @@
+.login {
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    height: 821px;
+    width: 1440px;
+    background-color: #fffaed;
+}
+
+.hero {
+    height: 821px;
+    width: 1440px;
+    background-color: #7b7aaf;
+}
+
+.what-is {
+    height: 821px;
+    width: 1440px;
+    background-color: #f5cac3;
+}
+
+.about-us {
+    height: 821px;
+    width: 1440px;
+    background-color: #d8f3dc;
+}
+
+.login-zone {
+    height: 821px;
+    width: 1440px;
+    background-color: lemonchiffon;
+}
+
+.link {
+    text-decoration: none;
+    display: inline;
+    padding: 20px 20px;
+    font-weight: 700;
+    font-size: large;
+    cursor: pointer;
+}
+
+  /* scroll to top button */
+.top-btn-position {
+    position: fixed;
+    bottom: 15px;
+    right: 20px;
+}
+
+.top-btn-style {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
+.top-btn-style:hover {
+    animation: none;
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+a{
+    color: black;
+}
+
+.login-google {
+    margin-top: 60px;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: 'Gaegu', cursive;
+    font-weight: bold;
+    background: #f8ad9d;
+    border: 1px solid black;
+    border-radius: 16px;
+    box-shadow: 4px 3px;
+    color: black;
+    padding: 6px 70px;
+    margin-left: 200px;
+}
+
+.login-topper-form {
+    height: 55px;
+    margin-left: 12rem;
+    width: 1070px;
+    background-color: #f8ad9d;
+    border: 2px solid black;
+    border-radius: 5px;
+    
+}
+
+.login-form {
+    margin-top: -15px;
+    margin-left: 12rem;
+    background-color: white;
+    border: 2px solid black;
+    padding: 12rem;
+    height: 600px;
+    width: 1070px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.head-login {
+    display: flex;
+    text-align: center;
+    font-size: 50px;
+    margin-top: -500px;
+    margin-left: 70px;
+}
+
+.paragraph-login {
+    font-family: 'Gaegu', cursive;
+    display: flex;
+    text-align: justify;
+    font-size: 30px;
+    margin-top: 60px;
+}
+
+.App-logo {
+    position: relative;
+    top: -330px;
+    left: 640px;
+}
+
+.login-dot-component{
+    position: relative;
+    top: -310px;
+    left: -330px;
+}
+
+.login-curve-component{
+    position: relative;
+    top: -310px;
+    left: -390px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+}
+}
