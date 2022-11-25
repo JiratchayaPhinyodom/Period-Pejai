@@ -8,7 +8,7 @@ from django.contrib.auth import login
 from django.contrib import messages
 from .models import *
 from rest_framework.response import Response
-from .serializers import MyData, MyDiaryPage, MyPeriod
+from .serializers import MyData, MyDiaryPage, MyPeriod, MyNotification
 from rest_framework import status
 from rest_framework.decorators import api_view
 import ast
@@ -186,29 +186,6 @@ def my_diary(request):
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-def redirect_line(request):
-    # response = redirect('/redirect-success/')
-    print(request.GET['code'])
-    # collect_state = request.GET['state']
-    # url = 'https://notify-bot.line.me/oauth/token'
-    # x = requests.post(url=url, json=collect_code)
-    # print(x)
-    # return HttpResponse('success')
-    pass
-
-
-# def request():
-#     code = "fPg7tfstCUlDW5s5TiAha5"
-#     client_id = "3i37SxxITCH1t4ngUNAPuz"
-#     url = "http://127.0.0.1:8000/api/setting"
-#     state = "abcdef123456"
-#     token = "IYsi0yC9Et4EqFHBzv9evCyN1azoebOgKkyU4UygHwj"
-#     headers = {'content-type': 'application/x-www-form-urlencoded', 'Authorization': 'Bearer ' + token}
-#     msg = 'Hello LINE Notify'
-#     r = requests.post(url, headers=headers, data={'message': msg})
-#     print(r.text)
-
-
 @api_view(["GET"])
 def ping(request):
     return JsonResponse({"message": "hello world"})
@@ -223,13 +200,6 @@ def ping(request):
 #         return HttpResponseRedirect(url)
 
 
-# Get code กลับมา
-# class NotificationCallback(generics.Detail.View):
-#     """A class that handles the callback after user authorize notification."""
-
-#     def get(self, request, *args, **kwargs):
-#         code = request.GET['code'] # get the code ได้โค้ดไปใส่ใน get access token
-
 class GetAccessToken(generic.DetailView):
     def get(self, request, *args, **kwargs):
         if request.method == "GET":
@@ -239,13 +209,10 @@ class GetAccessToken(generic.DetailView):
             print(uid)
             token = get_access_token(code, uid)
             Notification.objects.create(token=token, uid=uid)
-            send_notification("Your period will likely start in the next 3 days.", token)
+            # send_notification("Your period will likely start in the next 3 days.", token)
             return JsonResponse({"token": token})
 
-# class NotificationCallback(generic.DetailView):
-#     """A class that handles the callback after user authorize notification."""
-#
-#     def get(self, request, *args, **kwargs):
-#         token = request.data['token']
-#         message = request.data["message"]  # get the code ได้โค้ดไปใส่ใน get access token
-#         send_notification(message, token)
+
+class NotificationViewSet(generic.DetailView):
+    queryset = Notification.objects.all()
+    serializer_class = MyNotification
