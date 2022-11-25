@@ -1,5 +1,5 @@
 import requests
-import datetime
+from datetime import datetime, timedelta
 
 
 def send_notification(message, token):  # เอาไว้ส่งข้อความพร้อมกับ token
@@ -11,13 +11,14 @@ def send_notification(message, token):  # เอาไว้ส่งข้อ�
     return r.json()['status']
 
 
-uid_token = requests.get("http://localhost:8000/api/notification")
+uid_token = requests.get("http://localhost:8000/api/notification").json()
 for i in uid_token:
-    print(i)
     uid = i["uid"]
-    token = i["token"]
-    response = requests.get(f"http://localhost:8000/api/predict/?uid={uid}")
+    response = requests.get(f"http://localhost:8000/api/predict?uid={uid}").json()['result']
+    print(response)
     current_date = datetime.now()
-    next_three_day = datetime.datetime.strptime(response[0])
-    if current_date + 3 == next_three_day:
-        send_notification("message", token)
+    date_time_str = response[0]
+    date_time_obj = datetime.strptime(date_time_str, '%Y-%M-%d')
+    if current_date + timedelta(days=3) == date_time_obj:
+        token = i["token"]
+        send_notification("Your period will likely start in the next 3 days.", token)
