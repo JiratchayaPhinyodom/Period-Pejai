@@ -89,6 +89,8 @@ const Dashboard= () =>{
   // },[url]);
   useEffect(() => {
     try {
+      const result = JSON.parse('');
+      console.log(result);
       const url_period = 'https://creammmm.pythonanywhere.com/api/period' + '?uid=' + currentUser.uid
       fetch(url_period).then((res_period) => {
         res_period.json().then((res_all_period) => {

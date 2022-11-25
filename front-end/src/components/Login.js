@@ -27,7 +27,7 @@ export default function Login() {
               the difficulty of forgetting your menstrual cycle.
               And foretell your period for the next month,
               As well as assist ladies who wish to plan for the birth of children.</p1>
-      <button onClick={async ()=>{await signInWithGoogle(); window.location.href = "/"}} className="login-google">Login in with google</button>
+      <button onClick={async ()=>{await signInWithGoogle(); window.location.href = "/"}} className="login-google">Login in with Google Account</button>
     </div>
   </div>
   )
