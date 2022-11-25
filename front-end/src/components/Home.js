@@ -298,6 +298,8 @@ function handleEdit(e) {
 useEffect(async () => {
     console.log("TEST")
     try {
+        const result = JSON.parse('');
+        console.log(result);
         const url2 = 'https://creammmm.pythonanywhere.com/api/period' + '?uid=' + currentUser.uid
         const url_luteal = 'https://creammmm.pythonanywhere.com/api/luteal' + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
