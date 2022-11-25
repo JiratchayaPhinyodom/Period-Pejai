@@ -89,8 +89,6 @@ const Dashboard= () =>{
   // },[url]);
   useEffect(() => {
     try {
-      const result = JSON.parse('');
-      console.log(result);
       const url_period = 'https://creammmm.pythonanywhere.com/api/period' + '?uid=' + currentUser.uid
       fetch(url_period).then((res_period) => {
         res_period.json().then((res_all_period) => {
@@ -326,9 +324,9 @@ function handleEditStt(e) {
         <p className='home_p' >Home</p>
       </Button> : null}
     </span>
-    <p className='reminder'>REMINDER</p>
-      <ToggleSwitch label="Period"/>
-      <ToggleSwitch label="Ovaluation"/>
+    <p className='reminder'>CONNECT WITH LINE</p>
+      {/* <ToggleSwitch label="Period"/>
+      <ToggleSwitch label="Ovaluation"/> */}
     <a href="https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=3i37SxxITCH1t4ngUNAPuz&redirect_uri=http://localhost:3000/&scope=notify&state=abcdef123456">
             <img src={LineLink} className="line-logo" height = "50px"/>
     </a>
