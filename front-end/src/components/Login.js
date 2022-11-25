@@ -43,7 +43,7 @@ export default function Login() {
       <ScrollToTop></ScrollToTop>
       <div className="hero">
           <ul>
-          <img src={LogoPic} className= "animate__animated animate__tada animate__infinite" height = "100px"/>
+          <img src={LogoPic} className= "animate__animated animate__tada animate__infinite" height = "150px"/>
             <a onClick={() => scrollToSection(whatis)} className="link animate__animated animate__fadeIn"> What is Period Pejai?</a>
             <a onClick={() => scrollToSection(instruc)} className="link animate__animated animate__fadeIn animate__delay-1s">Instructions</a>
             <a onClick={() => scrollToSection(login)} className="link animate__animated animate__fadeIn animate__delay-3s">Login</a>
