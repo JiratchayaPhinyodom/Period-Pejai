@@ -1,6 +1,7 @@
 from .views import *
 from django.urls import path
 from . import views
+from . import line_notify
 
 urlpatterns = [
     path('home', main),
@@ -10,7 +11,7 @@ urlpatterns = [
     path('signup', register_request),
     path('login', login_request),
     path('setting', my_form),
-    path('notification', redirect_line),
+    path('notification', NotificationViewSet.as_view()),
     path('get_token', views.GetAccessToken.as_view()),
     # path('send_message', views.NotificationCallback.as_view()),
     path('predict', views.predict_date),
