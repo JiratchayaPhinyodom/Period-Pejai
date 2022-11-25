@@ -208,7 +208,6 @@ class GetAccessToken(generic.DetailView):
             # send_notification("Your period will likely start in the next 3 days.", token)
             return JsonResponse({"token": token})
 
-
 # class NotificationViewSet(generic.DetailView):
 #     queryset = Notification.objects.all()
 #     serializer_class = MyNotification
