@@ -37,8 +37,8 @@ def get_access_token(code, uid):  # ได้ token ออกมา
 def send_notification(message, token):  # เอาไว้ส่งข้อความพร้อมกับ token
     url = 'https://notify-api.line.me/api/notify'
     token = token
-    headers = {'content-type': 'application/x-www-form-urlencoded',
-               'Authorization': 'Bearer ' + token}
+    headers = {'content-type': 'application/x-www-form-urlencoded', 'Authorization': f'Bearer {token}'}
+
 
     r = requests.post(url, headers=headers, data={'message': message})
     return r.json()['status']
