@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from 'antd';
 import { DatePicker } from 'antd';
 import moment from 'moment';
+import { SettingOutlined, HomeOutlined, LogoutOutlined, UserOutlined} from '@ant-design/icons';
 
 function Calendars({date, setDate, rangeDate, setRangeDate, period, luteal}) {
 
@@ -156,7 +157,12 @@ function Calendars({date, setDate, rangeDate, setRangeDate, period, luteal}) {
 
   return (
     <div className='calendar'>
-      <h1 className='text-center'>PERIOD-PEJAI CALENDAR</h1>
+      <span >
+        <button className='backtosetting' type="primary" variant="link" onClick={()=>{window.location.href = "/"}}>
+          <p className='set'>
+          <SettingOutlined className='icon_set'/>Setting</p></button></span>
+
+      <h1 className='text-center-title'>PERIOD-PEJAI CALENDAR</h1>
       <div className='calendar-container'>
         {calen}
       </div>
@@ -169,17 +175,17 @@ function Calendars({date, setDate, rangeDate, setRangeDate, period, luteal}) {
         </p>
       ) : (
         <p className='text-center'>
-          <span className='bold'>Default selected date:</span>{' '}
+          <span className='bold'>Selected date:</span>{' '}
           {date.toDateString()}
         </p>
       )}
       
       {/* Use range date */}
-      <p>When is your period come?</p>
-      <RangePicker onChange={onChange} className='userperiod'  disabledDate={(current) => {
+      <p className='text-center'>When is your period come?</p>
+      <div className='diary-period' ><RangePicker classNsme="userperiod" onChange={onChange} disabledDate={(current) => {
           let customDate = moment().format("YYYY-MM-DD");
           return current && current < moment(customDate, "YYYY-MM-DD").subtract(2, 'M');
-        }} /> 
+        }} /> </div> 
       {showBtn ? <button type="button" onClick={() => { submitDate()}} >Save</button> : null }
         <br></br>
     </div>
