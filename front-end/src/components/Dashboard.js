@@ -24,19 +24,19 @@ const Dashboard= () =>{
   const { currentUser} = useAuth()
   const history = useHistory();
   const [setting, userSetting] = useState({
-    birth_year: "",
-    period_length: "", 
-    cycle_length: "", 
-    luteal_length: "", 
+    birth_year: 0,
+    period_length: 0, 
+    cycle_length: 0, 
+    luteal_length: 0, 
     uid: currentUser.uid
   });
 
   // States for edit button
   const [historySetting, setHistorySetting] = useState({
-    old_birth_year: "",
-    old_period_length: "",
-    old_cycle_length: "",
-    old_luteal_length: "",
+    old_birth_year: 0,
+    old_period_length: 0,
+    old_cycle_length: 0,
+    old_luteal_length: 0,
   });
   // const [latest, periodLatest] = useState({
   //   diary_text: "",
@@ -172,8 +172,11 @@ const Dashboard= () =>{
   }
 
 function handleInfoSubmit(e) {
-  if (typeof setting.birth_year === "number" && typeof setting.period_length === "number" && typeof setting.cycle_length === "number" && typeof setting.luteal_length){
-    if (setting.birth_year > 1960 && setting.birth_year < 2022 && setting.period_length > 0 && setting.cycle_length > 0 && setting.period_length > 0) {
+  console.log(typeof parseInt(setting.birth_year), typeof parseInt(setting.period_length), typeof parseInt(setting.cycle_length), typeof parseInt(setting.luteal_length))
+  if (typeof parseInt(setting.birth_year) === "number" && typeof parseInt(setting.period_length) === "number" && typeof parseInt(setting.cycle_length) === "number" && typeof parseInt(setting.luteal_length) === "number"){
+    console.log(typeof setting.birth_year, typeof setting.period_length, typeof parseInt(setting.cycle_length), typeof setting.luteal_length)
+    if (parseInt(setting.birth_year) > 1960 && parseInt(setting.birth_year) < 2022 && parseInt(setting.period_length) > 0 && parseInt(setting.cycle_length) > 0 && parseInt(setting.luteal_length) > 0) {
+      console.log(typeof setting.birth_year, typeof setting.period_length, typeof parseInt(setting.cycle_length), typeof setting.luteal_length)
         // setLoadingInput(true)
       // hover()
       console.log('success')
@@ -202,8 +205,11 @@ function handleInfoSubmit(e) {
 }
 
 function handleEditStt(e) {
-  if (typeof setting.birth_year === "number" && typeof setting.period_length === "number" && typeof setting.cycle_length === "number" && typeof setting.luteal_length){
-    if (setting.birth_year > 1960 && setting.birth_year < 2022 && setting.period_length > 0 && setting.cycle_length > 0 && setting.period_length > 0) {
+  console.log(typeof parseInt(setting.birth_year), typeof parseInt(setting.period_length), typeof parseInt(setting.cycle_length), typeof parseInt(setting.luteal_length))
+  if (typeof parseInt(setting.birth_year) === "number" && typeof parseInt(setting.period_length) === "number" && typeof parseInt(setting.cycle_length) === "number" && typeof parseInt(setting.luteal_length) === "number"){
+    console.log(typeof setting.birth_year, typeof setting.period_length, typeof parseInt(setting.cycle_length), typeof setting.luteal_length)
+    if (parseInt(setting.birth_year) > 1960 && parseInt(setting.birth_year) < 2022 && parseInt(setting.period_length) > 0 && parseInt(setting.cycle_length) > 0 && parseInt(setting.luteal_length) > 0) {
+      console.log(typeof setting.birth_year, typeof setting.period_length, typeof parseInt(setting.cycle_length), typeof setting.luteal_length)
   window.location.reload(false);
   e.preventDefault();
   Swal.fire({
@@ -252,7 +258,8 @@ function handleEditStt(e) {
     luteal_length: new_luteal_length, 
     uid: currentUser.uid}),
   })
-  .catch((err) => console.log(err));}}
+  .catch((err) => console.log(err));
+}}
   else {
     alert("Please fill in correctly.")
   }
@@ -285,6 +292,10 @@ function handleEditStt(e) {
       fetch(url_data).then((res_data) => {
         // {birth_year: 2002, period_length: 7, cycle_length: 28, luteal_length: 14, uid: '6FzQ7n2JRQfygAwkXpKhJOfa83v2'}
         // console.log("all", res_data.json())
+        if (res_data.status == 400) {
+          console.log("undefind")
+        }
+        else {
         res_data.json().then((res_all_data) => { 
 
           console.log('all_data', res_all_data)
@@ -317,10 +328,9 @@ function handleEditStt(e) {
               }
             }
           })
-
-        })
+        
+        })}
       })
-
     }
     catch (error) {
       console.log(error)

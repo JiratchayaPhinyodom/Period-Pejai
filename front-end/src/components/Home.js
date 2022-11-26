@@ -45,9 +45,11 @@ const uidRef = useRef();
 const [periodPhase, setPeriodPhase] = useState(0);
 const [dataDate, setDataDate] = useState(0);
 const {currentUser} = useAuth();
-    const [period, setPeriod] = useState([]);
-    const [showCa, setShowCa] = useState(null)
+const [period, setPeriod] = useState([]);
+const [showCa, setShowCa] = useState(null)
 // console.log(currentUser.uid)
+
+// const [reload, setReload] = useState(false)
 const [home, userHome] = useState({
     diary_text: "",
     blood_level: "",
@@ -91,8 +93,12 @@ useEffect(() => {
     try {
         const url_diary = 'https://creammmm.pythonanywhere.com/api/diary' + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
-
         fetch(url_diary).then((res_diary) => {
+            if (res_diary.status == 400) {
+                console.log("undefind")
+              }
+            else {
+                
             res_diary.json().then((res_all_diary) => {
                 console.log("all", res_all_diary)
                 // const painData = []
@@ -150,7 +156,9 @@ useEffect(() => {
                         }
                     }
                 })
-            })
+            })}
+        
+
         })
     }
     catch (error) {
@@ -179,10 +187,8 @@ const setR = useCallback((data) => {
         const url2 = 'https://creammmm.pythonanywhere.com/api/period' + '?uid=' + currentUser.uid
         const url_luteal = 'https://creammmm.pythonanywhere.com/api/luteal' + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
-
         fetch(url2).then((res2) => {
             res2.json().then((res_json2) => {
-
                 console.log(res_json2)
                 const periodData = []
                 res_json2.forEach((ListInList) => {
@@ -244,6 +250,7 @@ function handleSubmit(e) {
         date: DateToString(date)}),
     })
     .catch((err) => console.log(err));
+    window.location.reload(false);
 }
 
 function handleEdit(e) {
@@ -289,6 +296,7 @@ function handleEdit(e) {
         date: DateToString(date)}),
     })
     .catch((err) => console.log(err));
+    window.location.reload(false);
 }
 
 
@@ -326,15 +334,16 @@ useEffect(async () => {
         const res_json = await res.json()
         console.log("predict_data",res_json.result)
         setPeriod(res_json.result)
-    } catch (error) {
+     }catch (error) {
         console.log(error)
     }
 }, [])
-
     useEffect(() => {
     console.log("period change",period)
+    // window.location.reload(false);
         
 },[period])
+
 
 useEffect(() => {
     console.log("luuteal change",luteal)
@@ -348,9 +357,8 @@ const [activeBtnBlood3, setactiveBtnBlood3] = useState(true)
 
 return (
     <div className="home">
+        {/* {reload ? window.location.reload(false) : null} */}
         <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate} setRangeDate={setR} period={period} luteal={luteal} />
-        
-
         {/* <button type="button" onClick={(ev) => {console.log("button",rangeDate)}} >rangeDate</button> */}
         {/* <button type="button" onClick={() => setClick(click+1)} >setClick</button> */}
         <div className="home-form">
