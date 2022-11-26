@@ -364,7 +364,7 @@ function handleEditStt(e) {
     </span>
     <span>
     {/* showBtnHome &&  */}
-    { editBtnStt && checkPeriod ? <Button className='route_home' type="primary" variant="link" onClick={()=>{history.push("/home")}} style={{ background: "#b8bedd"}}>
+    { editBtnStt && checkPeriod ? <Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/home"}} style={{ background: "#b8bedd"}}>
         <HomeOutlined className='icon_home'/>
         <p className='home_p' >Home</p>
       </Button> : null}
@@ -376,7 +376,7 @@ function handleEditStt(e) {
             <img src={LineLink} className="line-logo" height = "50px"/>
     </a>
     <span>
-      <Button className='logout' type="primary" variant="link" onClick={() => {auth.signOut(); {history.push("/login")}}} style={{ background: "#b8bedd"}}>
+      <Button className='logout' type="primary" variant="link" onClick={() => {auth.signOut(); {window.location.href = "./login"}}} style={{ background: "#b8bedd"}}>
         <LogoutOutlined className='icon_logout'/>
           <p className='logout_p' >Logout</p>
         </Button>
