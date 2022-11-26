@@ -85,26 +85,33 @@ const Dashboard= () =>{
   //       console.log(error)
   //   }
   // },[url]);
-  useEffect(() => {
+  useEffect(async () => {
     try {
+      console.log('uid',currentUser.id)
       const url_period = 'https://creammmm.pythonanywhere.com/api/period' + '?uid=' + currentUser.uid
-      fetch(url_period).then((res_period) => {
-        res_period.json().then((res_all_period) => {
-          console.log("peee", res_all_period.length)
-          if (res_all_period.length > 0) {
-            console.log('kkkkk')
-            setCheckPeriod(true)
-          }
-          else {
-            setCheckPeriod(false)
-          }
-        })
+      await fetch(url_period).then((res_period) => {
+        if (res_period.status == 400) {
+          console.log("undefind")
+        }
+        else {
+          console.log('uid',currentUser.id)
+          res_period.json().then((res_all_period) => {
+            console.log("peee", res_all_period.length)
+            if (res_all_period.length > 0) {
+              console.log('kkkkk')
+              setCheckPeriod(true)
+            }
+            else {
+              setCheckPeriod(false)
+            }
+          })
+        }
       })
     }
     catch (error) {
       console.log(error)
   }
-  }, [])
+  }, [currentUser])
 
   const saveConfirm = () => {
   Swal.fire({
@@ -165,26 +172,38 @@ const Dashboard= () =>{
   }
 
 function handleInfoSubmit(e) {
-  e.preventDefault();
-    let url = "https://creammmm.pythonanywhere.com/api/setting";
-    fetch(url, {
-    method: "POST",
-    headers: { "Content-type": "application/json" },
-    body: JSON.stringify(setting)
-  })
-  .then((response) => {
-    userSetting({
-    birth_year: "",
-    period_length: "", 
-    cycle_length: "", 
-    luteal_length: "", 
-    uid: currentUser.uid})
-    window.location.reload(false);
-  })
-  .catch((err) => console.log(err));
+  if (typeof setting.birth_year === "number" && typeof setting.period_length === "number" && typeof setting.cycle_length === "number" && typeof setting.luteal_length){
+    if (setting.birth_year > 1960 && setting.birth_year < 2022 && setting.period_length > 0 && setting.cycle_length > 0 && setting.period_length > 0) {
+        // setLoadingInput(true)
+      // hover()
+      console.log('success')
+      e.preventDefault();
+      let url = "https://creammmm.pythonanywhere.com/api/setting";
+      fetch(url, {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(setting)
+    })
+    .then((response) => {
+      userSetting({
+      birth_year: "",
+      period_length: "", 
+      cycle_length: "", 
+      luteal_length: "", 
+      uid: currentUser.uid})
+      window.location.reload(false);
+    })
+    .catch((err) => console.log(err));
+    }
+    }
+  else {
+    alert("Please fill in correctly.")
+  }
 }
 
 function handleEditStt(e) {
+  if (typeof setting.birth_year === "number" && typeof setting.period_length === "number" && typeof setting.cycle_length === "number" && typeof setting.luteal_length){
+    if (setting.birth_year > 1960 && setting.birth_year < 2022 && setting.period_length > 0 && setting.cycle_length > 0 && setting.period_length > 0) {
   window.location.reload(false);
   e.preventDefault();
   Swal.fire({
@@ -233,7 +252,10 @@ function handleEditStt(e) {
     luteal_length: new_luteal_length, 
     uid: currentUser.uid}),
   })
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err));}}
+  else {
+    alert("Please fill in correctly.")
+  }
 }
 
 
@@ -305,17 +327,17 @@ function handleEditStt(e) {
     }
   }, [])
 
-  const [loadingInput, setLoadingInput] = useState(false)
-  useEffect(()=> {
-    console.log('type', typeof setting.birth_year)
-    if (typeof setting.birth_year === "number" && typeof setting.period_length === "number" && typeof setting.cycle_length === "number" && typeof setting.luteal_length){
-      if (setting.birth_year > 1960 && setting.birth_year < 2022 && setting.period_length > 0 && setting.cycle_length > 0 && setting.period_length > 0) {
-        setLoadingInput(true)
-        // hover()
-        console.log('success')
-      }
-      }
-    },[setting])
+  // const [loadingInput, setLoadingInput] = useState(false)
+  // useEffect(()=> {
+  //   console.log('type', typeof setting.birth_year)
+  //   if (typeof setting.birth_year === "number" && typeof setting.period_length === "number" && typeof setting.cycle_length === "number" && typeof setting.luteal_length){
+  //     if (setting.birth_year > 1960 && setting.birth_year < 2022 && setting.period_length > 0 && setting.cycle_length > 0 && setting.period_length > 0) {
+  //       setLoadingInput(true)
+  //       // hover()
+  //       console.log('success')
+  //     }
+  //     }
+  //   },[setting])
 
   return (
     <div className='App'>
@@ -369,8 +391,8 @@ function handleEditStt(e) {
         <p className='phase-length'>LUTHEAL PHASE LENGTH </p>
         <input type="number" value={setting.luteal_length} maxLength={60} minLength={1}  className="input-border" placeholder="14" onChange={(e) => userSetting({ ...setting, luteal_length: e.target.value })}/>
       </span>
-      { saveBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={saveConfirm} disabled={loadingInput}> Save </button>: null }
-      { editBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={handleEditStt} disabled={loadingInput}> Edit </button>: null }
+      { saveBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={saveConfirm} > Save </button>: null }
+      { editBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={handleEditStt} > Edit </button>: null }
       <p className="must">You must fill here first</p>
       <div className="periodLastMonth">
         <p className="last-month">Period Last Month</p>
