@@ -161,6 +161,7 @@ const Dashboard= () =>{
     // setShowBtnSetting(false)
     setshowRangeDatePicker(false)
     setShowBtnSave(false)
+    window.location.reload(false);
   }
 
 function handleInfoSubmit(e) {
@@ -178,11 +179,13 @@ function handleInfoSubmit(e) {
     cycle_length: "", 
     luteal_length: "", 
     uid: currentUser.uid})
+    window.location.reload(false);
   })
   .catch((err) => console.log(err));
 }
 
 function handleEditStt(e) {
+  window.location.reload(false);
   e.preventDefault();
   Swal.fire({
     position: 'center',
