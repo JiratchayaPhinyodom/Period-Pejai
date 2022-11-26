@@ -250,7 +250,6 @@ function handleSubmit(e) {
         date: DateToString(date)}),
     })
     .catch((err) => console.log(err));
-    window.location.reload(false);
 }
 
 function handleEdit(e) {
@@ -296,7 +295,6 @@ function handleEdit(e) {
         date: DateToString(date)}),
     })
     .catch((err) => console.log(err));
-    window.location.reload(false);
 }
 
 
@@ -340,7 +338,6 @@ useEffect(async () => {
 }, [])
     useEffect(() => {
     console.log("period change",period)
-    // window.location.reload(false);
         
 },[period])
 
@@ -357,7 +354,6 @@ const [activeBtnBlood3, setactiveBtnBlood3] = useState(true)
 
 return (
     <div className="home">
-        {/* {reload ? window.location.reload(false) : null} */}
         <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate} setRangeDate={setR} period={period} luteal={luteal} />
         {/* <button type="button" onClick={(ev) => {console.log("button",rangeDate)}} >rangeDate</button> */}
         {/* <button type="button" onClick={() => setClick(click+1)} >setClick</button> */}
