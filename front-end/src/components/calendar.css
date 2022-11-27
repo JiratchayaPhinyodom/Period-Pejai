@@ -200,3 +200,17 @@
 .backtosetting:hover, .backtologin:hover {
   border-color: #1377b5;
 }
+
+.period-submit {
+  margin-top: 15px;
+  margin-left: 15em;
+  cursor: pointer;
+  font-size: 20px;
+  font-family: 'Gaegu', cursive;
+  font-weight: bold;
+  background: #7B7AAF;
+  border-radius: 30px;
+  color: white;
+  height: 2em;
+  width: 5em;
+}

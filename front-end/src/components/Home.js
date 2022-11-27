@@ -96,7 +96,7 @@ useEffect(() => {
         fetch(url_diary).then((res_diary) => {
             if (res_diary.status == 400) {
                 console.log("undefind")
-              }
+            }
             else {
                 
             res_diary.json().then((res_all_diary) => {
@@ -332,7 +332,7 @@ useEffect(async () => {
         const res_json = await res.json()
         console.log("predict_data",res_json.result)
         setPeriod(res_json.result)
-     }catch (error) {
+    }catch (error) {
         console.log(error)
     }
 }, [])
