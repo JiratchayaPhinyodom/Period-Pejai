@@ -115,18 +115,18 @@ const Dashboard= () =>{
   }
   }, [currentUser])
 
-  const saveConfirm = () => {
-  Swal.fire({
-    title: 'Your information has been saved!',
-    width: 600,
-    padding: '3em',
-    color: '#716add',
-    background: '#fff',
-    backdrop: `
-      rgba(0,0,123,0.4)
-    `
-  })
-}
+//   const saveConfirm = () => {
+//   Swal.fire({
+//     title: 'Your information has been saved!',
+//     width: 600,
+//     padding: '3em',
+//     color: '#716add',
+//     background: '#fff',
+//     backdrop: `
+//       rgba(0,0,123,0.4)
+//     `
+//   })
+// }
 
   const { RangePicker } = DatePicker;
 
@@ -179,6 +179,17 @@ function handleInfoSubmit(e) {
     console.log(typeof setting.birth_year, typeof setting.period_length, typeof parseInt(setting.cycle_length), typeof setting.luteal_length)
     if (parseInt(setting.birth_year) > 1960 && parseInt(setting.birth_year) < 2022 && parseInt(setting.period_length) > 0 && parseInt(setting.cycle_length) > 0 && parseInt(setting.luteal_length) > 0) {
       console.log(typeof setting.birth_year, typeof setting.period_length, typeof parseInt(setting.cycle_length), typeof setting.luteal_length)
+      Swal.fire({
+        title: 'Your information has been saved!',
+        width: 600,
+        padding: '3em',
+        color: '#716add',
+        background: '#fff',
+        backdrop: `
+          rgba(0,0,123,0.4)
+        `
+      })
+      window.location.reload(false);
         // setLoadingInput(true)
       // hover()
       console.log('success')
@@ -199,7 +210,11 @@ function handleInfoSubmit(e) {
       window.location.reload(false);
     })
     .catch((err) => console.log(err));
-    }}
+    }
+    else {
+      alert("Please fill in correctly. You can see the instruction on the menu tab.")
+    }
+  }
   else {
     alert("Please fill in correctly. You can see the instruction on the menu tab.")
   }
@@ -211,7 +226,6 @@ function handleEditStt(e) {
     console.log(typeof setting.birth_year, typeof setting.period_length, typeof parseInt(setting.cycle_length), typeof setting.luteal_length)
     if (parseInt(setting.birth_year) > 1960 && parseInt(setting.birth_year) < 2022 && parseInt(setting.period_length) > 0 && parseInt(setting.cycle_length) > 0 && parseInt(setting.luteal_length) > 0) {
       console.log(typeof setting.birth_year, typeof setting.period_length, typeof parseInt(setting.cycle_length), typeof setting.luteal_length)
-  window.location.reload(false);
   e.preventDefault();
   Swal.fire({
     position: 'center',
@@ -260,32 +274,15 @@ function handleEditStt(e) {
     uid: currentUser.uid}),
   })
   .catch((err) => console.log(err));
-  }}
+  }
   else {
     alert("Please fill in correctly. You can see the instruction on the menu tab.")
   }
 }
-
-
-// function handleLatestSubmit(e) {
-//   // userHome({ diary_text: diaryRef.current.value,
-//   // blood_level: bloodLevel,
-//   // pain_level: painLevel,})
-//   e.preventDefault();
-//   let url = "http://creammmm.pythonanywhere.com/api/diary";
-//   fetch(url, {
-//   method: "PUT",
-//   headers: { "Content-type": "application/json" },
-//   body: JSON.stringify({ diary_text: diaryRef.current.value,
-//       blood_level: bloodLevel,
-//       pain_level: painLevel,
-//       start_date: rangeDate[0],
-//       end_date: rangeDate[1],
-//       uid: "",
-//       date: DateToString(date),}),
-//   })
-//   .catch((err) => console.log(err));
-// }
+  else {
+    alert("Please fill in correctly. You can see the instruction on the menu tab.")
+  }
+}
 
   useEffect(() => {
     try {
@@ -403,7 +400,7 @@ function handleEditStt(e) {
         <p className='phase-length'>LUTHEAL PHASE LENGTH </p>
         <input type="number" value={setting.luteal_length} maxLength={60} minLength={1}  className="input-border" placeholder="14" onChange={(e) => userSetting({ ...setting, luteal_length: e.target.value })}/>
       </span>
-      { saveBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={saveConfirm} > Save </button>: null }
+      { saveBtnStt ? <button id="submit" className="setting-submit" type="submit" > Save </button>: null }
       { editBtnStt ? <button id="submit" className="setting-submit" type="submit" onClick={handleEditStt} > Edit </button>: null }
       <p className="must">You must fill here first</p>
       <div className="periodLastMonth">
