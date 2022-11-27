@@ -1,3 +1,6 @@
+![example workflow](https://github.com/JiratchayaPhinyodom/Period-Pejai/actions/workflows/python-app.yml/badge.svg)
+
+[//]: # ([![codecov])
 # Period-Pejai
 
 ## What does it do?
