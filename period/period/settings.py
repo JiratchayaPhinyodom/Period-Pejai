@@ -18,12 +18,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = config('SECRET_KEY', cast=str, default='missing-secret-key')
-SECRET_KEY = os.environ.get('DJANGO_SECRETKEY', default='28y5s0l^fhej+)(3=helvnh(&fxaf75nk=-vmbwr%rv39^izg0')
+SECRET_KEY = os.environ.get('DJANGO_SECRETKEY',
+                            default='28y5s0l^fhej+)(3=helvnh'
+                                    '(&fxaf75nk=-vmbwr%rv39^izg0')
 # DEBUG = os.environ.get('DJANGO_DEBUG', '') == 'True'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
-
-
 
 ALLOWED_HOSTS = ['creammmm.pythonanywhere.com']
 os.environ['DJANGO_SETTINGS_MODULE'] = 'period.settings'
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "api_period.apps.ApiPeriodConfig",
-    "corsheaders", #new
+    "corsheaders",  # new
     "period",
 ]
 # 'django_crontab'
@@ -119,7 +119,6 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -131,8 +130,8 @@ LOGIN_REDIRECT_URL = "home"
 # AUTH_USER_MODEL = 'periods.User'
 
 CORS_ALLOWED_ORIGINS = [
- "https://period-pejai-front-end.vercel.app",
- "http://localhost:3000",
+    "https://period-pejai-front-end.vercel.app",
+    "http://localhost:3000",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = False

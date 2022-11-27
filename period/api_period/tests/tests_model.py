@@ -8,7 +8,8 @@ class SettingModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
-        Setting.objects.create(birth_year=2002, period_length=7, cycle_length=28, luteal_length=14,
+        Setting.objects.create(birth_year=2002, period_length=7,
+                               cycle_length=28, luteal_length=14,
                                uid="6FzQ7n2JRQfygAwkXpKhJOfa83v2")
 
     def test_birth_year_label(self):

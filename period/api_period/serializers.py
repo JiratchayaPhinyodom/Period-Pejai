@@ -1,4 +1,6 @@
 from rest_framework.serializers import Serializer, FileField
+from rest_framework import serializers
+from .models import Setting, PeriodData, DateRange, Notification
 
 
 class UploadFile(Serializer):
@@ -8,16 +10,13 @@ class UploadFile(Serializer):
         fields = ['file_uploaded']
 
 
-from rest_framework import serializers
-from .models import *
-
-
 class MyData(serializers.ModelSerializer):
     """To see the data in database file"""
 
     class Meta:
         model = Setting
-        fields = ["birth_year", "period_length", "cycle_length", "luteal_length", "uid"]
+        fields = ["birth_year", "period_length", "cycle_length",
+                  "luteal_length", "uid"]
 
 
 class MyDiaryPage(serializers.ModelSerializer):

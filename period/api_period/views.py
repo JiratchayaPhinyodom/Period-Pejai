@@ -3,17 +3,17 @@ from rest_framework import generics
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
-from .forms import *
+from .forms import MySettingPage, MyHomePage, MyPeriodData, NewUserForm
 from django.contrib.auth import login
 from django.contrib import messages
-from .models import *
+from .models import Setting, PeriodData, Notification, DateRange
 from rest_framework.response import Response
 from .serializers import MyData, MyDiaryPage, MyPeriod, MyNotification
 from rest_framework import status
 from rest_framework.decorators import api_view
 import ast
 import datetime
-from .line_notify import *
+from .line_notify import get_access_token
 from django.views import generic
 
 
@@ -53,12 +53,16 @@ def predict_date(request):
         if not setting_data.exists():
             return Response(status=status.HTTP_400_BAD_REQUEST)
         setting_data = setting_data[0]
-        tmp_list = sorted([i.period_phase for i in DateRange.objects.filter(uid=request.GET["uid"])])
+        tmp_list = sorted([i.period_phase for i in DateRange.
+                          objects.filter(uid=request.GET["uid"])])
         # print(tmp_list)
         period_start_day = ast.literal_eval(tmp_list[len(tmp_list) - 1])
-        period_start_day = datetime.datetime.strptime(period_start_day[len(period_start_day) - 1][0], '%Y-%m-%d')
+        period_start_day = datetime.datetime.strptime(period_start_day
+                                                      [len(period_start_day)
+                                                       - 1][0], '%Y-%m-%d')
         # print(period_start_day)
-        next_first_day = period_start_day + datetime.timedelta(days=setting_data.cycle_length)
+        next_first_day = period_start_day + datetime.timedelta(
+            days=setting_data.cycle_length)
         for _ in range(setting_data.period_length):
             list_data.append(str(next_first_day)[:10])
             next_first_day += datetime.timedelta(days=1)
@@ -76,12 +80,16 @@ def predict_luteal(request):
             return Response(status=status.HTTP_400_BAD_REQUEST)
         # print(setting_data)
         setting_data = setting_data[0]
-        tmp_list = sorted([i.period_phase for i in DateRange.objects.filter(uid=request.GET["uid"])])
+        tmp_list = sorted([i.period_phase for i in DateRange.
+                          objects.filter(uid=request.GET["uid"])])
         print(tmp_list)
         period_start_day = ast.literal_eval(tmp_list[len(tmp_list) - 1])
-        period_start_day = datetime.datetime.strptime(period_start_day[len(period_start_day) - 1][0], '%Y-%m-%d')
+        period_start_day = datetime.datetime.strptime(period_start_day
+                                                      [len(period_start_day)
+                                                       - 1][0], '%Y-%m-%d')
         # print(period_start_day)
-        next_first_day = period_start_day + datetime.timedelta(days=setting_data.luteal_length)
+        next_first_day = period_start_day + datetime. \
+            timedelta(days=setting_data.luteal_length)
         next_first_day = str(next_first_day)[:10]
         return JsonResponse({"result": [next_first_day]})
 
@@ -102,7 +110,8 @@ def login_request(request):
         else:
             messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
-    return render(request=request, template_name="registration/login.html", context={"login_form": form})
+    return render(request=request, template_name="registration/login.html",
+                  context={"login_form": form})
 
 
 def register_request(request):
@@ -113,9 +122,11 @@ def register_request(request):
             login(request, user)
             messages.success(request, "Registration successful.")
             return redirect("/api/login")
-        messages.error(request, "Unsuccessful registration. Invalid information.")
+        messages.error(request, "Unsuccessful registration. "
+                                "Invalid information.")
     form = NewUserForm()
-    return render(request=request, template_name="registration/register.html", context={"register_form": form})
+    return render(request=request, template_name="registration/register.html",
+                  context={"register_form": form})
 
 
 @api_view(['POST', 'PATCH'])
@@ -134,7 +145,8 @@ def my_form(request):
         serializer = MyData(setting_data, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(status=status.HTTP_201_CREATED, data=serializer.data)
+            return JsonResponse(status=status.HTTP_201_CREATED,
+                                data=serializer.data)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -175,11 +187,14 @@ def my_diary(request):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "PATCH":
-        period_data = PeriodData.objects.get(uid=request.data["uid"], date=request.data["date"])
-        serializer = MyDiaryPage(period_data, data=request.data, partial=True)
+        period_data = PeriodData.objects.get(uid=request.data["uid"],
+                                             date=request.data["date"])
+        serializer = MyDiaryPage(period_data, data=request.data,
+                                 partial=True)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(status=status.HTTP_201_CREATED, data=serializer.data)
+            return JsonResponse(status=status.HTTP_201_CREATED,
+                                data=serializer.data)
     elif request.method == "GET":
         diary = PeriodData.objects.filter(uid=request.GET["uid"])
         if len(diary) == 0:
@@ -205,7 +220,8 @@ class GetAccessToken(generic.DetailView):
             print(uid)
             token = get_access_token(code, uid)
             Notification.objects.create(token=token, uid=uid)
-            # send_notification("Your period will likely start in the next 3 days.", token)
+            # send_notification("Your period will likely
+            # start in the next 3 days.", token)
             return JsonResponse({"token": token})
 
 # class NotificationViewSet(generic.DetailView):

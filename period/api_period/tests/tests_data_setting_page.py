@@ -1,12 +1,13 @@
+from rest_framework import status
 from rest_framework.test import APITestCase
-from ..urls import *
 
 
 class TestDataAPIViewTests(APITestCase):
     """To check get/post in data page """
 
     def setUp(self):
-        self.data = {'birth_year': 2002, 'period_length': 7, 'cycle_length': 28, 'luteal_length': 14,
+        self.data = {'birth_year': 2002, 'period_length': 7,
+                     'cycle_length': 28, 'luteal_length': 14,
                      'uid': "6FzQ7n2JRQfygAwkXpKhJOfa83v2"}
 
     def test_get_data(self):
@@ -23,7 +24,8 @@ class TestDataAPIViewTests(APITestCase):
 
 class TestDataDetailAPIViewTests(APITestCase):
     def setUp(self):
-        self.data = {'birth_year': 2002, 'period_length': 7, 'cycle_length': 28, 'luteal_length': 14,
+        self.data = {'birth_year': 2002, 'period_length': 7,
+                     'cycle_length': 28, 'luteal_length': 14,
                      "uid": "6FzQ7n2JRQfygAwkXpKhJOfa83v2"}
         self.client.post(
             self.client.get('/api/data'), self.data, format='json')

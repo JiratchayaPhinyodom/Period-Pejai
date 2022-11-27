@@ -1,5 +1,5 @@
 from django import forms
-from .models import *
+from .models import Setting, PeriodData, DateRange, Notification
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -7,9 +7,13 @@ from django.contrib.auth.models import User
 class MySettingPage(forms.ModelForm):
     class Meta:
         model = Setting
-        fields = ["birth_year", "period_length", "cycle_length", "luteal_length", "uid"]
-        labels = {"birth_year": "Year of Birth", "period_length": "Period length",
-                  "cycle_length": "Cycle length", "luteal length": "Luteal length", "uid": "Uid"}
+        fields = ["birth_year", "period_length", "cycle_length",
+                  "luteal_length", "uid"]
+        labels = {"birth_year": "Year of Birth",
+                  "period_length": "Period length",
+                  "cycle_length": "Cycle length",
+                  "luteal length": "Luteal length",
+                  "uid": "Uid"}
 
 
 class MyHomePage(forms.ModelForm):
