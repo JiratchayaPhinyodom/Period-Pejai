@@ -182,11 +182,13 @@ function Calendars({date, setDate, rangeDate, setRangeDate, period, luteal}) {
       
       {/* Use range date */}
       <p className='text-center'>When is your period come?</p>
-        <div className='diary-period' ><RangePicker classNsme="userperiod" onChange={onChange} disabledDate={(current) => {
+        <div className='diary-period' ><RangePicker className="userperiod" onChange={onChange} disabledDate={(current) => {
             let customDate = moment().format("YYYY-MM-DD");
             return current && current < moment(customDate, "YYYY-MM-DD").subtract(2, 'M');
           }} /> 
         </div> 
+        <div className='space'>
+        </div>
         {showBtn ? <button type="button" className="period-submit" onClick={() => { submitDate()}} >Save</button> : null }
           <br></br>
       </div>

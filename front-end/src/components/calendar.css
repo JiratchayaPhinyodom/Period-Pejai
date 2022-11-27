@@ -162,7 +162,7 @@
   color: white;
   box-shadow: 0.25em 0.25em #f8ad9d;
   display: flex;
-  width: 7cm; 
+  width: 9cm; 
   height: 1cm;
   justify-content: center;
   font-size: 16px;
@@ -213,4 +213,8 @@
   color: white;
   height: 2em;
   width: 5em;
+}
+
+.space {
+  height: 15px;
 }

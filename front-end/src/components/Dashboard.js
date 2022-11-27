@@ -16,6 +16,7 @@ import { InputNumber, Space } from 'antd';
 import Input from "antd/lib/input/Input";
 import { DatePicker } from 'antd';
 import moment from 'moment';
+import Inst from "./pics/setting_inst.png";
 
 import { auth } from '../firebase'
 
@@ -85,6 +86,7 @@ const Dashboard= () =>{
   //       console.log(error)
   //   }
   // },[url]);
+
   useEffect(async () => {
     try {
       console.log('uid',currentUser.id)
@@ -197,10 +199,9 @@ function handleInfoSubmit(e) {
       window.location.reload(false);
     })
     .catch((err) => console.log(err));
-    }
-    }
+    }}
   else {
-    alert("Please fill in correctly.")
+    alert("Please fill in correctly. You can see the instruction on the menu tab.")
   }
 }
 
@@ -259,9 +260,9 @@ function handleEditStt(e) {
     uid: currentUser.uid}),
   })
   .catch((err) => console.log(err));
-}}
+  }}
   else {
-    alert("Please fill in correctly.")
+    alert("Please fill in correctly. You can see the instruction on the menu tab.")
   }
 }
 
@@ -369,6 +370,7 @@ function handleEditStt(e) {
         <p className='home_p' >Home</p>
       </Button> : null}
     </span>
+    <a className='reminder2' href={Inst}>SETTING INSTRUCTION</a>
     <p className='reminder'>CONNECT WITH LINE</p>
       {/* <ToggleSwitch label="Period"/>
       <ToggleSwitch label="Ovaluation"/> */}
