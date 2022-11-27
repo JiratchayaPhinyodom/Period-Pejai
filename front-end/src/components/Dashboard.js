@@ -101,9 +101,9 @@ const Dashboard= () =>{
               console.log('kkkkk')
               setCheckPeriod(true)
             }
-            else {
-              setCheckPeriod(false)
-            }
+            // else {
+            //   setCheckPeriod(false)
+            // }
           })
         }
       })
