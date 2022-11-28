@@ -37,6 +37,7 @@ jobs:
         pip install coverage
     - name: test_manage.py
       run : |
-            cd period coverage run manage.py test api_period
+            cd period
+            coverage run manage.py test api_period
     - name: upload report
       uses: codecov/codecov-action@v3
