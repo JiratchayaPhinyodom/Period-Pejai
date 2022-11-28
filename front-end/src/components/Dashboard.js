@@ -164,13 +164,13 @@ const Dashboard= () =>{
     })
     .then((response) => {
       console.log(response)
+      window.location.reload(false)
     })
     // console.log("submitRangeDate in setting page", range_date)
     // console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
     // setShowBtnSetting(false)
     setshowRangeDatePicker(false)
     setShowBtnSave(false)
-    window.location.reload(false);
   }
 
 function handleInfoSubmit(e) {
