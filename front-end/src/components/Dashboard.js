@@ -189,7 +189,6 @@ function handleInfoSubmit(e) {
           rgba(0,0,123,0.4)
         `
       })
-      window.location.reload(false);
         // setLoadingInput(true)
       // hover()
       console.log('success')
@@ -271,7 +270,9 @@ function handleEditStt(e) {
     period_length: new_period_length, 
     cycle_length: new_cycle_length, 
     luteal_length: new_luteal_length, 
-    uid: currentUser.uid}),
+    uid: currentUser.uid,
+  }),
+    
   })
   .catch((err) => console.log(err));
   }
