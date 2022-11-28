@@ -1,6 +1,4 @@
-from .views import main, Data, my_diary, \
-    my_period, register_request, login_request, \
-    Notification, my_form
+from .views import main, Data, my_diary, my_period, register_request, login_request, Notification, my_form
 from django.urls import path
 from . import views
 
