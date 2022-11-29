@@ -92,7 +92,6 @@ const [luteal, setLuteal] = useState([])
 useEffect(() => {
     try {
         const url_diary = `${process.env.REACT_APP_SERVER_URL}/api/diary` + '?uid=' + currentUser.uid
-        // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
         fetch(url_diary).then((res_diary) => {
             if (res_diary.status == 400) {
                 console.log("undefind")
