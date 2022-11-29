@@ -79,6 +79,14 @@
   margin-top: 0.5cm;
 }
 
+.reminder2 {
+  font-size: 1.5rem;
+  color: #7b7aaf;
+  font-weight: bolder;
+  margin-top: 0.5cm;
+  text-decoration: underline;
+}
+
 .logout_p {
   font-size: 1.5rem;
   color: white; 
@@ -105,9 +113,8 @@
   box-shadow: 0.5em 0.5em #f8ad9d;
   width: 50em;
   height: 35em;
-  margin: 5cm;
-  margin-top: -20cm;
-  margin-left: 15cm;
+  margin: 2.5cm;
+  margin-left: 5cm;
 }
 
 .setting-submit {
@@ -206,4 +213,9 @@ color: #ffe4dc
 .must {
   font-size: 20px;
   margin-bottom: -2cm;
+}
+
+.calculated {
+  font-size: 20px;
+  margin-top: 0.8cm;
 }

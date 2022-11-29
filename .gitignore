@@ -22,3 +22,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+period/
+
+.coveragerc
+.flake8
+front-end/node_modules/

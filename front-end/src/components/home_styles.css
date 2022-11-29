@@ -141,3 +141,29 @@
     animation: App-logo-spin infinite 20s linear;
 }
 }
+
+.backtologin {
+    display: flex;
+    justify-content: flex-start;
+    border-style: solid;
+    border-color: #b8bedd;
+    background-color: #b8bedd;
+    border-radius: 3em;
+    height: 3.5em;
+    width: 11em;
+    color: white;
+    margin-left: 1cm;
+  }
+  .log {
+    font-size: 25px;
+    padding-left: 0.5cm;
+  }
+  
+  .icon_log {
+    margin-top: 0.175cm;
+    padding-right: 0.25cm;
+  }
+  
+  .backtologin:hover {
+    border-color: #1377b5;
+  }

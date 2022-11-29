@@ -39,15 +39,6 @@ const Dashboard= () =>{
     old_cycle_length: "",
     old_luteal_length: "",
   });
-  // const [latest, periodLatest] = useState({
-  //   diary_text: "",
-  //   blood_level: "",
-  //   pain_level: "",
-  //   start_date: "",
-  //   end_date: "",
-  //   uid: "",
-  //   date: "",
-  //   });
   console.log(setting);
 
   // states for button
@@ -60,11 +51,6 @@ const Dashboard= () =>{
 
   const [showBtnSave, setShowBtnSave] = useState(false)
   const [showRangeDatePicker, setshowRangeDatePicker] = useState(true)
-  // useEffect (() => {
-  //   if (btnCheck == 0) {
-  //   }
-
-  // })
   const [showBtnHome, setShowBtnHome] = useState(false)
   const [url, setUrl] = useState(window.location.href)
 
@@ -76,7 +62,11 @@ const Dashboard= () =>{
    console.log("code", code);
    console.log("LINE GET request")
      try {
+<<<<<<< HEAD
          const url_line_get = 'http://127.0.0.1:8000/api/get_token' + '?uid=' + currentUser.uid + '&' + 'code=' + code
+=======
+         const url_line_get = `${process.env.REACT_APP_SERVER_URL}/api/get_token` + '?uid=' + currentUser.uid + '&' + 'code=' + code
+>>>>>>> bugs-front-end
          const res_line = await fetch(url_line_get)
          // const res_json_line = await res_line.json()
          // console.log("res_json_line = ",res_json_line)
@@ -126,7 +116,7 @@ const Dashboard= () =>{
       uid: currentUser.uid
     }
     console.log(JSON.stringify(body))
-    let url = "https://creammmm.pythonanywhere.com/api/period";
+    let url = `${process.env.REACT_APP_SERVER_URL}/api/period`;
     fetch(url, {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -135,16 +125,13 @@ const Dashboard= () =>{
     .then((response) => {
       console.log(response)
     })
-    // console.log("submitRangeDate in setting page", range_date)
-    // console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
-    // setShowBtnSetting(false)
     setshowRangeDatePicker(false)
     setShowBtnSave(false)
   }
 
 function handleInfoSubmit(e) {
   e.preventDefault();
-    let url = "https://creammmm.pythonanywhere.com/api/setting";
+    let url = `${process.env.REACT_APP_SERVER_URL}/api/setting`;
     fetch(url, {
     method: "POST",
     headers: { "Content-type": "application/json" },
@@ -198,7 +185,7 @@ function handleEditStt(e) {
       // new_dict["diary_text"] = diaryRef;
       new_luteal_length = setting.luteal_length;
   }
-  let url = "https://creammmm.pythonanywhere.com/api/setting";
+  let url = `${process.env.REACT_APP_SERVER_URL}/api/setting`;
   fetch(url, {
   method: "PATCH",
   headers: { "Content-type": "application/json" },
@@ -212,30 +199,9 @@ function handleEditStt(e) {
   .catch((err) => console.log(err));
 }
 
-
-// function handleLatestSubmit(e) {
-//   // userHome({ diary_text: diaryRef.current.value,
-//   // blood_level: bloodLevel,
-//   // pain_level: painLevel,})
-//   e.preventDefault();
-//   let url = "http://creammmm.pythonanywhere.com/api/diary";
-//   fetch(url, {
-//   method: "PUT",
-//   headers: { "Content-type": "application/json" },
-//   body: JSON.stringify({ diary_text: diaryRef.current.value,
-//       blood_level: bloodLevel,
-//       pain_level: painLevel,
-//       start_date: rangeDate[0],
-//       end_date: rangeDate[1],
-//       uid: "",
-//       date: DateToString(date),}),
-//   })
-//   .catch((err) => console.log(err));
-// }
-
   useEffect(() => {
     try {
-      const url_data = 'https://creammmm.pythonanywhere.com/api/data' + '?uid=' + currentUser.uid
+      const url_data = `${process.env.REACT_APP_SERVER_URL}/api/data` + '?uid=' + currentUser.uid
       fetch(url_data).then((res_data) => {
         // {birth_year: 2002, period_length: 7, cycle_length: 28, luteal_length: 14, uid: '6FzQ7n2JRQfygAwkXpKhJOfa83v2'}
         // console.log("all", res_data.json())
@@ -300,7 +266,7 @@ function handleEditStt(e) {
     <p className='reminder'>REMINDER</p>
       <ToggleSwitch label="Period"/>
       <ToggleSwitch label="Ovaluation"/>
-    <a href="https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=3i37SxxITCH1t4ngUNAPuz&redirect_uri=http://localhost:3000/&scope=notify&state=abcdef123456">
+    <a href="https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=3i37SxxITCH1t4ngUNAPuz&redirect_uri=https://period-pejai-deploy.vercel.app/&scope=notify&state=abcdef123456">
             <img src={LineLink} className="line-logo" height = "50px"/>
     </a>
     <span>
