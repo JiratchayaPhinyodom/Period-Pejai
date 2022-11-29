@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRETKEY',
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['creammmm.pythonanywhere.com']
+ALLOWED_HOSTS = ['creammmm.pythonanywhere.com', '127.0.0.1']
 os.environ['DJANGO_SETTINGS_MODULE'] = 'period.settings'
 # Application definition
 
