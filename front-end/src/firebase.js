@@ -2,13 +2,13 @@ import firebase from "firebase/app"
 import "firebase/auth"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCmNgx-85bdx5L_fJxI844jdAQ9mlDxxT4",
-  authDomain: "period-pejai.firebaseapp.com",
-  projectId: "period-pejai",
-  storageBucket: "period-pejai.appspot.com",
-  messagingSenderId: "1068916256161",
-  appId: "1:1068916256161:web:793537c61ae1f915daafe0",
-  measurementId: "G-K1XDC06Z0D"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
