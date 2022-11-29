@@ -30,7 +30,7 @@ Next, you have to install the packages that are required for this repository.
     pip install -r requirements.txt
 ```
 
-Lastly, you have to build your server using `sample.env`.
+Lastly, you have to build your server using `.env` file (you can see the tamplate in sample_front.env for frontend and sample.env for backend).
 
 ## How to Run
 
