@@ -91,7 +91,7 @@ const [luteal, setLuteal] = useState([])
     
 useEffect(() => {
     try {
-        const url_diary = 'https://creammmm.pythonanywhere.com/api/diary' + '?uid=' + currentUser.uid
+        const url_diary = `${process.env.REACT_APP_SERVER_URL}/api/diary` + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
         fetch(url_diary).then((res_diary) => {
             if (res_diary.status == 400) {
@@ -173,7 +173,7 @@ const setR = useCallback((data) => {
     // use data ---> call api
     // [[],[],[]] not use
     // [[]] use this
-    let url = "https://creammmm.pythonanywhere.com/api/period";
+    let url = `${process.env.REACT_APP_SERVER_URL}/api/period`;
     fetch(url, {
         method: "POST",
         headers: { "Content-type": "application/json" },
@@ -183,9 +183,9 @@ const setR = useCallback((data) => {
         })
     }).then((response)=>{
         console.log("response period",response)
-        const url = 'https://creammmm.pythonanywhere.com/api/predict' + '?uid=' + currentUser.uid
-        const url2 = 'https://creammmm.pythonanywhere.com/api/period' + '?uid=' + currentUser.uid
-        const url_luteal = 'https://creammmm.pythonanywhere.com/api/luteal' + '?uid=' + currentUser.uid
+        const url = `${process.env.REACT_APP_SERVER_URL}/api/predict` + '?uid=' + currentUser.uid
+        const url2 = `${process.env.REACT_APP_SERVER_URL}/api/period` + '?uid=' + currentUser.uid
+        const url_luteal = `${process.env.REACT_APP_SERVER_URL}/api/luteal` + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
         fetch(url2).then((res2) => {
             res2.json().then((res_json2) => {
@@ -238,7 +238,7 @@ function handleSubmit(e) {
         popup: 'animate__animated animate__fadeOutUp'
         }
     })
-    let url = "https://creammmm.pythonanywhere.com/api/diary";
+    let url = `${process.env.REACT_APP_SERVER_URL}/api/diary`;
     fetch(url, {
     method: "POST",
     headers: { "Content-type": "application/json" },
@@ -283,7 +283,7 @@ function handleEdit(e) {
         new_diary = diaryRef.current.value;
     }
     console.log("new", new_diary);
-    let url = "https://creammmm.pythonanywhere.com/api/diary";
+    let url = `${process.env.REACT_APP_SERVER_URL}/api/diary`;
     fetch(url, {
     method: "PATCH",
     headers: { "Content-type": "application/json" },
@@ -302,8 +302,8 @@ function handleEdit(e) {
 useEffect(async () => {
     console.log("TEST")
     try {
-        const url2 = 'https://creammmm.pythonanywhere.com/api/period' + '?uid=' + currentUser.uid
-        const url_luteal = 'https://creammmm.pythonanywhere.com/api/luteal' + '?uid=' + currentUser.uid
+        const url2 = `${process.env.REACT_APP_SERVER_URL}/api/period` + '?uid=' + currentUser.uid
+        const url_luteal = `${process.env.REACT_APP_SERVER_URL}/api/luteal` + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
         const res2 = await fetch(url2)
         const res_json2 = await res2.json()
@@ -326,7 +326,7 @@ useEffect(async () => {
         console.log("luteal day= ",res_Luteal_json.result) // luteal day
         setLuteal(res_Luteal_json.result)
 
-        const url = 'https://creammmm.pythonanywhere.com/api/predict' + '?uid=' + currentUser.uid
+        const url = `${process.env.REACT_APP_SERVER_URL}/api/predict` + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
         const res = await fetch(url)
         const res_json = await res.json()
