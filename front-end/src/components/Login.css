@@ -11,6 +11,65 @@
     background-color: #fffaed;
 }
 
+.hero {
+    height: 821px;
+    width: 1440px;
+    background-color: #7b7aaf;
+}
+
+.what-is {
+    height: 1600px;
+    width: 1440px;
+    background-color: #f5cac3;
+}
+
+.instruction {
+    height: 1050px;
+    width: 1440px;
+    background-color: #f8ad9d;
+    flex-direction: column;
+}
+
+.login-zone {
+    height: 700px;
+    width: 1440px;
+    background-color: lemonchiffon;
+}
+
+.link {
+    text-decoration: none;
+    display: inline;
+    padding: 20px 20px;
+    font-weight: 700;
+    font-size: 30px;
+    cursor: pointer;
+    color: lemonchiffon;
+}
+
+  /* scroll to top button */
+.top-btn-position {
+    position: fixed;
+    bottom: 15px;
+    right: 20px;
+}
+
+.top-btn-style {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
+.top-btn-style:hover {
+    animation: none;
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
 a{
     color: black;
 }
@@ -27,11 +86,12 @@ a{
     box-shadow: 4px 3px;
     color: black;
     padding: 6px 70px;
-    margin-left: 200px;
+    margin-left: 10rem;
 }
 
 .login-topper-form {
     height: 55px;
+    margin-left: 12rem;
     width: 1070px;
     background-color: #f8ad9d;
     border: 2px solid black;
@@ -39,8 +99,17 @@ a{
     
 }
 
+.info{
+    margin-top: 10rem;
+    font-size: 50px;
+    font-weight: bold;
+    display: inline;
+    margin-left: 45 rem;
+}
+
 .login-form {
-    margin-top: -22px;
+    margin-top: -15px;
+    margin-left: 12rem;
     background-color: white;
     border: 2px solid black;
     padding: 12rem;
@@ -71,6 +140,27 @@ a{
     left: 640px;
 }
 
+.adver-pic {
+    margin-top: 3rem;
+    margin-left: 12rem;
+}
+
+.text-title-what-is {
+    color: #FC3F83;
+    font-size: 60px;
+    font-weight: bold;
+    margin-left: 2rem;
+
+}
+
+.mouse-on {
+    text-decoration: underline;
+}
+
+.info-block{
+    flex-direction: column;
+}
+
 .login-dot-component{
     position: relative;
     top: -310px;
@@ -87,4 +177,19 @@ a{
 .App-logo {
     animation: App-logo-spin infinite 20s linear;
 }
+}
+
+a:hover {
+    color: hotpink;
+}
+
+.web-des {
+    color: #7b7aaf;
+    font-weight: bold;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.inst-pic {
+    margin-left: 8rem;
 }

@@ -16,6 +16,7 @@ import { SettingOutlined, HomeOutlined, LogoutOutlined, UserOutlined} from '@ant
 import { auth } from '../firebase'
 import { useAuth } from '../contexts/AuthContext';
 import Swal from 'sweetalert2';
+import ButtonKub from './ButtonKub'
 
 function Home() {
  // React States
@@ -44,9 +45,11 @@ const uidRef = useRef();
 const [periodPhase, setPeriodPhase] = useState(0);
 const [dataDate, setDataDate] = useState(0);
 const {currentUser} = useAuth();
-    const [period, setPeriod] = useState([]);
-    const [showCa, setShowCa] = useState(null)
+const [period, setPeriod] = useState([]);
+const [showCa, setShowCa] = useState(null)
 // console.log(currentUser.uid)
+
+// const [reload, setReload] = useState(false)
 const [home, userHome] = useState({
     diary_text: "",
     blood_level: "",
@@ -88,10 +91,13 @@ const [luteal, setLuteal] = useState([])
     
 useEffect(() => {
     try {
-        const url_diary = 'https://creammmm.pythonanywhere.com/api/diary' + '?uid=' + currentUser.uid
-        // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
-
+        const url_diary = `${process.env.REACT_APP_SERVER_URL}/api/diary` + '?uid=' + currentUser.uid
         fetch(url_diary).then((res_diary) => {
+            if (res_diary.status == 400) {
+                console.log("undefind")
+            }
+            else {
+                
             res_diary.json().then((res_all_diary) => {
                 console.log("all", res_all_diary)
                 // const painData = []
@@ -108,48 +114,32 @@ useEffect(() => {
                     // console.log(diaryRef.current.value == '55')
 
                     if(date_diary === DateToString(date)) {
-                        setSaveBtn(false)
-                        setEditBtn(true)
                         console.log('Hello test')
                         console.log(blood)
                         check = 9999
                         console.log(check)
                         setDiaryValue(diary)
                         setPainLevel(pain)
+                        setBloodLevel(blood)
                         historyDiary.old_diary_text = diary;
                         historyDiary.old_blood_level = blood;
                         historyDiary.old_pain_level = pain;
-                        if (blood == 1) {
-                            setactiveBtnBlood1(false);
-                            setactiveBtnBlood2(true);
-                            setactiveBtnBlood3(true);
-                        }
-                        if (blood == 2) {
-                            setactiveBtnBlood2(false);
-                            setactiveBtnBlood1(true);
-                            setactiveBtnBlood3(true);
-                        }
-                        if (blood == 3) {
-                            setactiveBtnBlood3(false);
-                            setactiveBtnBlood1(true);
-                            setactiveBtnBlood2(true);
-                        }
                     } 
                     else {
                         if (check == 0) {
+                            setBloodLevel(0)
                             setSaveBtn(true)
                             setEditBtn(false)
                             console.log('success')
                             setDiaryValue('')    
                             setPainLevel(0);
-                            setactiveBtnBlood3(true);
-                            setactiveBtnBlood1(true);
-                            setactiveBtnBlood2(true);
 
                         }
                     }
                 })
-            })
+            })}
+        
+
         })
     }
     catch (error) {
@@ -164,7 +154,7 @@ const setR = useCallback((data) => {
     // use data ---> call api
     // [[],[],[]] not use
     // [[]] use this
-    let url = "https://creammmm.pythonanywhere.com/api/period";
+    let url = `${process.env.REACT_APP_SERVER_URL}/api/period`;
     fetch(url, {
         method: "POST",
         headers: { "Content-type": "application/json" },
@@ -174,14 +164,12 @@ const setR = useCallback((data) => {
         })
     }).then((response)=>{
         console.log("response period",response)
-        const url = 'https://creammmm.pythonanywhere.com/api/predict' + '?uid=' + currentUser.uid
-        const url2 = 'https://creammmm.pythonanywhere.com/api/period' + '?uid=' + currentUser.uid
-        const url_luteal = 'https://creammmm.pythonanywhere.com/api/luteal' + '?uid=' + currentUser.uid
+        const url = `${process.env.REACT_APP_SERVER_URL}/api/predict` + '?uid=' + currentUser.uid
+        const url2 = `${process.env.REACT_APP_SERVER_URL}/api/period` + '?uid=' + currentUser.uid
+        const url_luteal = `${process.env.REACT_APP_SERVER_URL}/api/luteal` + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
-
         fetch(url2).then((res2) => {
             res2.json().then((res_json2) => {
-
                 console.log(res_json2)
                 const periodData = []
                 res_json2.forEach((ListInList) => {
@@ -231,7 +219,7 @@ function handleSubmit(e) {
         popup: 'animate__animated animate__fadeOutUp'
         }
     })
-    let url = "https://creammmm.pythonanywhere.com/api/diary";
+    let url = `${process.env.REACT_APP_SERVER_URL}/api/diary`;
     fetch(url, {
     method: "POST",
     headers: { "Content-type": "application/json" },
@@ -276,7 +264,7 @@ function handleEdit(e) {
         new_diary = diaryRef.current.value;
     }
     console.log("new", new_diary);
-    let url = "https://creammmm.pythonanywhere.com/api/diary";
+    let url = `${process.env.REACT_APP_SERVER_URL}/api/diary`;
     fetch(url, {
     method: "PATCH",
     headers: { "Content-type": "application/json" },
@@ -295,8 +283,8 @@ function handleEdit(e) {
 useEffect(async () => {
     console.log("TEST")
     try {
-        const url2 = 'https://creammmm.pythonanywhere.com/api/period' + '?uid=' + currentUser.uid
-        const url_luteal = 'https://creammmm.pythonanywhere.com/api/luteal' + '?uid=' + currentUser.uid
+        const url2 = `${process.env.REACT_APP_SERVER_URL}/api/period` + '?uid=' + currentUser.uid
+        const url_luteal = `${process.env.REACT_APP_SERVER_URL}/api/luteal` + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
         const res2 = await fetch(url2)
         const res_json2 = await res2.json()
@@ -319,33 +307,21 @@ useEffect(async () => {
         console.log("luteal day= ",res_Luteal_json.result) // luteal day
         setLuteal(res_Luteal_json.result)
 
-    //     fetch(url_luteal).then((res_diary) => {
-    //         res_diary.json().then((res_all_diary) => {
-    //             console.log("lulu", res_all_diary.result)
-    //         })
-    // })
-        
-
-
-        const url = 'https://creammmm.pythonanywhere.com/api/predict' + '?uid=' + currentUser.uid
+        const url = `${process.env.REACT_APP_SERVER_URL}/api/predict` + '?uid=' + currentUser.uid
         // const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
         const res = await fetch(url)
         const res_json = await res.json()
         console.log("predict_data",res_json.result)
         setPeriod(res_json.result)
-
-
-
-        
-    } catch (error) {
+    }catch (error) {
         console.log(error)
     }
 }, [])
-
     useEffect(() => {
     console.log("period change",period)
         
 },[period])
+
 
 useEffect(() => {
     console.log("luuteal change",luteal)
@@ -353,15 +329,9 @@ useEffect(() => {
 },[luteal])
     
 
-const [activeBtnBlood1, setactiveBtnBlood1] = useState(true)
-const [activeBtnBlood2, setactiveBtnBlood2] = useState(true)
-const [activeBtnBlood3, setactiveBtnBlood3] = useState(true)
-
 return (
     <div className="home">
         <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate} setRangeDate={setR} period={period} luteal={luteal} />
-        
-
         {/* <button type="button" onClick={(ev) => {console.log("button",rangeDate)}} >rangeDate</button> */}
         {/* <button type="button" onClick={() => setClick(click+1)} >setClick</button> */}
         <div className="home-form">
@@ -370,62 +340,29 @@ return (
                     <Slider className="slider-position" onChange={setPainLevel} value={painLevel} min={0} max={10}></Slider>
                 </div>
             <div className="home-title">BLOOD LEVEL</div>
-                <div className="blood-level-container">
-                {activeBtnBlood1 ? <button id="1" className="small-blood-level-block" value={1} onClick={(e)=> {
-                        console.log(e.target.value);
-                        setBloodLevel(e.target.value);
-                        setactiveBtnBlood1(false);
-                        setactiveBtnBlood2(true);
-                        setactiveBtnBlood3(true)
-                    }}>
-                        <img src={Droplet} height = "60px"/>
-                    </button> : <button id="1" className="small-blood-level-block" style = {{background:"#b8bedd"}}value={1} onClick={(e)=> {
-                        setactiveBtnBlood1(true);
-
-                    }}> 
-                    <img src={Droplet} height = "60px"/>
-                        </button>}
-                    {activeBtnBlood2 ? <button id="2" className="small-blood-level-block" value={2} onClick={(e)=> {
-                        console.log(e.target.value);
-                        setBloodLevel(e.target.value);
-                        setactiveBtnBlood2(false)
-                        setactiveBtnBlood1(true)
-                        setactiveBtnBlood3(true)
-                    }}>
-                    <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
-                    </button> : <button id="2" className="small-blood-level-block" style = {{background:"#b8bedd"}} value={2} onClick={(e)=> {
-                        setactiveBtnBlood2(true)
-                    }}>
-                        <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
-                        </button>}
-                    {activeBtnBlood3 ? <button id="3" className="small-blood-level-block" value={3} onClick={(e)=> {
-                        //  console.log(e.target.value);
-                        setBloodLevel(e.target.value);
-                        setactiveBtnBlood3(false)
-                        setactiveBtnBlood2(true)
-                        setactiveBtnBlood1(true)
-                    }}>
-                        <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
-                    </button> : <button id="3" className="small-blood-level-block" style = {{background:"#b8bedd"}} value={3} onClick={(e)=> {
-                         // console.log(e.target.value);
-                         // setBloodLevel(e.target.value);
-                        setactiveBtnBlood3(true)
-                    }}>
-                        <img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/><img src={Droplet} height = "60px"/>
-                        </button>}
-                </div>
+                
+            <div className="blood-level-container">
+                    {[1, 2, 3].map((value, index) => (
+                        <ButtonKub
+                        imageSrc={Droplet}
+                        value={value}
+                        active={bloodLevel === value}
+                        setBloodLevel={() => {
+                        setBloodLevel(value);
+                        }}
+                        key={index}
+                        />
+                        ))}
+                    </div>
             <div className="home-title">DIARY</div>
                 <textarea rows={10} placeholder="How do you feel today?" maxLength={1000} className='diary-container' ref={diaryRef} value={diaryValue} onChange={(e) => setDiaryValue(e.target.value)}/>
             <br></br>
             { saveBtn ? <button id="submit" className="home-submit" type="submit" onClick={handleSubmit} >Save</button>: null}
             { editBtn ? <button id="submit" className="home-submit" type="submit" onClick={handleEdit} >Edit</button>: null}
         </div>
-        <span className="location_setting"><Button className='route_home' type="primary" variant="link" onClick={()=>{window.location.href = "/"}} style={{ background: "#b8bedd"}}>
-            <p className='home_p' >
-            <HomeOutlined className='icon_home'/>Setting</p></Button></span>
-
-        <span className="location_logout"><Button className='logout' type="primary" variant="link" onClick={() => {auth.signOut(); window.location.href = "./login"}} style={{ background: "#b8bedd"}}><p className='logout_p' >
-            <LogoutOutlined className='icon_logout'/>Logout</p></Button></span>
+        <span><button className="backtologin" type="primary" variant="link" onClick={() => {auth.signOut(); window.location.href = "./login"}}>
+            <p className="log">
+            <LogoutOutlined className="icon_log"/>Logout</p></button></span>
 
     </div>
 );
