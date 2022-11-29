@@ -21,7 +21,7 @@ Since all of our team members are female and understand the issues that arise in
 Clone this repository into your local working space.
 
 ```
-    git clone https://github.com/
+    https://github.com/JiratchayaPhinyodom/Period-Pejai.git
 ```
 
 Next, you have to install the packages that are required for this repository.
