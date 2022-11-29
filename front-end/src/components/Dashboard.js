@@ -70,27 +70,27 @@ const Dashboard= () =>{
 
   const [checkPeriod, setCheckPeriod] = useState(false)
 
-  // useEffect(async()=> {
-  // console.log(url);
-  // const url_line = new URL(url);
-  // let params = url_line.searchParams;
-  // const code = params.get('code'); // 'node'
-  // console.log("code", code);
-  // console.log("LINE GET request")
-  //   try {
-  //       const url_line_get = 'http://127.0.0.1:8000/api/get_token' + '?uid=' + currentUser.uid + '&' + '?code=' + code
-  //       const res_line = await fetch(url_line_get)
-  //       // const res_json_line = await res_line.json()
-  //       // console.log("res_json_line = ",res_json_line)
-  //     } catch (error) {
-  //       console.log(error)
-  //   }
-  // },[url]);
+  useEffect(async()=> {
+  console.log(url);
+  const url_line = new URL(url);
+  let params = url_line.searchParams;
+  const code = params.get('code'); // 'node'
+  console.log("code", code);
+  console.log("LINE GET request")
+    try {
+        const url_line_get = `${process.env.REACT_APP_SERVER_URL}/api/get_token` + '?uid=' + currentUser.uid + '&' + '?code=' + code
+        const res_line = await fetch(url_line_get)
+        // const res_json_line = await res_line.json()
+        // console.log("res_json_line = ",res_json_line)
+      } catch (error) {
+        console.log(error)
+    }
+  },[url]);
 
   useEffect(async () => {
     try {
       console.log('uid',currentUser.id)
-      const url_period = 'https://creammmm.pythonanywhere.com/api/period' + '?uid=' + currentUser.uid
+      const url_period = `${process.env.REACT_APP_SERVER_URL}/api/period` + '?uid=' + currentUser.uid
       await fetch(url_period).then((res_period) => {
         if (res_period.status == 400) {
           console.log("undefind")
@@ -156,7 +156,7 @@ const Dashboard= () =>{
       uid: currentUser.uid
     }
     console.log(JSON.stringify(body))
-    let url = "https://creammmm.pythonanywhere.com/api/period";
+    let url = `${process.env.REACT_APP_SERVER_URL}/api/period`;
     fetch(url, {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -193,7 +193,7 @@ function handleInfoSubmit(e) {
       // hover()
       console.log('success')
       e.preventDefault();
-      let url = "https://creammmm.pythonanywhere.com/api/setting";
+      let url = `${process.env.REACT_APP_SERVER_URL}/api/setting`;
       fetch(url, {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -261,7 +261,7 @@ function handleEditStt(e) {
       // new_dict["diary_text"] = diaryRef;
       new_luteal_length = setting.luteal_length;
   }
-  let url = "https://creammmm.pythonanywhere.com/api/setting";
+  let url = `${process.env.REACT_APP_SERVER_URL}/api/setting`;
   fetch(url, {
   method: "PATCH",
   headers: { "Content-type": "application/json" },
@@ -287,7 +287,7 @@ function handleEditStt(e) {
 
   useEffect(() => {
     try {
-      const url_data = 'https://creammmm.pythonanywhere.com/api/data' + '?uid=' + currentUser.uid
+      const url_data = `${process.env.REACT_APP_SERVER_URL}/api/data` + '?uid=' + currentUser.uid
       fetch(url_data).then((res_data) => {
         // {birth_year: 2002, period_length: 7, cycle_length: 28, luteal_length: 14, uid: '6FzQ7n2JRQfygAwkXpKhJOfa83v2'}
         // console.log("all", res_data.json())
