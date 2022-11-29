@@ -1,4 +1,5 @@
 ![example workflow](https://github.com/JiratchayaPhinyodom/Period-Pejai/actions/workflows/python-app.yml/badge.svg)
+[![codecov](https://codecov.io/gh/JiratchayaPhinyodom/Period-Pejai/branch/master/graph/badge.svg?token=T39NFVDGVT)](https://codecov.io/gh/JiratchayaPhinyodom/Period-Pejai)
 
 [//]: # ([![codecov])
 # Period-Pejai
