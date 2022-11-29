@@ -16,6 +16,64 @@ This website is intended primarily to help menstruating women, but men can also 
 
 Since all of our team members are female and understand the issues that arise in women very well, we wanted to create this website to help women with their menstrual and birth control issues. We often don't know when our periods will come, causing us to encounter problems with menstrual cramps unexpectedly.
 
+## How to Install
+
+Clone this repository into your local working space.
+
+```
+    git clone https://github.com/
+```
+
+Next, you have to install the packages that are required for this repository.
+
+```
+    pip install -r requirements.txt
+```
+
+Lastly, you have to build your server using `sample.env`.
+
+## How to Run
+
+You can run the server by
+
+For backend, 
+
+First,
+```
+cd period
+```
+
+Next, 
+```
+python manage.py runserver
+```
+
+Now, you can visit the link of backend (Django-Rest) `http://localhost:8000`.
+
+Then, you have to open a new terminal for frontend and type
+
+```
+cd ..
+```
+to move back to the outer directory
+
+```
+cd front-end
+```
+
+Next, 
+```
+npm install
+```
+
+After that,
+
+```
+npm start
+```
+Now, you can visit the link of backend (Django-Rest) `http://localhost:3000`.
+
+
 
 ## For more details
 - [User Stories](https://github.com/JiratchayaPhinyodom/Period-Pejai/wiki/User-Stories)
