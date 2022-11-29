@@ -1,0 +1,10 @@
+[run]
+# measure branch coverage
+branch = True
+# omit uninteresting files
+omit =
+    api_period/tests/*.py
+    api_period/migrations/*.py
+    */__init__.py
+    period/*
+    manage.py
