@@ -23,3 +23,4 @@ Since all of our team members are female and understand the issues that arise in
 - [Iteration 3 Plan](https://github.com/JiratchayaPhinyodom/Period-Pejai/wiki/Iteration-3-Plan)
 - [Iteration 4 Plan](https://github.com/JiratchayaPhinyodom/Period-Pejai/wiki/Iteration-4-Plan)
 - [Iteration 5 Plan](https://github.com/JiratchayaPhinyodom/Period-Pejai/wiki/Iteration-5-Plan)
+- [Iteration 6 Plan](https://github.com/JiratchayaPhinyodom/Period-Pejai/wiki/Iteration-6-Plan)
