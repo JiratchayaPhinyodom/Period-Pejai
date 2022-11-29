@@ -31,6 +31,7 @@ Next, you have to install the packages that are required for this repository.
 ```
 
 Lastly, you have to build your server using `.env` file (you can see the tamplate in sample_front.env for frontend and sample.env for backend).
+- For frontend, you must change all `REACT_APP_SERVER_URL` to be `REACT_APP_SERVER_URL_LOCAL` to run your server on `http://localhost:3000`.
 
 ## How to Run
 
