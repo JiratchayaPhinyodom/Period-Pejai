@@ -164,13 +164,13 @@ const Dashboard= () =>{
     })
     .then((response) => {
       console.log(response)
+      window.location.reload(false)
     })
     // console.log("submitRangeDate in setting page", range_date)
     // console.log("submitRangeDate", range_date) //ถ้าะส่งค่าเป็นช่วงใช้ตัวนี้
     // setShowBtnSetting(false)
     setshowRangeDatePicker(false)
     setShowBtnSave(false)
-    window.location.reload(false);
   }
 
 function handleInfoSubmit(e) {
@@ -372,7 +372,7 @@ function handleEditStt(e) {
     <p className='reminder'>CONNECT WITH LINE</p>
       {/* <ToggleSwitch label="Period"/>
       <ToggleSwitch label="Ovaluation"/> */}
-    <a href="https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=3i37SxxITCH1t4ngUNAPuz&redirect_uri=http://localhost:3000/&scope=notify&state=abcdef123456">
+    <a href="https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=3i37SxxITCH1t4ngUNAPuz&redirect_uri=https://period-pejai-deploy.vercel.app/&scope=notify&state=abcdef123456">
             <img src={LineLink} className="line-logo" height = "50px"/>
     </a>
     <span>

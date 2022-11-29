@@ -114,8 +114,6 @@ useEffect(() => {
                     // console.log(diaryRef.current.value == '55')
 
                     if(date_diary === DateToString(date)) {
-                        setSaveBtn(false)
-                        setEditBtn(true)
                         console.log('Hello test')
                         console.log(blood)
                         check = 9999
@@ -126,21 +124,6 @@ useEffect(() => {
                         historyDiary.old_diary_text = diary;
                         historyDiary.old_blood_level = blood;
                         historyDiary.old_pain_level = pain;
-                        if (blood == 1) {
-                            setactiveBtnBlood1(false);
-                            setactiveBtnBlood2(true);
-                            setactiveBtnBlood3(true);
-                        }
-                        if (blood == 2) {
-                            setactiveBtnBlood2(false);
-                            setactiveBtnBlood1(true);
-                            setactiveBtnBlood3(true);
-                        }
-                        if (blood == 3) {
-                            setactiveBtnBlood3(false);
-                            setactiveBtnBlood1(true);
-                            setactiveBtnBlood2(true);
-                        }
                     } 
                     else {
                         if (check == 0) {
@@ -150,9 +133,6 @@ useEffect(() => {
                             console.log('success')
                             setDiaryValue('')    
                             setPainLevel(0);
-                            setactiveBtnBlood3(true);
-                            setactiveBtnBlood1(true);
-                            setactiveBtnBlood2(true);
 
                         }
                     }
@@ -349,10 +329,6 @@ useEffect(() => {
 },[luteal])
     
 
-const [activeBtnBlood1, setactiveBtnBlood1] = useState(true)
-const [activeBtnBlood2, setactiveBtnBlood2] = useState(true)
-const [activeBtnBlood3, setactiveBtnBlood3] = useState(true)
-
 return (
     <div className="home">
         <Calendars className="component-calendar" date={date} setDate={setDate} rangeDate={rangeDate} setRangeDate={setR} period={period} luteal={luteal} />
@@ -372,7 +348,7 @@ return (
                         value={value}
                         active={bloodLevel === value}
                         setBloodLevel={() => {
-                            setBloodLevel(value);
+                        setBloodLevel(value);
                         }}
                         key={index}
                         />
