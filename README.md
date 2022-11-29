@@ -34,7 +34,7 @@ Lastly, you have to build your server using `.env` file (you can see the tamplat
 
 ## How to Run
 
-You can run the server by
+You can run the server by:
 
 For backend, 
 
