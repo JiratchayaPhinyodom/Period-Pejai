@@ -38,12 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "api_period.apps.ApiPeriodConfig",
-    "corsheaders",  # new
+    "corsheaders",
     "period",
-]
-# 'django_crontab'
-CRONJOBS = [
-    ('* * * * *', 'api_period.cron.my_cron_job')
 ]
 
 MIDDLEWARE = [
