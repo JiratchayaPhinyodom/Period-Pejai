@@ -13,19 +13,11 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
+SECRET_KEY = config('SECRET_KEY', cast=str, default='missing-secret-key')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = config('SECRET_KEY', cast=str, default='missing-secret-key')
-SECRET_KEY = os.environ.get('DJANGO_SECRETKEY',
-                            default='28y5s0l^fhej+)(3=helvnh'
-                                    '(&fxaf75nk=-vmbwr%rv39^izg0')
-# DEBUG = os.environ.get('DJANGO_DEBUG', '') == 'True'
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['creammmm.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['creammmm.pythonanywhere.com',  '127.0.0.1']
 os.environ['DJANGO_SETTINGS_MODULE'] = 'period.settings'
 # Application definition
 
@@ -38,8 +30,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "api_period.apps.ApiPeriodConfig",
-    "corsheaders",
+    "corsheaders",  # new
     "period",
+]
+# 'django_crontab'
+CRONJOBS = [
+    ('* * * * *', 'api_period.cron.my_cron_job')
 ]
 
 MIDDLEWARE = [
