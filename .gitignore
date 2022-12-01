@@ -28,3 +28,5 @@ period/
 .coveragerc
 .flake8
 front-end/node_modules/
+
+__pycache__
